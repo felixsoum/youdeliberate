@@ -1,4 +1,5 @@
 UploadApp::Application.routes.draw do
+  get "list_files/list"
   get "admin/home"
   post "admin/upload"
   # The priority is based upon order of creation: first created -> highest priority.
