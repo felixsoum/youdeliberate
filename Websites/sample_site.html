@@ -217,7 +217,7 @@
 
 				var bubble = d3.layout.pack()
 					.sort(null)
-					.size([diameter, diameter])
+					.size([diameter-100, diameter-100])
 					.padding(1.5);
 
 				var svg = d3.select(document.getElementById("content")).append("svg")
