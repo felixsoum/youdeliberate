@@ -1,0 +1,17 @@
+{
+ "name": "flare",
+ "children": [
+  {
+   "name": "analytics",
+   "children": [
+	{
+     "name": "Ambivalent",
+     "children": [
+      {"name":"5", "picture": "filelocation", "size": 250, "language":"French", "NumberAgree" : 12, "NumberDisagree":1 ,"NarrativeID":1,"category":"Ambivalent"},
+	  {"name":"6", "picture": "filelocation", "size": 300, "language":"French", "NumberAgree" : 12, "NumberDisagree":1 ,"NarrativeID":1,"category":"Undecided"}
+     ]
+    }
+   ]
+  }
+ ]
+}
