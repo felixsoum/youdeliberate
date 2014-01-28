@@ -34,7 +34,7 @@ function OnCheckFilterOption(){
 var diameter = 0; 
 function refreshBubbles(){
 	//delete all children in div 
-	var node1 = document.getElementById("bubble"); 
+	var node1 = document.getElementById("bubbles"); 
 	while (node1.hasChildNodes()) {
 		node1.removeChild(node1.lastChild);
 	}	
@@ -124,3 +124,5 @@ function getSectionColor(n){
 	}
 }
 d3.select(self.frameElement).style("height", diameter + "px");
+
+refreshBubbles(); <!-- TEST -->
