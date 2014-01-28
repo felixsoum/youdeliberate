@@ -4,7 +4,7 @@ var width = 420,
     radius = Math.min(width, height) / 2;
 
 //add element to document body
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#sunburst").append("svg")
     .attr("width", width)
     .attr("height", height+10)
   .append("g")
@@ -44,7 +44,7 @@ d3.json("sunburst.json", function(error, root) {
       .attr("display", function(d) { return d.depth ? null : "none"; }) // hide inner ring
       .attr("d", arc)
       .style("stroke", "#fff")
-      .style("fill", function(d) { return getSectionColor(d.name); })
+      .style("fill", function(d) { return getArcColor(d.name); })
       .style("fill-rule", "evenodd")
       .each(stash);
 
@@ -68,7 +68,7 @@ function arcTween(a) {
 }
 
 //ghetto color selector
-function getSectionColor(n){
+function getArcColor(n){
   switch(n){
     case "For":
       return "#111774";
