@@ -1,0 +1,45 @@
+<h1>Listing narratives</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nar name</th>
+      <th>Nar path</th>
+      <th>Language</th>
+      <th>Category</th>
+      <th>First image</th>
+      <th>Num of view</th>
+      <th>Num of agree</th>
+      <th>Num of disagree</th>
+      <th>Num of flagged</th>
+      <th>Create time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @narratives.each do |narrative| %>
+      <tr>
+        <td><%= narrative.nar_name %></td>
+        <td><%= narrative.nar_path %></td>
+        <td><%= narrative.language_id %></td>
+        <td><%= narrative.category_id %></td>
+        <td><%= narrative.first_image %></td>
+        <td><%= narrative.num_of_view %></td>
+        <td><%= narrative.num_of_agree %></td>
+        <td><%= narrative.num_of_disagree %></td>
+        <td><%= narrative.num_of_flagged %></td>
+        <td><%= narrative.create_time %></td>
+        <td><%= link_to 'Show', narrative %></td>
+        <td><%= link_to 'Edit', edit_narrative_path(narrative) %></td>
+        <td><%= link_to 'Destroy', narrative, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Narrative', new_narrative_path %>
