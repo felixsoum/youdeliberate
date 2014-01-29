@@ -1,0 +1,14 @@
+
+		#sunburst{
+		
+			position:absolute;
+			top:100px;
+			left:10px;
+		}
+		#bubbles{
+			position:absolute;
+			top:180px;
+			left:450px;
+			max-width: 500px;
+		}
+	
