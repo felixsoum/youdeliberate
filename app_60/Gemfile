@@ -49,3 +49,6 @@ gem 'nokogiri'
 
 # Use rubyzip to read zip files
 gem 'rubyzip'
+
+# Use rake for CI
+gem 'rake'
