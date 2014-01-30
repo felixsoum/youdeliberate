@@ -1,6 +1,0 @@
-<h1>Welcome home</h1>
-<p><%= @message %></p>
-<%= form_tag({action: :upload}, multipart: true) do %>
-  <%= file_field_tag 'narrative' %>
-  <%= submit_tag("Upload") %>
-<% end %>
