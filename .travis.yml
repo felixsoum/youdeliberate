@@ -5,6 +5,10 @@ rvm:
 before_install:
   - cd app_60
   - gem install bundler --pre
+branches:
+  only:
+    - master
+    - backend
 notifications:
   email:
     - felix@felixsoum.com
