@@ -43,3 +43,9 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+# Use nokogiri for parsing xml files
+gem 'nokogiri'
+
+# Use rubyzip to read zip files
+gem 'rubyzip'
