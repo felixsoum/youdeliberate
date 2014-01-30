@@ -1,0 +1,57 @@
+<%= form_for(@narrative) do |f| %>
+  <% if @narrative.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@narrative.errors.count, "error") %> prohibited this narrative from being saved:</h2>
+
+      <ul>
+      <% @narrative.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nar_name %><br>
+    <%= f.text_field :nar_name %>
+  </div>
+  <div class="field">
+    <%= f.label :nar_path %><br>
+    <%= f.text_field :nar_path %>
+  </div>
+  <div class="field">
+    <%= f.label :language_id %><br>
+    <%= f.number_field :language_id %>
+  </div>
+  <div class="field">
+    <%= f.label :category_id %><br>
+    <%= f.number_field :category_id %>
+  </div>
+  <div class="field">
+    <%= f.label :first_image %><br>
+    <%= f.text_field :first_image %>
+  </div>
+  <div class="field">
+    <%= f.label :num_of_view %><br>
+    <%= f.number_field :num_of_view %>
+  </div>
+  <div class="field">
+    <%= f.label :num_of_agree %><br>
+    <%= f.number_field :num_of_agree %>
+  </div>
+  <div class="field">
+    <%= f.label :num_of_disagree %><br>
+    <%= f.number_field :num_of_disagree %>
+  </div>
+  <div class="field">
+    <%= f.label :num_of_flagged %><br>
+    <%= f.number_field :num_of_flagged %>
+  </div>
+  <div class="field">
+    <%= f.label :create_time %><br>
+    <%= f.datetime_select :create_time %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
