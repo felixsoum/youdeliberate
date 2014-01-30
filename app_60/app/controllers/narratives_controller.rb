@@ -5,6 +5,11 @@ class NarrativesController < ApplicationController
   # GET /narratives.json
   def index
     @narratives = Narrative.all
+    respond_to do |format|
+      format.html
+      # Support JSONP. Read more: http://henrysztul.info/post/14970402595/how-to-enable-jsonp-support-in-a-rails-app
+      format.json { render :json => @narratives, :callback => params[:callback] }
+    end
   end
 
   # GET /narratives/1
