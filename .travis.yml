@@ -6,3 +6,4 @@ before_install: cd app_60
 notifications:
   email:
     - felix@felixsoum.com
+bundler_args:
