@@ -2,7 +2,7 @@ language: ruby
 rvm:
   - 1.9.3
   - 2.0.0
-before_script: cd app_60
+before_install: cd app_60
 notifications:
   email:
     - felix@felixsoum.com
