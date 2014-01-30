@@ -52,3 +52,6 @@ gem 'rubyzip'
 
 # Use rake for CI
 gem 'rake'
+
+# Use coveralls for test coverage
+gem 'coveralls', require: false
