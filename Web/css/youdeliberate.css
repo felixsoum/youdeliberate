@@ -1,14 +1,17 @@
-
-		#sunburst{
-		
-			position:absolute;
-			top:100px;
-			left:10px;
-		}
-		#bubbles{
-			position:absolute;
-			top:180px;
-			left:450px;
-			max-width: 500px;
-		}
-	
+body {
+  padding-top: 50px;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+#sort-buttons{
+	position:absolute;
+	left:29%;
+	top:30%;
+}
+#sunburst-info{
+	text-align:center;
+	position:relative;
+	left:-15px;
+}
