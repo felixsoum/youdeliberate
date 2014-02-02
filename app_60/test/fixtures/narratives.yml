@@ -1,25 +1,25 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  nar_name: MyString
-  nar_path: MyString
+  nar_name: first narrative
+  nar_path: first nar path
   language_id: 1
   category_id: 1
-  first_image: MyString
+  first_image: image path
   num_of_view: 1
   num_of_agree: 1
   num_of_disagree: 1
   num_of_flagged: 1
-  create_time: 2014-01-29 12:42:10
+  create_time: 2014-01-21 12:42:10
 
 two:
-  nar_name: MyString
-  nar_path: MyString
+  nar_name: second narrative
+  nar_path: second nar path
   language_id: 1
   category_id: 1
-  first_image: MyString
-  num_of_view: 1
-  num_of_agree: 1
-  num_of_disagree: 1
-  num_of_flagged: 1
+  first_image: image path
+  num_of_view: 0
+  num_of_agree: 0
+  num_of_disagree: 0
+  num_of_flagged: 0
   create_time: 2014-01-29 12:42:10

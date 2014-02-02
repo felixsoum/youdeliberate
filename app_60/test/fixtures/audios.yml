@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  narrative_id: 1
-  audio_path: MyString
+  narrative: two
+  audio_path: audio path
 
 two:
-  narrative_id: 1
-  audio_path: MyString
+  narrative: two
+  audio_path: audio path
