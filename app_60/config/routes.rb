@@ -1,7 +1,9 @@
 App60::Application.routes.draw do
-  get "admin" => redirect("admin/index")
-  get "admin/index", as: "index_admin"
-  post "admin/upload"
+  root :to => redirect('user/index')
+  get 'user/index'
+  get 'admin' => redirect('admin/index')
+  get 'admin/index', as: 'index_admin'
+  post 'admin/upload'
   resources :narratives
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="icons/docs-assets/ico/favicon.png">
+
+    <title>YouDeliberate</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="dist/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Site-specific CSS -->
+    <link href="css/youdeliberate.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">YouDeliberate</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#Bill 60"></a></li>
+            <li><a href="">Filter by Language</a></li>
+            <li><a href="">Sort by Most Viewed</a></li>
+            <li><a href="">Sort by Most Agreed</a></li>
+            <li><a href="">Sort by Most Disagreed</a></li>
+            <li><a href="">&nbsp;&nbsp;&nbsp;</a></li>
+            <li><a href="">Admin Login</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="starter-template">
+        <h1>YouDeliberate - Bill 60</h1>
+        <p class="lead">Share narratives and engage in deliberative democracy!</p>
+      </div>
+      <div class="col-lg-4">
+        <div id="sunburst">
+          <table id="sort-buttons"><tr>
+            <td><button type="button" class="btn btn-default btn-lg" onclick="changeClass(this)"><span class="glyphicon glyphicon-eye-open"></span></button></td>
+            <td><button type="button" class="btn btn-default btn-lg" onclick="changeClass(this)"><span class="glyphicon glyphicon-time"></span></button></td>
+            </tr><tr><td><button type="button" class="btn btn-default btn-lg" onclick="changeClass(this)"><span class="glyphicon glyphicon-thumbs-up"></span></button></td>
+            <td><button type="button" class="btn btn-default btn-lg" onclick="changeClass(this)"><span class="glyphicon glyphicon-comment"></span></button><td></tr>
+          </table>
+        </div>
+        <div>
+            <p class="lead" id="sunburst-info">Bill 60 at a glance</p>
+        </div>
+        
+      </div>
+      <div class="col-lg-8">
+        <div id="bubbles"></div>
+      </div>
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <script src="dist/js/bootstrap.min.js"></script>
+    <script src="js/d3.v3.min.js"></script>
+    <script src="js/jquery.qtip.min.js"></script>
+    <script src="js/functions.js"></script>
+    <script src="js/bubbles.js"></script>
+    <script src="js/sunburst.js"></script>
+	<!--This is the script for placing the sorting icons-->
+  <!--
+	<script>
+			var mydiv = document.getElementById("sunburst");
+				//weird super complicated way of making the image right in the middle (because just doing left:50%, places the object too far right, since there is no "middle:50%" function)
+				mydiv.style.left=(parseInt(mydiv.style.left.replace(/%/,""))) -(parseInt(mydiv.style.width.replace(/%/,""))/2)+"%";
+				mydiv=document.getElementById("eye");
+				mydiv.style.left=50 -(parseInt(mydiv.style.width.replace(/%/,""))/2)+"%";
+				mydiv=document.getElementById("clock");
+				mydiv.style.left=50 -(parseInt(mydiv.style.width.replace(/%/,""))/2)+"%";
+				mydiv.style.height=mydiv.offsetWidth+"px";
+				mydiv=document.getElementById("thumbs-up");
+				mydiv.style.top=50 -(parseInt(mydiv.style.width.replace(/%/,"")))/2+"%";
+				mydiv=document.getElementById("thumbs-down");
+				mydiv.style.top=50 -(parseInt(mydiv.style.width.replace(/%/,"")))/2+"%";
+				//end of weird stuff
+				
+				mydiv = document.getElementById("sunburst");
+				var height = Math.min(mydiv.clientWidth,mydiv.clientHeight);
+				//to set the eye's position
+				var topThing=height*.25;
+				document.getElementById("eye").style.top=topThing+"px";
+				//to set the clock's position
+				topThing=height*.6;
+				document.getElementById("clock").style.top=topThing+"px";
+				//to set the thumbs-up's position
+				var leftThing=height*.7;
+				document.getElementById("thumbs-up").style.left=leftThing+"px";
+				//to set the thumbs-down's position
+				leftThing=height*.335;
+				document.getElementById("thumbs-down").style.left=leftThing+"px";
+		</script>
+  -->
+  </body>
+</html>

@@ -1,6 +1,6 @@
 //specify sunburst size
-var width = 420,
-    height = 350,
+var width = 300, //420
+    height = 300,//350
     radius = Math.min(width, height) / 2;
 
 //add element to document body
@@ -94,4 +94,9 @@ function getArcColor(n){
   }
 }
 
+   $('path').qtip({
+   content: 'This is a sunburst segment',
+   show: 'mouseover',
+   hide: 'mouseout'
+})
 d3.select(self.frameElement).style("height", height + "px");
