@@ -72,17 +72,17 @@ function arcTween(a) {
 function getArcColor(n){
   switch(n){
     case "For":
-      return "#111774";
+      return "#1E30FF";
     case "ForAgreed":
-      return "#010533";
+      return "#111774";
     case "ForDisagreed":
-      return "#3965ae";
+      return "#6670E8"; //3695ae
     case "Against":
       return "#ff0000";
     case "AgainstAgreed":
-      return "#85000D";
+      return "#8B0000";
     case "AgainstDisagreed":
-      return "#FF6B6B";
+      return "#EE6363"; //FF6B6B
     case "Ambivalent":
       return "#c0c0c0";    
     case "AmbivalentAgreed":
@@ -93,10 +93,4 @@ function getArcColor(n){
       return "#000";
   }
 }
-
-   $('path').qtip({
-   content: 'This is a sunburst segment',
-   show: 'mouseover',
-   hide: 'mouseout'
-})
 d3.select(self.frameElement).style("height", height + "px");

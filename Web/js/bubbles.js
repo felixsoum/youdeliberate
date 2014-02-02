@@ -113,6 +113,7 @@ function getSize(d){
 	}
 }
 function getSectionColor(n){
+	/*
 	switch(n){
 		case "For":
 			return "#00CC33";
@@ -124,19 +125,32 @@ function getSectionColor(n){
 			return "#D8D8D8";
 			break; 
 	}
+	*/
+	switch(n){
+	case "For":
+      return "#1E30FF"; //#111774
+    case "ForAgreed":
+      return "#010533";
+    case "ForDisagreed":
+      return "#3965ae";
+    case "Against":
+      return "#ff0000";
+    case "AgainstAgreed":
+      return "#85000D";
+    case "AgainstDisagreed":
+      return "#FF6B6B";
+    case "Ambivalent":
+      return "#c0c0c0";    
+    case "AmbivalentAgreed":
+      return "#615656";
+    case "AmbivalentDisagreed":
+      return "#a8bba8";
+    default:
+      return "#000";
+  }
 }
 function getMouseOverColor(n){
-	switch(n){
-		case "For":
-			return "#00CC33";
-			break; 
-		case "Against":
-			return "#D80000";
-			break; 
-		case "Ambivalent":
-			return "#D8D8D8";
-			break; 
-	}
+	return "#aaa"	
 }
 d3.select(self.frameElement).style("height", diameter + "px");
 
