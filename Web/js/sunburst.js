@@ -36,7 +36,7 @@ window.onload = function(){
 }
 
 //get data
-d3.json("sunburst.json", function(error, root) {
+d3.json("sunburst2.json", function(error, root) {
 
   path = svg.datum(root).selectAll("path")
       .data(partition.nodes)
@@ -72,18 +72,21 @@ function arcTween(a) {
 function getArcColor(n){
   switch(n){
     case "For":
+    case "ForNeutral":
       return "#1E30FF";
     case "ForAgreed":
       return "#111774";
     case "ForDisagreed":
       return "#6670E8"; //3695ae
     case "Against":
+    case "AgainstNeutral":
       return "#ff0000";
     case "AgainstAgreed":
       return "#8B0000";
     case "AgainstDisagreed":
       return "#EE6363"; //FF6B6B
     case "Ambivalent":
+    case "AmbivalentNeutral":
       return "#c0c0c0";    
     case "AmbivalentAgreed":
       return "#615656";

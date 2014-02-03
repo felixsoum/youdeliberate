@@ -1,0 +1,21 @@
+{
+ "name": "sunburst",
+ "children": [
+      {"name": "For", "children": [
+        {"name": "ForAgreed", "size": 4},
+        {"name": "ForNeutral", "size": 4},
+        {"name": "ForDisagreed", "size": 2}
+       ]},
+      {"name": "Against", "children": [
+        {"name": "AgainstAgreed", "size": 9},
+        {"name": "AgainstNeutral", "size": 3},
+        {"name": "AgainstDisagreed", "size": 1}
+       ]},
+      {"name": "Ambivalent", "children": [
+        {"name": "AmbivalentAgreed", "size": 5},
+        {"name": "AmbivalentNeutral", "size": 1},
+        {"name": "AmbivalentDisagreed", "size": 1}
+       ]}
+     ]
+}
+  
