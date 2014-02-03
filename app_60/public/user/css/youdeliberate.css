@@ -15,3 +15,10 @@ body {
 	position:relative;
 	left:-15px;
 }
+#fr-flag{
+	position:relative;
+	top:10px;
+}
+.list-spacer{
+	padding-left:6em
+}

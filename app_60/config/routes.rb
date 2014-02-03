@@ -1,5 +1,6 @@
 App60::Application.routes.draw do
   root :to => redirect('user/index')
+  get 'user' => redirect('user/index')
   get 'user/index'
   get 'admin' => redirect('admin/index')
   get 'admin/index', as: 'index_admin'

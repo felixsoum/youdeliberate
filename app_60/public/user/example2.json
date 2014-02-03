@@ -1,0 +1,53 @@
+{
+ "name": "flare",
+ "children": [
+  {
+   "name": "analytics",
+   "children": [    
+	{
+     "name": "Against",
+     "children": [
+      {"name":"3", "picture": "filelocation", "size": 250, "language":"French", "NumberAgree" : 12, "NumberDisagree":1 ,"NarrativeID":1,"category":"AgainstAgreed"},
+      {"name":"5", "picture": "filelocation", "size": 250, "language":"French", "NumberAgree" : 12, "NumberDisagree":1 ,"NarrativeID":1,"category":"AgainstAgreed"},
+      {"name":"8", "picture": "filelocation", "size": 250, "language":"French", "NumberAgree" : 12, "NumberDisagree":1 ,"NarrativeID":1,"category":"AgainstAgreed"},
+      {"name":"9", "picture": "filelocation", "size": 500, "language":"French", "NumberAgree" : 12, "NumberDisagree":1 ,"NarrativeID":1,"category":"AgainstAgreed"},
+      {"name":"7", "picture": "filelocation", "size": 250, "language":"French", "NumberAgree" : 12, "NumberDisagree":1 ,"NarrativeID":1,"category":"AgainstAgreed"},
+	  {"name":"31", "picture": "filelocation", "size": 500, "language":"French", "NumberAgree" : 12, "NumberDisagree":1 ,"NarrativeID":1,"category":"AgainstAgreed"},
+	  {"name":"32", "picture": "filelocation", "size": 1000, "language":"French", "NumberAgree" : 12, "NumberDisagree":1 ,"NarrativeID":1,"category":"AgainstAgreed"},
+	  {"name":"33", "picture": "filelocation", "size": 250, "language":"French", "NumberAgree" : 12, "NumberDisagree":1 ,"NarrativeID":1,"category":"AgainstAgreed"},
+	  {"name":"34", "picture": "filelocation", "size": 1000, "language":"French", "NumberAgree" : 12, "NumberDisagree":1 ,"NarrativeID":1,"category":"AgainstAgreed"},
+	  {"name":"35", "picture": "filelocation", "size": 600, "language":"French", "NumberAgree" : 12, "NumberDisagree":1 ,"NarrativeID":1,"category":"AgainstNeutral"},
+	  {"name":"36", "picture": "filelocation", "size": 200, "language":"French", "NumberAgree" : 12, "NumberDisagree":1 ,"NarrativeID":1,"category":"AgainstNeutral"},
+	  {"name":"37", "picture": "filelocation", "size": 300, "language":"French", "NumberAgree" : 12, "NumberDisagree":1 ,"NarrativeID":1,"category":"AgainstNeutral"},
+	  {"name":"4", "picture": "filelocation", "size": 400, "language":"French", "NumberAgree" : 12, "NumberDisagree":1 ,"NarrativeID":1,"category":"AgainstDisagreed"}
+     ]
+    },
+	{
+     "name": "For",
+     "children": [
+      {"name":"1", "picture": "filelocation", "size": 400, "language":"French", "NumberAgree" : 12, "NumberDisagree":1 ,"NarrativeID":1,"category":"ForAgreed"},
+	  {"name":"13", "picture": "filelocation", "size": 300, "language":"French", "NumberAgree" : 12, "NumberDisagree":1 ,"NarrativeID":1,"category":"ForAgreed"},
+	  {"name":"21", "picture": "filelocation", "size": 700, "language":"French", "NumberAgree" : 12, "NumberDisagree":1 ,"NarrativeID":1,"category":"ForAgreed"},
+	  {"name":"11", "picture": "filelocation", "size": 900, "language":"French", "NumberAgree" : 12, "NumberDisagree":1 ,"NarrativeID":1,"category":"ForAgreed"},
+	  {"name":"22", "picture": "filelocation", "size": 200, "language":"French", "NumberAgree" : 12, "NumberDisagree":1 ,"NarrativeID":1,"category":"ForDisagreed"},
+	  {"name":"14", "picture": "filelocation", "size": 1000, "language":"French", "NumberAgree" : 12, "NumberDisagree":1 ,"NarrativeID":1,"category":"ForDisagreed"},
+	  {"name":"23", "picture": "filelocation", "size": 200, "language":"French", "NumberAgree" : 12, "NumberDisagree":1 ,"NarrativeID":1,"category":"ForDisagreed"},
+	  {"name":"15", "picture": "filelocation", "size": 250, "language":"French", "NumberAgree" : 12, "NumberDisagree":1 ,"NarrativeID":1,"category":"ForDisagreed"},
+	  {"name":"24", "picture": "filelocation", "size": 750, "language":"French", "NumberAgree" : 12, "NumberDisagree":1 ,"NarrativeID":1,"category":"ForNeutral"},
+	  {"name":"25", "picture": "filelocation", "size": 500, "language":"French", "NumberAgree" : 12, "NumberDisagree":1 ,"NarrativeID":1,"category":"ForNeutral"}
+     ]
+    },
+	{
+     "name": "Ambivalent",
+     "children": [
+      {"name":"51", "picture": "filelocation", "size": 250, "language":"French", "NumberAgree" : 12, "NumberDisagree":1 ,"NarrativeID":1,"category":"AmbivalentAgreed"},
+	  {"name":"52", "picture": "filelocation", "size": 500, "language":"French", "NumberAgree" : 12, "NumberDisagree":1 ,"NarrativeID":1,"category":"AmbivalentAgreed"},
+	  {"name":"54", "picture": "filelocation", "size": 1000, "language":"French", "NumberAgree" : 12, "NumberDisagree":1 ,"NarrativeID":1,"category":"AmbivalentAgreed"},
+	  {"name":"55", "picture": "filelocation", "size": 200, "language":"French", "NumberAgree" : 12, "NumberDisagree":1 ,"NarrativeID":1,"category":"AmbivalentDisagreed"},
+	  {"name":"6", "picture": "filelocation", "size": 200, "language":"French", "NumberAgree" : 12, "NumberDisagree":1 ,"NarrativeID":1,"category":"AmbivalentNeutral"}
+     ]
+    }
+   ]
+  }
+ ]
+}

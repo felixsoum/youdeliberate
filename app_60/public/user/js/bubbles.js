@@ -1,5 +1,5 @@
 <!--Bubble generation : http://bl.ocks.org/mbostock/4063269-->
-var fileName = "flare.json";   //default
+var fileName = "example2.json";   //default
 var radius = 100; 
 //test to see if dummy objects work and filtering 
 function OnCheckFilterOption(){	
@@ -66,9 +66,9 @@ function refreshBubbles(){
 
 	  node.append("circle")
 		  .attr("r", function(d) { return d.r; })
-		  .style("fill", function(d) { return getSectionColor(d.packageName); })
-		  .on("mouseover",function(d){d3.select(this).style("fill",function(d) { return getMouseOverColor(d.packageName); })})
-		  .on("mouseout",function(d){d3.select(this).style("fill", function(d) { return getSectionColor(d.packageName); })});
+		  .style("fill", function(d) { return getSectionColor(d.category); })
+		  .on("mouseover",function(d){d3.select(this).style("fill",function(d) { return getMouseOverColor(d.category); })})
+		  .on("mouseout",function(d){d3.select(this).style("fill", function(d) { return getSectionColor(d.category); })});
 
 	  node.append("text")
 		  .attr("dy", ".3em")
@@ -83,7 +83,7 @@ function classes(root) {
 
   function recurse(name, node) {
     if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });
-    else classes.push({packageName: name, className: node.name, value: node.size, agree : node.NumberAgree, disagree: node.NumberDisagree, views: node.NumberViews });
+    else classes.push({packageName: name, className: node.name, value: node.size, agree : node.NumberAgree, disagree: node.NumberDisagree, views: node.NumberViews, category: node.category });
   }
 
   recurse(null, root);
@@ -113,6 +113,7 @@ function getSize(d){
 	}
 }
 function getSectionColor(n){
+	/*
 	switch(n){
 		case "For":
 			return "#00CC33";
@@ -124,19 +125,36 @@ function getSectionColor(n){
 			return "#D8D8D8";
 			break; 
 	}
+	*/
+
+	switch(n){
+    case "For":
+    case "ForNeutral":
+      return "#1E30FF";
+    case "ForAgreed":
+      return "#111774";
+    case "ForDisagreed":
+      return "#6670E8"; //3695ae
+    case "Against":
+    case "AgainstNeutral":
+      return "#ff0000";
+    case "AgainstAgreed":
+      return "#8B0000";
+    case "AgainstDisagreed":
+      return "#EE6363"; //FF6B6B
+    case "Ambivalent":
+    case "AmbivalentNeutral":
+      return "#c0c0c0";    
+    case "AmbivalentAgreed":
+      return "#615656";
+    case "AmbivalentDisagreed":
+      return "#a8bba8";
+    default:
+      return "#000";
+  }
 }
 function getMouseOverColor(n){
-	switch(n){
-		case "For":
-			return "#00CC33";
-			break; 
-		case "Against":
-			return "#D80000";
-			break; 
-		case "Ambivalent":
-			return "#D8D8D8";
-			break; 
-	}
+	return "#aaa"	
 }
 d3.select(self.frameElement).style("height", diameter + "px");
 

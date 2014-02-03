@@ -3,13 +3,3 @@ function changeClass(b){
 	else {b.className = "btn btn-default btn-lg";}
         
 }
-
-$(document).ready(function() 
-{
-   // Match all link elements with href attributes within the content div
-   $('path').qtip({
-   content: 'This is a sunburst segment',
-   show: 'mouseover',
-   hide: 'mouseout'
-})
-});
