@@ -58,3 +58,9 @@ gem 'coveralls', require: false
 
 # Use jquery-turbolinks to enable binding to jQuery.ready()
 gem 'jquery-turbolinks'
+
+# Use html5shiv-rails to shim HTML5 sectioning elements
+gem 'html5shiv-rails'
+
+# Use respond-rails to shim CSS3 media queries
+gem 'respond-rails'

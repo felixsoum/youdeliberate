@@ -45,6 +45,8 @@ GEM
     erubis (2.7.0)
     execjs (2.0.2)
     hike (1.2.3)
+    html5shiv-rails (0.0.2)
+      railties (>= 3.2.0, < 5.0)
     i18n (0.6.9)
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
@@ -87,6 +89,8 @@ GEM
     rake (10.1.1)
     rdoc (4.1.1)
       json (~> 1.4)
+    respond-rails (1.0.1)
+      railties (>= 3.1.0)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rubyzip (1.1.0)
@@ -112,7 +116,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
-    sqlite3 (1.3.8)
     sqlite3 (1.3.8-x86-mingw32)
     term-ansicolor (1.2.2)
       tins (~> 0.8)
@@ -137,12 +140,14 @@ PLATFORMS
 DEPENDENCIES
   coffee-rails (~> 4.0.0)
   coveralls
+  html5shiv-rails
   jbuilder (~> 1.2)
   jquery-rails
   jquery-turbolinks
   nokogiri
   rails (= 4.0.2)
   rake
+  respond-rails
   rubyzip
   sass-rails (~> 4.0.0)
   sdoc
