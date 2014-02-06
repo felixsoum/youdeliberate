@@ -11,9 +11,15 @@ class AdminControllerTest < ActionController::TestCase
   	assert_select "form"
   end
 
-  test "should post upload" do
+  test "should post upload without zip file" do
     post :upload
     assert_response :success
   end
 
+  test "should post upload with zip file" do
+    file = fixture_file_upload('files/1.zip', 'application/zip')
+    post :upload, :narrative => file 
+    assert_response :success
+  end
+  
 end
