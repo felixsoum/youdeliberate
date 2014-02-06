@@ -55,3 +55,6 @@ gem 'rake'
 
 # Use coveralls for test coverage
 gem 'coveralls', require: false
+
+# Use jquery-turbolinks to enable binding to jQuery.ready()
+gem 'jquery-turbolinks'

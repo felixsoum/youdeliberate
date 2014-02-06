@@ -12,5 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.turbolinks
 //= require turbolinks
+//= require d3.v3.min
+//= require bubbles
+//= require sunburst
 //= require_tree .
