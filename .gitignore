@@ -16,3 +16,4 @@ rerun.txt
 pickle-email-*.html
 .project
 config/initializers/secret_token.rb
+app_60/public/user/img/Thumbs.db

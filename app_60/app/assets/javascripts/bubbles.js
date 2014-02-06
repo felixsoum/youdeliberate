@@ -158,4 +158,10 @@ function getMouseOverColor(n){
 }
 d3.select(self.frameElement).style("height", diameter + "px");
 
-refreshBubbles(); <!-- INITIALIZE -->
+// jQuery.ready() with turbolinks. Read more: http://stackoverflow.com/a/17600195
+var init = function() {
+    refreshBubbles();
+};
+
+$(document).ready(init);
+$(document).on('page:load', init);
