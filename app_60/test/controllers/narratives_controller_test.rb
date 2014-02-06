@@ -46,4 +46,13 @@ class NarrativesControllerTest < ActionController::TestCase
 
     assert_redirected_to narratives_path
   end
+  
+  test "should not create narrative" do
+    assert_no_difference('Narrative.count') do
+      post :create, narrative: {category_id: @narrative.category_id}
+    end
+
+    assert_template :new
+  end
+
 end

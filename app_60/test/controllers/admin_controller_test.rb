@@ -20,6 +20,7 @@ class AdminControllerTest < ActionController::TestCase
     file = fixture_file_upload('files/1.zip', 'application/zip')
     post :upload, :narrative => file 
     assert_response :success
+    FileUtils.rm_rf(Dir["#{Rails.root}/public/narratives/"])
   end
   
 end
