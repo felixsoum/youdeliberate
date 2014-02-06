@@ -9,6 +9,7 @@
     <%= javascript_include_tag 'html5shiv-printshiv' %>
   <![endif]-->
   <%= respond_include_tags %>
+  <%= yield(:head) %>
 </head>
 <body>
 
