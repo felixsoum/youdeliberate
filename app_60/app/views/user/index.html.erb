@@ -69,42 +69,5 @@
       </div>
     </div><!-- /.container -->
 
-
-    <!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-
-    <!-- <script src="js/jquery.qtip.min.js"></script> -->
-  <!--This is the script for placing the sorting icons-->
-  <!--
-  <script>
-      var mydiv = document.getElementById("sunburst");
-        //weird super complicated way of making the image right in the middle (because just doing left:50%, places the object too far right, since there is no "middle:50%" function)
-        mydiv.style.left=(parseInt(mydiv.style.left.replace(/%/,""))) -(parseInt(mydiv.style.width.replace(/%/,""))/2)+"%";
-        mydiv=document.getElementById("eye");
-        mydiv.style.left=50 -(parseInt(mydiv.style.width.replace(/%/,""))/2)+"%";
-        mydiv=document.getElementById("clock");
-        mydiv.style.left=50 -(parseInt(mydiv.style.width.replace(/%/,""))/2)+"%";
-        mydiv.style.height=mydiv.offsetWidth+"px";
-        mydiv=document.getElementById("thumbs-up");
-        mydiv.style.top=50 -(parseInt(mydiv.style.width.replace(/%/,"")))/2+"%";
-        mydiv=document.getElementById("thumbs-down");
-        mydiv.style.top=50 -(parseInt(mydiv.style.width.replace(/%/,"")))/2+"%";
-        //end of weird stuff
-        
-        mydiv = document.getElementById("sunburst");
-        var height = Math.min(mydiv.clientWidth,mydiv.clientHeight);
-        //to set the eye's position
-        var topThing=height*.25;
-        document.getElementById("eye").style.top=topThing+"px";
-        //to set the clock's position
-        topThing=height*.6;
-        document.getElementById("clock").style.top=topThing+"px";
-        //to set the thumbs-up's position
-        var leftThing=height*.7;
-        document.getElementById("thumbs-up").style.left=leftThing+"px";
-        //to set the thumbs-down's position
-        leftThing=height*.335;
-        document.getElementById("thumbs-down").style.left=leftThing+"px";
-    </script>
-  -->
+    <script src="js/d3.v3.min.js"></script>
