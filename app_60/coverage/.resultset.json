@@ -1,59 +1,73 @@
 {
   "MiniTest": {
     "coverage": {
-      "d:/Aptana Studio 3/Aptana Studio 3 Workspace/youdeliberate/app_60/app/models/audio.rb": [
+      "C:/Users/Jorge2/Documents/SOEN 390/youdeliberate/app_60/app/models/audio.rb": [
         1,
         1,
         1,
         1,
         null
       ],
-      "d:/Aptana Studio 3/Aptana Studio 3 Workspace/youdeliberate/app_60/app/models/category.rb": [
+      "C:/Users/Jorge2/Documents/SOEN 390/youdeliberate/app_60/app/models/category.rb": [
         1,
         null
       ],
-      "d:/Aptana Studio 3/Aptana Studio 3 Workspace/youdeliberate/app_60/app/models/image.rb": [
-        1,
-        1,
-        1,
-        1,
-        null
-      ],
-      "d:/Aptana Studio 3/Aptana Studio 3 Workspace/youdeliberate/app_60/app/models/narrative.rb": [
-        1,
+      "C:/Users/Jorge2/Documents/SOEN 390/youdeliberate/app_60/app/models/image.rb": [
         1,
         1,
         1,
         1,
         null
       ],
-      "d:/Aptana Studio 3/Aptana Studio 3 Workspace/youdeliberate/app_60/app/models/narrative_count.rb": [
+      "C:/Users/Jorge2/Documents/SOEN 390/youdeliberate/app_60/app/models/narrative.rb": [
+        1,
+        1,
+        1,
+        1,
+        1,
         1,
         null
       ],
-      "d:/Aptana Studio 3/Aptana Studio 3 Workspace/youdeliberate/app_60/app/helpers/admin_helper.rb": [
+      "C:/Users/Jorge2/Documents/SOEN 390/youdeliberate/app_60/app/models/narrative_count.rb": [
         1,
         null
       ],
-      "d:/Aptana Studio 3/Aptana Studio 3 Workspace/youdeliberate/app_60/app/helpers/application_helper.rb": [
+      "C:/Users/Jorge2/Documents/SOEN 390/youdeliberate/app_60/app/models/n_comment.rb": [
         1,
-        null
-      ],
-      "d:/Aptana Studio 3/Aptana Studio 3 Workspace/youdeliberate/app_60/app/helpers/narratives_helper.rb": [
         1,
-        null
-      ],
-      "d:/Aptana Studio 3/Aptana Studio 3 Workspace/youdeliberate/app_60/app/helpers/user_helper.rb": [
-        1,
-        null
-      ],
-      "d:/Aptana Studio 3/Aptana Studio 3 Workspace/youdeliberate/app_60/app/controllers/admin_controller.rb": [
         1,
         1,
         null,
-        null,
+        null
+      ],
+      "C:/Users/Jorge2/Documents/SOEN 390/youdeliberate/app_60/app/helpers/admin_helper.rb": [
+        1,
+        null
+      ],
+      "C:/Users/Jorge2/Documents/SOEN 390/youdeliberate/app_60/app/helpers/application_helper.rb": [
+        1,
+        null
+      ],
+      "C:/Users/Jorge2/Documents/SOEN 390/youdeliberate/app_60/app/helpers/narratives_helper.rb": [
+        1,
+        null
+      ],
+      "C:/Users/Jorge2/Documents/SOEN 390/youdeliberate/app_60/app/helpers/user_helper.rb": [
+        1,
+        null
+      ],
+      "C:/Users/Jorge2/Documents/SOEN 390/youdeliberate/app_60/app/controllers/admin_controller.rb": [
+        1,
         1,
         2,
+        null,
+        null,
+        1,
+        3,
+        1,
+        1,
+        2,
+        1,
         1,
         null,
         1,
@@ -114,14 +128,14 @@
         null,
         null
       ],
-      "d:/Aptana Studio 3/Aptana Studio 3 Workspace/youdeliberate/app_60/app/controllers/application_controller.rb": [
+      "C:/Users/Jorge2/Documents/SOEN 390/youdeliberate/app_60/app/controllers/application_controller.rb": [
         1,
         null,
         null,
         1,
         null
       ],
-      "d:/Aptana Studio 3/Aptana Studio 3 Workspace/youdeliberate/app_60/app/controllers/narratives_controller.rb": [
+      "C:/Users/Jorge2/Documents/SOEN 390/youdeliberate/app_60/app/controllers/narratives_controller.rb": [
         1,
         1,
         null,
@@ -203,13 +217,13 @@
         null,
         null
       ],
-      "d:/Aptana Studio 3/Aptana Studio 3 Workspace/youdeliberate/app_60/app/controllers/user_controller.rb": [
+      "C:/Users/Jorge2/Documents/SOEN 390/youdeliberate/app_60/app/controllers/user_controller.rb": [
         1,
         1,
         null,
         null
       ]
     },
-    "timestamp": 1391703632
+    "timestamp": 1391805129
   }
 }
