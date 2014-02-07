@@ -1,10 +1,15 @@
 class AdminController < ApplicationController
   def index
+    @upload_message = "Upload a narrative in zip format"
   end
 
   def upload
     if params[:narrative].nil?
-      @result = "Nothing to upload"
+      @upload_message = "Failed. Nothing to upload"
+      render :index
+    elsif params[:narrative].content_type != "application/zip"
+      @upload_message = "Failed. Please choose a zip file."
+      render :index
     else
       require 'rubygems'
       require 'zip'

@@ -1,6 +1,6 @@
 <h1>Admin#index</h1>
-<p>Upload a narrative in zip format</p>
+<p><%= @upload_message %></p>
 <%= form_tag({action: :upload}, multipart: true) do %>
-  <%= file_field_tag 'narrative' %>
+  <%= file_field_tag 'narrative'  , accept: 'application/zip'%>
   <%= submit_tag("Upload") %>
 <% end %>
