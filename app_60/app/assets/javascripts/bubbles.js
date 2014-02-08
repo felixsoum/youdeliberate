@@ -68,7 +68,8 @@ function refreshBubbles(){
 		  .attr("r", function(d) { return d.r; })
 		  .style("fill", function(d) { return getSectionColor(d.category); })
 		  .on("mouseover",function(d){d3.select(this).style("fill",function(d) { return getMouseOverColor(d.category); })})
-		  .on("mouseout",function(d){d3.select(this).style("fill", function(d) { return getSectionColor(d.category); })});
+		  .on("mouseout",function(d){d3.select(this).style("fill", function(d) { return getSectionColor(d.category); })})
+		  .on("click",function(d){$.fancybox({type: 'iframe',href: 'http://localhost:3000/narratives'});});
 
 	  node.append("text")
 		  .attr("dy", ".3em")
