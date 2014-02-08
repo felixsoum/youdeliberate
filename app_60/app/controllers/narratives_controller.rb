@@ -1,4 +1,5 @@
 class NarrativesController < ApplicationController
+  include NarrativesHelper
   before_action :set_narrative, only: [:show, :edit, :update, :destroy]
 
   # GET /narratives
@@ -8,13 +9,19 @@ class NarrativesController < ApplicationController
     respond_to do |format|
       format.html
       # Support JSONP. Read more: http://henrysztul.info/post/14970402595/how-to-enable-jsonp-support-in-a-rails-app
-      format.json { render :json => @narratives, :callback => params[:callback] }
+      format.json { render :json => narratives_json(@narratives), :callback => params[:callback] }
     end
   end
 
   # GET /narratives/1
   # GET /narratives/1.json
   def show
+    @narrative = Narrative.find(params[:id])
+    respond_to do |format|
+      format.html
+      # Support JSONP. Read more: http://henrysztul.info/post/14970402595/how-to-enable-jsonp-support-in-a-rails-app
+      format.json { render :json => narrative_json(@narrative), :callback => params[:callback] }
+    end
   end
 
   # GET /narratives/new

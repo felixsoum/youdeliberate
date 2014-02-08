@@ -1,5 +1,6 @@
 <!--Bubble generation : http://bl.ocks.org/mbostock/4063269-->
 var fileName = "example2.json";   //default
+fileName = 'http://localhost:3000/narratives.json';
 var radius = 100; 
 //test to see if dummy objects work and filtering 
 function OnCheckFilterOption(){	
@@ -65,7 +66,9 @@ function refreshBubbles(){
 		  .text(function(d) { return d.className + ": " + format(d.value); });
 
 	  node.append("circle")
-		  .attr("r", function(d) { return d.r; })
+		  .attr("r", function(d) {
+		  	 return d.r; 
+		  	 })
 		  .style("fill", function(d) { return getSectionColor(d.category); })
 		  .on("mouseover",function(d){d3.select(this).style("fill",function(d) { return getMouseOverColor(d.category); })})
 		  .on("mouseout",function(d){d3.select(this).style("fill", function(d) { return getSectionColor(d.category); })});
@@ -84,6 +87,14 @@ function classes(root) {
   function recurse(name, node) {
     if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });
     else classes.push({packageName: name, className: node.name, value: node.size, agree : node.NumberAgree, disagree: node.NumberDisagree, views: node.NumberViews, category: node.category });
+    /*else classes.push({packageName: name, 
+    		className: node.nar_name,
+    		//value: node.size, // Currently not in DB
+    		value: node.num_of_view,  
+    		agree : node.num_of_agree, 
+    		disagree: node.num_of_disagree, 
+    		views: node.num_of_view, 
+    		category: node.category_id });*/
   }
 
   recurse(null, root);
