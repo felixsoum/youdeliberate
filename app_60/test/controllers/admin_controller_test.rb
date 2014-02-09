@@ -28,7 +28,9 @@ class AdminControllerTest < ActionController::TestCase
     file = fixture_file_upload('files/1.zip', 'application/zip')
     post :upload, :narrative => file 
     assert_response :success
-    FileUtils.rm_rf(Dir["#{Rails.root}/public/narratives/"])
+
+    # Remove the directory of the uploaded narrative
+    FileUtils.rm_rf(Rails.root.join('public', 'narratives', NarrativeCount.find(1).value.to_s)
   end
   
 end
