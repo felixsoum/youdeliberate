@@ -1,6 +1,6 @@
 <!--Bubble generation : http://bl.ocks.org/mbostock/4063269-->
-var fileName = "example2.json";   //default
-fileName = 'http://localhost:3000/narratives.json';
+var fileName = "example2.json";   //data from stub
+fileName = 'http://localhost:3000/narratives.json'; //data from DB
 var radius = 100; 
 //test to see if dummy objects work and filtering 
 function OnCheckFilterOption(){	
@@ -35,10 +35,12 @@ function OnCheckFilterOption(){
 var diameter = 0; 
 function refreshBubbles(){
 	//delete all children in div 
+	
 	var node1 = document.getElementById("bubbles"); 
 	while (node1.hasChildNodes()) {
 		node1.removeChild(node1.lastChild);
 	}	
+	
 	diameter = 500,
 		format = d3.format(",d"),
 		color = d3.scale.category20c();
@@ -47,7 +49,7 @@ function refreshBubbles(){
 	var bubble = d3.layout.pack()
 		.sort(null)
 		.size([diameter, diameter])
-		.padding(1.5);
+		.padding(4.5);
 		
 	var svg = d3.select("#bubbles").append("svg")
 		.attr("width", diameter*2)
@@ -59,7 +61,7 @@ function refreshBubbles(){
 		  .data(bubble.nodes(classes(root))
 		  .filter(function(d) { return !d.children; }))
 		.enter().append("g")
-		  .attr("class", "node");		  
+		  .attr("class", "node");	  
 
 	  node.append("title")
 		  .text(function(d) { return d.className + ": " + format(d.value); });
@@ -69,9 +71,14 @@ function refreshBubbles(){
 		  	 return d.r/2; 
 		  	 })		
 		  .attr("transform", function(d) { return "translate(" + 200 + "," + 200 + ")"; })
-		  .on("mouseover",function(d){d3.select(this).style("fill",function(d) { return getMouseOverColor(d.category); })})
-		  .on("mouseout",function(d){d3.select(this).style("fill", function(d) { return getSectionColor(d.category); })})
-		  .on("click",function(d){$.fancybox({type: 'iframe',href: 'http://localhost:3000/narratives/narrative'});})
+		  .style({ 'stroke': function(d) { return getSectionColor(d.category); }, 'fill': 'none', 'stroke-width': '3px'})
+		  //For fill-in selection color
+		  //.on("mouseover",function(d){d3.select(this).style("fill",function(d) { return getMouseOverColor(d.category); })})
+		  //.on("mouseout",function(d){d3.select(this).style("fill", function(d) { return getSectionColor(d.category); })})
+		  //For outline selection color
+		  .on("mouseover",function(d){d3.select(this).style("stroke",function(d) { return getMouseOverColor(d.category); })})
+		  .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { return getSectionColor(d.category); })})
+		  .on("click",function(d){$.fancybox({type: 'iframe',href: 'http://localhost:3000/narratives/narrative'+'?id='+d.n_id});}) //Requests single-narrative view with appropriate ID
 		  .transition()
 		  .attr("r", function(d) {
 		  	 return d.r; 
@@ -79,8 +86,8 @@ function refreshBubbles(){
 			.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
 		  .style("fill", function(d) { return getSectionColor(d.category); })
 		  .style("opacity",0.5)
-		  .duration(4000)
-		  .ease("bounce")
+		  .duration(2000)
+		  .ease("bounce");
 
 	  node.append("text")
 		  .attr("dy", ".3em")
@@ -96,7 +103,7 @@ function classes(root) {
 
   function recurse(name, node) {
     if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });
-    else classes.push({packageName: name, className: node.name, value: node.size, agree : node.NumberAgree, disagree: node.NumberDisagree, views: node.NumberViews, category: node.category });
+    else classes.push({packageName: name, className: node.name, value: node.size, agree : node.NumberAgree, disagree: node.NumberDisagree, views: node.NumberViews, category: node.category, n_id: node.id });
     /*else classes.push({packageName: name, 
     		className: node.nar_name,
     		//value: node.size, // Currently not in DB
@@ -134,23 +141,11 @@ function getSize(d){
 	}
 }
 function getSectionColor(n){
-	/*
-	switch(n){
-		case "For":
-			return "#00CC33";
-			break; 
-		case "Against":
-			return "#D80000";
-			break; 
-		case "Ambivalent":
-			return "#D8D8D8";
-			break; 
-	}
-	*/
 
 	switch(n){
     case "For":
     case "ForNeutral":
+    case 0:
       return "#1E30FF";
     case "ForAgreed":
       return "#111774";
@@ -158,6 +153,7 @@ function getSectionColor(n){
       return "#6670E8"; //3695ae
     case "Against":
     case "AgainstNeutral":
+    case 1:
       return "#ff0000";
     case "AgainstAgreed":
       return "#8B0000";
@@ -165,6 +161,7 @@ function getSectionColor(n){
       return "#EE6363"; //FF6B6B
     case "Ambivalent":
     case "AmbivalentNeutral":
+    case 2:
       return "#c0c0c0";    
     case "AmbivalentAgreed":
       return "#615656";
@@ -175,7 +172,9 @@ function getSectionColor(n){
   }
 }
 function getMouseOverColor(n){
-	return "#aaa"	
+	//return "#aaa"	   //Grey
+	//return "#4CBB17" //Kelly Green
+	return "#000";
 }
 d3.select(self.frameElement).style("height", diameter + "px");
 
