@@ -28,6 +28,7 @@ class AdminControllerTest < ActionController::TestCase
     # Save current narratives
     old_path = Rails.root.join('public', 'narratives')
     new_path = Rails.root.join('public', 'narratives_backup')
+    FileUtils.mkdir_p(old_path)
     FileUtils.mv(old_path, new_path)
 
     file = fixture_file_upload('files/1.zip', 'application/zip')
