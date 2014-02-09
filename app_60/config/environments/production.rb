@@ -77,4 +77,7 @@ App60::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  # Config respond-rails. Read more: https://github.com/gevans/respond-rails
+  config.assets.precompile += %w( modernizr.js respond.js respond-proxy.html respond.proxy.js )
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140130051338) do
+ActiveRecord::Schema.define(version: 20140207201949) do
 
   create_table "audios", force: true do |t|
     t.integer  "narrative_id"
@@ -20,9 +20,28 @@ ActiveRecord::Schema.define(version: 20140130051338) do
     t.datetime "updated_at"
   end
 
+  create_table "categories", force: true do |t|
+    t.string   "category_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "images", force: true do |t|
     t.integer  "narrative_id"
     t.string   "image_path"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "languages", force: true do |t|
+    t.string   "language_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "n_comments", force: true do |t|
+    t.integer  "narrative_id"
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
