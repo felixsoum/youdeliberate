@@ -25,12 +25,20 @@ class AdminControllerTest < ActionController::TestCase
   end
   
   test "should post upload with zip file" do
+    # Save current narratives
+    old_path = Rails.root.join('public', 'narratives')
+    new_path = Rails.root.join('public', 'narratives_backup')
+    FileUtils.mv(old_path, new_path)
+
     file = fixture_file_upload('files/1.zip', 'application/zip')
     post :upload, :narrative => file 
     assert_response :success
 
     # Remove the directory of the uploaded narrative
-    FileUtils.rm_rf(Rails.root.join('public', 'narratives', NarrativeCount.find(1).value.to_s)
+    FileUtils.rm_rf(old_path)
+
+    # Restore saved narratives
+    FileUtils.mv(new_path, old_path)
   end
   
 end
