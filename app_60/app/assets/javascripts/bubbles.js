@@ -72,7 +72,7 @@ function refreshBubbles(){
 		  .style("fill", function(d) { return getSectionColor(d.category); })
 		  .on("mouseover",function(d){d3.select(this).style("fill",function(d) { return getMouseOverColor(d.category); })})
 		  .on("mouseout",function(d){d3.select(this).style("fill", function(d) { return getSectionColor(d.category); })})
-		  .on("click",function(d){$.fancybox({type: 'iframe',href: 'http://localhost:3000/narratives'});});
+		  .on("click",function(d){$.fancybox({type: 'iframe',href: 'http://localhost:3000/narratives/narrative'});});
 
 	  node.append("text")
 		  .attr("dy", ".3em")

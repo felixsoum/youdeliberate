@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>App60</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  <!--[if lt IE 9]>
+    <%= javascript_include_tag 'html5shiv-printshiv' %>
+  <![endif]-->
+  <%= respond_include_tags %>
+</head>
+<body>
+<div>
+	<div id="narrative" align="center">
+		<div>Media element will be here</div>
+		<div class="btn-group">
+		  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up">&nbsp4</span></button>
+		  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-down">&nbsp5</span></button>
+		  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-flag"></span></button>
+		</div>
+	</div>
+	<div class="col-lg-6" id="narrative">
+		<div class="input-group">
+		  <input type="text" class="form-control">
+		  <span class="input-group-btn">
+			<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-comment"></button>
+		  </span>
+		</div>
+	</div>
+	<div class="panel panel-primary" id="narrative">
+		<table>
+		  <tbody>
+			  <tr>
+				<td>
+					<p>comments will be here</p>
+					<div>
+						<div class="btn-group">
+						  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+						  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-down"></span></button>
+						</div>
+						<span>Date will be here</span>
+					</div>					
+				</td>				
+			  </tr>
+		  </tbody>
+		</table>	
+	</div>
+</div>
+</body>
+</html>
