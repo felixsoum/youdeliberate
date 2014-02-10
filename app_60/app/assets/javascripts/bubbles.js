@@ -92,7 +92,14 @@ function refreshBubbles(){
 	  node.append("text")
 		  .attr("dy", ".3em")
 		  .style("text-anchor", "middle")
-		  .text(function(d) { return d.className.substring(0,  d.r/ 3); });
+		  .style("opacity",0)
+		  .attr("transform", function(d) { return "translate(" + 200 + "," + 200 + ")"; })
+		  .text(function(d) { return d.className.substring(0,  d.r/ 3)})
+		  .transition()
+		  .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+		  .style("opacity",1)
+		  .duration(2000)
+		  .ease("bounce");
 			
 	});		
 }
