@@ -76,8 +76,8 @@ function refreshBubbles(){
 		  //.on("mouseover",function(d){d3.select(this).style("fill",function(d) { return getMouseOverColor(d.category); })})
 		  //.on("mouseout",function(d){d3.select(this).style("fill", function(d) { return getSectionColor(d.category); })})
 		  //For outline selection color
-		  .on("mouseover",function(d){d3.select(this).style("stroke",function(d) { return getMouseOverColor(d.category); })})
-		  .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { return getSectionColor(d.category); })})
+		  .on("mouseover",function(d){d3.select(this).style("stroke",function(d) { d3.select(this).style("opacity",1); return getMouseOverColor(d.category);  })})
+		  .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { d3.select(this).style("opacity",0.75); return getSectionColor(d.category);  })})
 		  .on("click",function(d){$.fancybox({type: 'iframe',href: 'http://localhost:3000/narratives/'+d.n_id});}) //Requests single-narrative view with appropriate ID
 		  .transition()
 		  .attr("r", function(d) {
@@ -85,7 +85,7 @@ function refreshBubbles(){
 		  	 })
 			.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
 		  .style("fill", function(d) { return getSectionColor(d.category); })
-		  .style("opacity",0.5)
+		  .style("opacity",0.75)
 		  .duration(2000)
 		  .ease("bounce");
 

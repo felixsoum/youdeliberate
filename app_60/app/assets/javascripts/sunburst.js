@@ -49,9 +49,12 @@ function getData() {
       .enter().append("path")
         .attr("display", function(d) { return d.depth ? null : "none"; }) // hide inner ring
         .attr("d", arc)
+        .style("opacity",0.75)
         .style("stroke", "#fff")
         .style("fill", function(d) { return getArcColor(d.name); })
         .style("fill-rule", "evenodd")
+        .on("mouseover",function(d){d3.select(this).style("stroke",function(d) { d3.select(this).style("opacity",1); return getArcMouseOutColor(d.category);  })})
+        .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { d3.select(this).style("opacity",0.75); return getArcMouseOutColor(d.category);  })})
         .on("click",function(d,i){alert(d.name)})
         .each(stash);
 
@@ -82,6 +85,7 @@ function getArcColor(n){
   switch(n){
     case "For":
     case "ForNeutral":
+    case 0:
       return "#1E30FF";
     case "ForAgreed":
       return "#111774";
@@ -89,6 +93,7 @@ function getArcColor(n){
       return "#6670E8"; //3695ae
     case "Against":
     case "AgainstNeutral":
+    case 1:
       return "#ff0000";
     case "AgainstAgreed":
       return "#8B0000";
@@ -96,6 +101,7 @@ function getArcColor(n){
       return "#EE6363"; //FF6B6B
     case "Ambivalent":
     case "AmbivalentNeutral":
+    case 2:
       return "#c0c0c0";    
     case "AmbivalentAgreed":
       return "#615656";
@@ -103,7 +109,19 @@ function getArcColor(n){
       return "#a8bba8";
     default:
       return "#000";
-  }
+    }
+}
+
+function getArcMouseOverColor(n){
+  //return "#aaa"    //Grey
+  //return "#4CBB17" //Kelly Green
+  return "#000";
+}
+
+function getArcMouseOutColor(n){
+  //return "#aaa"    //Grey
+  //return "#4CBB17" //Kelly Green
+  return "#fff";
 }
 d3.select(self.frameElement).style("height", height + "px");
 
