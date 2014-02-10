@@ -78,7 +78,7 @@ function refreshBubbles(){
 		  //For outline selection color
 		  .on("mouseover",function(d){d3.select(this).style("stroke",function(d) { return getMouseOverColor(d.category); })})
 		  .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { return getSectionColor(d.category); })})
-		  .on("click",function(d){$.fancybox({type: 'iframe',href: 'http://localhost:3000/narratives/narrative'+'?id='+d.n_id});}) //Requests single-narrative view with appropriate ID
+		  .on("click",function(d){$.fancybox({type: 'iframe',href: 'http://localhost:3000/narratives/'+d.n_id});}) //Requests single-narrative view with appropriate ID
 		  .transition()
 		  .attr("r", function(d) {
 		  	 return d.r; 
@@ -104,14 +104,6 @@ function classes(root) {
   function recurse(name, node) {
     if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });
     else classes.push({packageName: name, className: node.name, value: node.size, agree : node.NumberAgree, disagree: node.NumberDisagree, views: node.NumberViews, category: node.category, n_id: node.id });
-    /*else classes.push({packageName: name, 
-    		className: node.nar_name,
-    		//value: node.size, // Currently not in DB
-    		value: node.num_of_view,  
-    		agree : node.num_of_agree, 
-    		disagree: node.num_of_disagree, 
-    		views: node.num_of_view, 
-    		category: node.category_id });*/
   }
 
   recurse(null, root);
