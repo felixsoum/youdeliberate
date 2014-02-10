@@ -10,6 +10,26 @@ class NarrativesControllerTest < ActionController::TestCase
     assert_response :success
     assert_not_nil assigns(:narratives)
   end
+  
+  # This test could also be done in helpers/narratives_helper_test -- but if it passes here, then the helper works.
+  test "should have the appropriate JSON object" do
+    params = {:format => 'json'}
+  
+    get :index, params
+    
+    narratives = JSON.parse(@response.body)
+    narrative = narratives['children'][0]['children'][0]['children'][0] # Skip the whole hierarchy and only look at the first narrative object
+    assert_not_nil(narrative['id'])
+    assert_not_nil(narrative['name'])
+    assert_not_nil(narrative['picture'])
+    assert_not_nil(narrative['size'])
+    assert_not_nil(narrative['language'])
+    assert_not_nil(narrative['NumberAgree'])
+    assert_not_nil(narrative['NumberDisagree'])
+    assert_not_nil(narrative['NumberViews'])
+    assert_not_nil(narrative['NarrativeID'])
+    assert_not_nil(narrative['category'])
+   end
 
   test "should get new" do
     get :new
