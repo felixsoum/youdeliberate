@@ -60,18 +60,18 @@ function refreshBubbles(){
 	 var node = svg.selectAll(".node")
 		  .data(bubble.nodes(classes(root))
 		  .filter(function(d) { return !d.children; }))
-		.enter().append("g")
-		  .attr("class", "node");	  
+		  .enter().append("g")
+		  .attr("class", "node");  
 
 	  node.append("title")
-		  .text(function(d) { return d.className + ": " + format(d.value); });
+		  .text(function(d) { return d.className + ": " + format(d.value); });		  
 
 	  node.append("circle")
 			.attr("r",function(d) {
 		  	 return d.r/2; 
-		  	 })		
-		  .attr("transform", function(d) { return "translate(" + 200 + "," + 200 + ")"; })
+		  	 })				  
 		  .style({ 'stroke': function(d) { return getSectionColor(d.category); }, 'fill': 'none', 'stroke-width': '3px'})
+		  .attr("transform", function(d) { return "translate(" + 200+"," + 200 + ")"; })
 		  //For fill-in selection color
 		  //.on("mouseover",function(d){d3.select(this).style("fill",function(d) { return getMouseOverColor(d.category); })})
 		  //.on("mouseout",function(d){d3.select(this).style("fill", function(d) { return getSectionColor(d.category); })})
@@ -83,16 +83,22 @@ function refreshBubbles(){
 		  .attr("r", function(d) {
 		  	 return d.r; 
 		  	 })
-			.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+		  .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
 		  .style("fill", function(d) { return getSectionColor(d.category); })
-		  .style("opacity",0.5)
 		  .duration(2000)
 		  .ease("bounce");
 
 	  node.append("text")
 		  .attr("dy", ".3em")
 		  .style("text-anchor", "middle")
-		  .text(function(d) { return d.className.substring(0,  d.r/ 3); });
+		  .style("opacity",0)
+		  .text(function(d) { return d.className.substring(0,  d.r/ 3.5); })
+		  .attr("transform", function(d) { return "translate(" + 200 + "," + 200 + ")"; })
+		  .transition()
+		  .style("opacity",1)
+		  .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+		  .duration(2000)
+		  .ease("bounce");
 			
 	});		
 }
