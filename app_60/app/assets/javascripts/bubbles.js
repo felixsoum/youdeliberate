@@ -60,8 +60,8 @@ function refreshBubbles(){
 	 var node = svg.selectAll(".node")
 		  .data(bubble.nodes(classes(root))
 		  .filter(function(d) { return !d.children; }))
-		.enter().append("g")
-		  .attr("class", "node");	  
+		  .enter().append("g")
+		  .attr("class", "node");  
 
 	  node.append("title")
 		  .text(function(d) { return d.className + ": " + format(d.value); });
@@ -83,7 +83,7 @@ function refreshBubbles(){
 		  .attr("r", function(d) {
 		  	 return d.r; 
 		  	 })
-			.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+		  .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
 		  .style("fill", function(d) { return getSectionColor(d.category); })
 		  .style("opacity",0.75)
 		  .duration(2000)
