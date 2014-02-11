@@ -64,3 +64,11 @@ gem 'html5shiv-rails'
 
 # Use respond-rails to shim CSS3 media queries
 gem 'respond-rails'
+
+group :production do
+  # Use postgresql as the database for Active Record on Heroku
+  gem 'pg'
+
+  # Use rails_12factor to enable serving assets in production
+  gem 'rails_12factor'
+end
