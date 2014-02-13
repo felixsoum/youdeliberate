@@ -67,8 +67,4 @@ ActiveRecord::Schema.define(version: 20140207201949) do
     t.datetime "updated_at"
   end
 
-  create_table "test", id: false, force: true do |t|
-    t.integer "idtest", null: false
-  end
-
 end
