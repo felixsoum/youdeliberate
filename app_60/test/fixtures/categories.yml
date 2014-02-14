@@ -1,7 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  category_name: MyString
+  id: 1
+  category_name: For
 
 two:
-  category_name: MyString
+  id: 2
+  category_name: Against
+  
+two:
+  id: 3
+  category_name: Undecide
