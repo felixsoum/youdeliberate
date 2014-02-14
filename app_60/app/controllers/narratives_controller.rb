@@ -1,4 +1,5 @@
 class NarrativesController < ApplicationController
+  include NarrativesHelper
   before_action :set_narrative, only: [:show, :edit, :update, :destroy]
 
   # GET /narratives
@@ -8,13 +9,19 @@ class NarrativesController < ApplicationController
     respond_to do |format|
       format.html
       # Support JSONP. Read more: http://henrysztul.info/post/14970402595/how-to-enable-jsonp-support-in-a-rails-app
-      format.json { render :json => @narratives, :callback => params[:callback] }
+      format.json { render :json => narratives_json(@narratives), :callback => params[:callback] }
     end
   end
 
   # GET /narratives/1
   # GET /narratives/1.json
   def show
+    @narrative = Narrative.find(params[:id])
+    respond_to do |format|
+      format.html
+      # Support JSONP. Read more: http://henrysztul.info/post/14970402595/how-to-enable-jsonp-support-in-a-rails-app
+      format.json { render :json => narrative_json(@narrative), :callback => params[:callback] }
+    end
   end
 
   # GET /narratives/new
@@ -36,8 +43,7 @@ class NarrativesController < ApplicationController
         format.html { redirect_to @narrative, notice: 'Narrative was successfully created.' }
         format.json { render action: 'show', status: :created, location: @narrative }
       else
-        format.html { render action: 'new' }
-        format.json { render json: @narrative.errors, status: :unprocessable_entity }
+        render_after_fail(format, 'new')
       end
     end
   end
@@ -50,8 +56,7 @@ class NarrativesController < ApplicationController
         format.html { redirect_to @narrative, notice: 'Narrative was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
-        format.json { render json: @narrative.errors, status: :unprocessable_entity }
+        render_after_fail(format, 'edit')
       end
     end
   end
@@ -75,6 +80,12 @@ class NarrativesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def narrative_params
-      params.require(:narrative).permit(:nar_name, :nar_path, :language_id, :category_id, :first_image, :num_of_view, :num_of_agree, :num_of_disagree, :num_of_flagged, :create_time)
+      params.require(:narrative).permit(:nar_name, :nar_path, :language_id, :category_id, :first_image,
+                                        :num_of_view, :num_of_agree, :num_of_disagree, :num_of_flagged, :create_time)
+    end
+    
+    def render_after_fail format, act
+      format.html { render action: act }
+      format.json { render json: @narrative.errors, status: :unprocessable_entity }
     end
 end
