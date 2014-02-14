@@ -1,11 +1,15 @@
 <% content_for(:head) do %>
   <!--[if lte IE 8]><%= javascript_include_tag "r2d3" %><![endif]-->
   <!--[if gte IE 9]><!-->
+
   <%= javascript_include_tag "d3.v3.min" %>
   <!--<![endif]-->
   <%= javascript_include_tag "functions" %>
   <%= javascript_include_tag "bubbles" %>
   <%= javascript_include_tag "sunburst" %>
+  <%= stylesheet_link_tag "jquery.fancybox" %>
+  <%= javascript_include_tag "jquery.fancybox.pack" %>
+
 <% end %>
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
@@ -49,6 +53,7 @@
       <div class="starter-template">
         <h1>YouDeliberate - Bill 60</h1>
         <p class="lead">Share narratives and engage in deliberative democracy!</p>
+
       </div>
       <div class="col-lg-4">
         <div id="sunburst">
