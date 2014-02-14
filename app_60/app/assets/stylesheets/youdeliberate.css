@@ -25,3 +25,7 @@ circle:hover{
 path:hover{
 	cursor: pointer;
 }
+svg.bubble{
+	position:relative;
+	top: -100px;
+}
