@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140207201949) do
+ActiveRecord::Schema.define(version: 20140214211614) do
 
   create_table "audios", force: true do |t|
     t.integer  "narrative_id"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20140207201949) do
     t.string   "image_path"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "image_number"
   end
 
   create_table "languages", force: true do |t|

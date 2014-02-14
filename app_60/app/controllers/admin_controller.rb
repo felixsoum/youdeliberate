@@ -11,7 +11,8 @@ class AdminController < ApplicationController
       @upload_message = "Failed. Nothing to upload"
       render :index
     elsif params[:narrative].content_type != "application/zip" and
-          params[:narrative].content_type != "application/octet-stream"
+          params[:narrative].content_type != "application/octet-stream" and
+          params[:narrative].content_type != "application/x-zip-compressed"
       # The MIME type of a zip file is sometimes octet-stream. Read more: http://stackoverflow.com/questions/856013/mime-type-for-zip-file-in-google-chrome
       @upload_message = "Failed. Please choose a zip file."
       render :index
@@ -67,16 +68,13 @@ class AdminController < ApplicationController
           doc = Nokogiri::XML(File.open(File.join(narrative_path, file)))
           nar_info = doc.xpath("//narrative")
           narrative_name = nar_info.xpath("//narrativeName").text
-          narrative_language = (nar_info.xpath("//language").text).capitalize()
+          narrative_language = nar_info.xpath("//language").text
           narrative_language_id = get_language_id(narrative_language)
           nar_date = nar_info.xpath("//submitDate").text
-          nar_time = (nar_info.xpath("//time").text).gsub("-", ":")
-          nar_create_time = "#{nar_date} #{nar_time}"
-          relative_narrative_path = narrative_path.from(narrative_path.index('public/narratives'))
-          @narrative = Narrative.create(nar_name: narrative_name, nar_path: relative_narrative_path,
-                                        language_id: narrative_language_id, category_id: 3,
-                                        num_of_view: 0, num_of_agree: 0, num_of_disagree: 0,
-                                        num_of_flagged: 0, create_time: nar_create_time)
+          nar_time = nar_info.xpath("//time").text
+          @narrative = Narrative.create(nar_name: narrative_name, nar_path: narrative_path,
+                                        language_id: narrative_language_id, num_of_view: 0,
+                                        num_of_agree: 0, num_of_disagree: 0, num_of_flagged: 0)
         end
       end
     end
@@ -86,13 +84,13 @@ class AdminController < ApplicationController
       accepted_image_formats = [".jpg", ".png"]
       Dir.foreach(narrative_path) do |file|
         next if file == '.' or file == '..'
-        relative_narrative_path = narrative_path.from(narrative_path.index('public/narratives'))
         if accepted_audio_formats.include? File.extname(file)
-          Audio.create(audio_path: "#{relative_narrative_path}/#{file}",
+          Audio.create(audio_path: "#{narrative_path}/#{file}",
                        narrative_id: @narrative.id)
         elsif accepted_image_formats.include? File.extname(file)
-          Image.create(image_path: "#{relative_narrative_path}/#{file}",
-                       narrative_id: @narrative.id)
+          Image.create(image_path: "#{narrative_path}/#{file}",
+                       narrative_id: @narrative.id,
+                       image_number: File.basename(file, '.*'))
         end
       end
     end
