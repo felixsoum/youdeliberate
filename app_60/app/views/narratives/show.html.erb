@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+<p>
+<strong>Nar name:</strong>
+<%= @narrative.nar_name %>
+ </p>
+ 
+ <p>
+<strong>Nar path:</strong>
+<%= @narrative.nar_path %>
+ </p>
+ 
+ <p>
+<strong>Language:</strong>
+<%= @narrative.language_id %>
+ </p>
+ 
+ <p>
+<strong>Category:</strong>
+<%= @narrative.category_id %>
+ </p>
+ 
+ <p>
+<strong>First image:</strong>
+<%= @narrative.first_image %>
+ </p>
+ 
+ <p>
+<strong>Num of view:</strong>
+<%= @narrative.num_of_view %>
+ </p>
+ 
+ <p>
+<strong>Num of agree:</strong>
+<%= @narrative.num_of_agree %>
+ </p>
+ 
+ <p>
+<strong>Num of disagree:</strong>
+<%= @narrative.num_of_disagree %>
+ </p>
+ 
+ <p>
+<strong>Num of flagged:</strong>
+<%= @narrative.num_of_flagged %>
+ </p>
+ 
+ <p>
+<strong>Create time:</strong>
+<%= @narrative.create_time %>
+ </p>
+ 
+ <%= link_to 'Edit', edit_narrative_path(@narrative) %> |
+ <%= link_to 'Back', narratives_path %>
