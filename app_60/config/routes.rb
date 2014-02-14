@@ -7,6 +7,8 @@ App60::Application.routes.draw do
   get 'admin/index', as: 'index_admin'
   post 'admin/upload'
   resources :narratives
+  
+  match ':controller(/:action(/:id))', :via => :get
 	
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
