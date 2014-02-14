@@ -37,13 +37,16 @@ class NarrativesController < ApplicationController
     # GET /narratives/play/1
   def play   
     @narrative = Narrative.find(params[:id])
-    images = Image.where(narrative_id: params[:id])
+    images = Image.where(narrative_id: params[:id]).order(:image_name)
+    image = images.first
+    #image = "http://www.jplayer.org/audio/poster/The_Stark_Palace_640x360.png"
 
     audio_array = []
-    Audio.where(narrative_id: params[:id]).each do |audio| 
+    Audio.where(narrative_id: params[:id]).each do |audio|
+       
       audio_array.push(  
         mp3: audio.audio_path,
-        poster: "http://www.jplayer.org/audio/poster/The_Stark_Palace_640x360.png"        
+        poster: image
       )
     end
     @audio_json = audio_array.to_json.html_safe 
