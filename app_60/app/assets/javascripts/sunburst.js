@@ -25,7 +25,8 @@ function setArc() {
     arc = d3.svg.arc()
     .startAngle(function(d) { return d.x; })
     .endAngle(function(d) { return d.x + d.dx; })
-    .innerRadius(function(d) { return Math.sqrt(d.y); })
+    //.innerRadius(function(d) { return Math.sqrt(d.y); })
+    .innerRadius(function(d) { return Math.sqrt(d.y / 1.5); })
     .outerRadius(function(d) { return Math.sqrt(d.y + d.dy); });
 }
 
@@ -36,25 +37,25 @@ function onLoadAnim() {
     path
         .data(partition.value(value).nodes)
       .transition()
-        .duration(5000)
-        .delay(1000)
+        .duration(3000)
+        //.delay(1000)
         .attrTween("d", arcTween);
 }
 
 //get data
 function getData() {
-  d3.json("sunburst2.json", function(error, root) {
+  d3.json("sunburst3.json", function(error, root) {
     path = svg.datum(root).selectAll("path")
         .data(partition.nodes)
       .enter().append("path")
         .attr("display", function(d) { return d.depth ? null : "none"; }) // hide inner ring
         .attr("d", arc)
-        .style("opacity",0.75)
+        .style("opacity",1.0)
         .style("stroke", "#fff")
-        .style("fill", function(d) { return getArcColor(d.name); })
+        .style("fill", function(d) { return getCategoryColor(d.name); })
         .style("fill-rule", "evenodd")
-        .on("mouseover",function(d){d3.select(this).style("stroke",function(d) { d3.select(this).style("opacity",1); return getArcMouseOutColor(d.category);  })})
-        .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { d3.select(this).style("opacity",0.75); return getArcMouseOutColor(d.category);  })})
+        .on("mouseover",function(d){d3.select(this).style("stroke",function(d) { d3.select(this).style("opacity",0.5); return getArcMouseOutColor(d.category);  })})
+        .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { d3.select(this).style("opacity",1); return getArcMouseOutColor(d.category);  })})
         .on("click",function(d,i){alert(d.name)})
         .each(stash);
 
@@ -78,38 +79,6 @@ function arcTween(a) {
     a.dx0 = b.dx;
     return arc(b);
   };
-}
-
-//ghetto color selector
-function getArcColor(n){
-  switch(n){
-    case "For":
-    case "ForNeutral":
-    case 0:
-      return "#1E30FF";
-    case "ForAgreed":
-      return "#111774";
-    case "ForDisagreed":
-      return "#6670E8"; //3695ae
-    case "Against":
-    case "AgainstNeutral":
-    case 1:
-      return "#ff0000";
-    case "AgainstAgreed":
-      return "#8B0000";
-    case "AgainstDisagreed":
-      return "#EE6363"; //FF6B6B
-    case "Ambivalent":
-    case "AmbivalentNeutral":
-    case 2:
-      return "#c0c0c0";    
-    case "AmbivalentAgreed":
-      return "#615656";
-    case "AmbivalentDisagreed":
-      return "#a8bba8";
-    default:
-      return "#000";
-    }
 }
 
 function getArcMouseOverColor(n){
