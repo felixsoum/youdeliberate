@@ -60,8 +60,8 @@ function refreshBubbles(){
 	 var node = svg.selectAll(".node")
 		  .data(bubble.nodes(classes(root))
 		  .filter(function(d) { return !d.children; }))
-		.enter().append("g")
-		  .attr("class", "node");	  
+		  .enter().append("g")
+		  .attr("class", "node");  
 
 	  node.append("title")
 		  .text(function(d) { return d.className + ": " + format(d.value); });
@@ -76,23 +76,30 @@ function refreshBubbles(){
 		  //.on("mouseover",function(d){d3.select(this).style("fill",function(d) { return getMouseOverColor(d.category); })})
 		  //.on("mouseout",function(d){d3.select(this).style("fill", function(d) { return getSectionColor(d.category); })})
 		  //For outline selection color
-		  .on("mouseover",function(d){d3.select(this).style("stroke",function(d) { return getMouseOverColor(d.category); })})
-		  .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { return getSectionColor(d.category); })})
+		  .on("mouseover",function(d){d3.select(this).style("stroke",function(d) { d3.select(this).style("opacity",1); return getMouseOverColor(d.category);  })})
+		  .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { d3.select(this).style("opacity",0.75); return getSectionColor(d.category);  })})
 		  .on("click",function(d){$.fancybox({type: 'iframe',href: 'http://localhost:3000/narratives/'+d.n_id});}) //Requests single-narrative view with appropriate ID
 		  .transition()
 		  .attr("r", function(d) {
 		  	 return d.r; 
 		  	 })
-			.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+		  .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
 		  .style("fill", function(d) { return getSectionColor(d.category); })
-		  .style("opacity",0.5)
+		  .style("opacity",0.75)
 		  .duration(2000)
 		  .ease("bounce");
 
 	  node.append("text")
 		  .attr("dy", ".3em")
 		  .style("text-anchor", "middle")
-		  .text(function(d) { return d.className.substring(0,  d.r/ 3); });
+		  .style("opacity",0)
+		  .attr("transform", function(d) { return "translate(" + 200 + "," + 200 + ")"; })
+		  .text(function(d) { return d.className.substring(0,  d.r/ 3)})
+		  .transition()
+		  .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+		  .style("opacity",1)
+		  .duration(2000)
+		  .ease("bounce");
 			
 	});		
 }

@@ -19,3 +19,9 @@
 .list-spacer{
 	padding-left:6em
 }
+circle:hover{
+	cursor: pointer;
+}
+path:hover{
+	cursor: pointer;
+}

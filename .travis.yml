@@ -9,7 +9,9 @@ branches:
   only:
     - master
     - backend
+    - frontend
 notifications:
   email:
     - felix@felixsoum.com
     - un.tremblay@gmailcom
+    - ldohxc@hotmail.com
