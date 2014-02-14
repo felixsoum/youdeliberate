@@ -1,10 +1,16 @@
 class AdminController < ApplicationController
   def index
+    @upload_message = "Upload a narrative in zip format"
   end
 
   def upload
     if params[:narrative].nil?
-      @result = "Nothing to upload"
+      @upload_message = "Failed. Nothing to upload"
+      render :index
+    elsif params[:narrative].content_type != "application/zip" and params[:narrative].content_type != "application/octet-stream"
+      # The MIME type of a zip file is sometimes octet-stream. Read more: http://stackoverflow.com/questions/856013/mime-type-for-zip-file-in-google-chrome
+      @upload_message = "Failed. Please choose a zip file."
+      render :index
     else
       require 'rubygems'
       require 'zip'
@@ -12,7 +18,7 @@ class AdminController < ApplicationController
     	Zip::File.open(params[:narrative].path) do |zip_file|
         # Make sure narrative count exists
         if NarrativeCount.count == 0
-          NarrativeCount.create(value: 0)
+          NarrativeCount.create(value: 1000)
         end
 
         # Create unique directory name for the next narrative
