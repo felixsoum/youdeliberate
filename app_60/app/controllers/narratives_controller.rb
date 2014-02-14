@@ -17,6 +17,7 @@ class NarrativesController < ApplicationController
   # GET /narratives/1.json
   def show
     @narrative = Narrative.find(params[:id])
+    
     respond_to do |format|
       format.html
       # Support JSONP. Read more: http://henrysztul.info/post/14970402595/how-to-enable-jsonp-support-in-a-rails-app
@@ -32,6 +33,21 @@ class NarrativesController < ApplicationController
   # GET /narratives/1/edit
   def edit
   end
+  
+    # GET /narratives/play/1
+  def play   
+    @narrative = Narrative.find(params[:id])
+    images = Image.where(narrative_id: params[:id])
+
+    audio_array = []
+    Audio.where(narrative_id: params[:id]).each do |audio| 
+      audio_array.push(  
+        mp3: audio.audio_path,
+        poster: "http://www.jplayer.org/audio/poster/The_Stark_Palace_640x360.png"        
+      )
+    end
+    @audio_json = audio_array.to_json.html_safe 
+  end
 
   # POST /narratives
   # POST /narratives.json
@@ -43,7 +59,8 @@ class NarrativesController < ApplicationController
         format.html { redirect_to @narrative, notice: 'Narrative was successfully created.' }
         format.json { render action: 'show', status: :created, location: @narrative }
       else
-        render_after_fail(format, 'new')
+        format.html { render action: 'new' }
+        format.json { render json: @narrative.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -56,7 +73,8 @@ class NarrativesController < ApplicationController
         format.html { redirect_to @narrative, notice: 'Narrative was successfully updated.' }
         format.json { head :no_content }
       else
-        render_after_fail(format, 'edit')
+        format.html { render action: 'edit' }
+        format.json { render json: @narrative.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -80,12 +98,6 @@ class NarrativesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def narrative_params
-      params.require(:narrative).permit(:nar_name, :nar_path, :language_id, :category_id, :first_image,
-                                        :num_of_view, :num_of_agree, :num_of_disagree, :num_of_flagged, :create_time)
-    end
-    
-    def render_after_fail format, act
-      format.html { render action: act }
-      format.json { render json: @narrative.errors, status: :unprocessable_entity }
+      params.require(:narrative).permit(:nar_name, :nar_path, :language_id, :category_id, :first_image, :num_of_view, :num_of_agree, :num_of_disagree, :num_of_flagged, :create_time)
     end
 end

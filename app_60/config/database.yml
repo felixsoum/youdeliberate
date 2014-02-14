@@ -23,12 +23,3 @@ production:
   database: db/production.sqlite3
   pool: 5
   timeout: 5000
-
-paolo:
-  adapter: mysql2
-  encoding: utf8
-  database: soen390
-  pool: 5
-  username: soen390
-  password: soen3902014
-  host: nw0.mooo.com
