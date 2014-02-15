@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140214211614) do
+ActiveRecord::Schema.define(version: 20140215050143) do
 
   create_table "audios", force: true do |t|
     t.integer  "narrative_id"
     t.string   "audio_path"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "audio_number"
   end
 
   create_table "categories", force: true do |t|
