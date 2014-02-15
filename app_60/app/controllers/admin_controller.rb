@@ -88,11 +88,11 @@ class AdminController < ApplicationController
         next if file == '.' or file == '..'
         relative_narrative_path = narrative_path.from(narrative_path.index('public/narratives'))
         if accepted_audio_formats.include? File.extname(file)
-          Audio.create(audio_path: "#{narrative_path}/#{file}",
+          Audio.create(audio_path: "#{relative_narrative_path}/#{file}",
                        narrative_id: @narrative.id,
                        audio_number: File.basename(file, '.*'))
         elsif accepted_image_formats.include? File.extname(file)
-          Image.create(image_path: "#{narrative_path}/#{file}",
+          Image.create(image_path: "#{relative_narrative_path}/#{file}",
                        narrative_id: @narrative.id,
                        image_number: File.basename(file, '.*'))
         end
