@@ -11,7 +11,8 @@ class AdminController < ApplicationController
       @upload_message = "Failed. Nothing to upload"
       render :index
     elsif params[:narrative].content_type != "application/zip" and
-          params[:narrative].content_type != "application/octet-stream"
+          params[:narrative].content_type != "application/octet-stream" and
+          params[:narrative].content_type != "application/x-zip-compressed"
       # The MIME type of a zip file is sometimes octet-stream. Read more: http://stackoverflow.com/questions/856013/mime-type-for-zip-file-in-google-chrome
       @upload_message = "Failed. Please choose a zip file."
       render :index
@@ -38,7 +39,6 @@ class AdminController < ApplicationController
   end
   
   private
-    #
     def get_narrative_counter
       # Make sure narrative count exists
       if NarrativeCount.count == 0
@@ -89,10 +89,12 @@ class AdminController < ApplicationController
         relative_narrative_path = narrative_path.from(narrative_path.index('public/narratives'))
         if accepted_audio_formats.include? File.extname(file)
           Audio.create(audio_path: "#{relative_narrative_path}/#{file}",
-                       narrative_id: @narrative.id)
+                       narrative_id: @narrative.id,
+                       audio_number: File.basename(file, '.*'))
         elsif accepted_image_formats.include? File.extname(file)
           Image.create(image_path: "#{relative_narrative_path}/#{file}",
-                       narrative_id: @narrative.id)
+                       narrative_id: @narrative.id,
+                       image_number: File.basename(file, '.*'))
         end
       end
     end
