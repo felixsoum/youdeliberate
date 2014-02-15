@@ -3,7 +3,9 @@
 one:
   image_path: image path
   narrative: one
+  image_number: 1
   
 two:
   image_path: image path
   narrative: one
+  image_number: 2
