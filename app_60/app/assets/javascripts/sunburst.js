@@ -13,8 +13,8 @@ function setArc() {
     svg = d3.select("#sunburst").append("svg")
       .attr("width", width)
       .attr("height", height+10)
-    .append("g")
-    .attr("transform", "translate(" + width / 2 + "," + height * .52 + ")");
+      .append("g")
+      .attr("transform", "translate(" + width / 2 + "," + height * .52 + ")")
 
     //d3 layout magic
     partition = d3.layout.partition()
@@ -47,15 +47,17 @@ function getData() {
   d3.json("sunburst3.json", function(error, root) {
     path = svg.datum(root).selectAll("path")
         .data(partition.nodes)
+        //.data([1,0,0])
       .enter().append("path")
         .attr("display", function(d) { return d.depth ? null : "none"; }) // hide inner ring
         .attr("d", arc)
         .style("opacity",1.0)
-        .style("stroke", "#fff")
+        .style("stroke", function(d) { return getArcMouseOutColor(d.name); })
+        .style("stroke-width","2px")
         .style("fill", function(d) { return getCategoryColor(d.name); })
         .style("fill-rule", "evenodd")
-        .on("mouseover",function(d){d3.select(this).style("stroke",function(d) { d3.select(this).style("opacity",0.5); return getArcMouseOutColor(d.category);  })})
-        .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { d3.select(this).style("opacity",1); return getArcMouseOutColor(d.category);  })})
+        .on("mouseover",function(d){d3.select(this).style("stroke",function(d) { d3.select(this).style("opacity",0.5); return getArcMouseOverColor(d.name);  })})
+        .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { d3.select(this).style("opacity",1); return getArcMouseOutColor(d.name);  })})
         .on("click",function(d,i){alert(d.name)})
         .each(stash);
 
@@ -84,13 +86,13 @@ function arcTween(a) {
 function getArcMouseOverColor(n){
   //return "#aaa"    //Grey
   //return "#4CBB17" //Kelly Green
-  return "#000";
+  return "#fff";
 }
 
 function getArcMouseOutColor(n){
   //return "#aaa"    //Grey
   //return "#4CBB17" //Kelly Green
-  return "#fff";
+  return "#fff"
 }
 d3.select(self.frameElement).style("height", height + "px");
 

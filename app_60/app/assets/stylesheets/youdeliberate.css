@@ -1,11 +1,5 @@
 .starter-template {
-  padding: 40px 15px;
   text-align: center;
-}
-#sort-buttons{
-	position:absolute;
-	left:29%;
-	top:30%;
 }
 #sunburst-info{
 	text-align:center;
@@ -25,7 +19,11 @@ circle:hover{
 path:hover{
 	cursor: pointer;
 }
+
 svg.bubble{
 	position:relative;
-	top: -100px;
+	top: -50px;
+}
+#bubbles{
+	height:600px;
 }

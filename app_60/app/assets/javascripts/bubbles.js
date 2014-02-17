@@ -4,6 +4,7 @@
 var bubbleDataSource = 'http://localhost:3000/narratives.json'; //data from DB
 
 var diameter = 0; //initialize global var
+
 //draw bubbles 
 function drawBubbles(){
 	//delete all children in div 
@@ -13,10 +14,9 @@ function drawBubbles(){
 		node1.removeChild(node1.lastChild);
 	}	
 	
-	var diameter = 600,
+	var diameter = $("#bubbles").width()
 		format = d3.format(",d"),
 		color = d3.scale.category20c();
-
 
 	var bubble = d3.layout.pack()
 		.sort(null)
@@ -24,8 +24,8 @@ function drawBubbles(){
 		.padding(4.5);
 		
 	var svg = d3.select("#bubbles").append("svg")
-		.attr("width", diameter*2)
-		.attr("height", diameter*2)
+		.attr("width", diameter)
+		.attr("height", diameter)
 		.attr("class", "bubble");
 
 	d3.json(bubbleDataSource, function(error, root) {
@@ -35,8 +35,9 @@ function drawBubbles(){
 		  .enter().append("g")
 		  .attr("class", "node");  
 
-	  node.append("title")
-		  .text(function(d) { return d.className + ": " + format(d.value); });
+	//title appears on mouseover
+	//node.append("title")
+	//  .text(function(d) { return d.className + ": " + format(d.value); });
 
 	  node.append("circle")
 			.attr("r",function(d) {
@@ -63,6 +64,8 @@ function drawBubbles(){
 		  .duration(2000)
 		  .ease("bounce");
 
+	  //Text on bubbles
+	  /*
 	  node.append("text")
 		  .attr("dy", ".3em")
 		  .style("text-anchor", "middle")
@@ -74,6 +77,7 @@ function drawBubbles(){
 		  .style("opacity",1)
 		  .duration(2000)
 		  .ease("bounce");
+	  */
 			
 	});		
 }
@@ -96,6 +100,7 @@ function getMouseOverColor(n){
 	//return "#4CBB17" //Kelly Green
 	return "#FFF";     //White
 }
+
 //d3.select(self.frameElement).style("height", diameter + "px");  //I have no idea what this does
 
 // jQuery.ready() with turbolinks. Read more: http://stackoverflow.com/a/17600195
