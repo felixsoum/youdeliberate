@@ -31,6 +31,10 @@ module NarrativesHelper
         }
   end
   
+  def get_comments_for_narrative narrative_id
+    NComment.where(narrative_id: narrative_id)
+  end
+  
   def get_language_name language_id
     query = "SELECT language_name FROM languages WHERE id = \'#{language_id}\'"
     result = ActiveRecord::Base.connection.execute(query).first;
