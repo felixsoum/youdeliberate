@@ -39,10 +39,11 @@ class NarrativesController < ApplicationController
     @narrative = Narrative.find(params[:id])
     
     root = "http://localhost:3000/"
+    default_image_path = Image.where(narrative_id: params[:id]).pluck(:image_path).first || "narratives/default_narrative_image.jpg"
 
     audio_array = []
     Audio.where(narrative_id: params[:id]).each do |audio|
-      image_path = Image.where(narrative_id: params[:id]).where("image_number <= ?", audio.audio_number).pluck(:image_path).last || "narratives/default_narrative_image.jpg"      
+      image_path = Image.where(narrative_id: params[:id]).where("image_number <= ?", audio.audio_number).pluck(:image_path).last || default_image_path      
       audio_array.push(  
         #mp3: Rails.public_path + audio.audio_path,
         mp3: root + audio.audio_path,
