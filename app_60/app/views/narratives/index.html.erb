@@ -24,14 +24,14 @@
       <tr>
         <td><%= narrative.nar_name %></td>
         <td><%= narrative.nar_path %></td>
-        <td><%= narrative.language_id %></td>
-        <td><%= narrative.category_id %></td>
+        <td><%= get_language_name(narrative.language_id) %></td>
+        <td><%= get_category_name(narrative.category_id) %></td>
         <td><%= narrative.first_image %></td>
         <td><%= narrative.num_of_view %></td>
         <td><%= narrative.num_of_agree %></td>
         <td><%= narrative.num_of_disagree %></td>
         <td><%= narrative.num_of_flagged %></td>
-        <td><%= narrative.create_time %></td>
+        <td><%= narrative.create_time.to_formatted_s(:db) %></td>
         <td><%= link_to 'Show', narrative %></td>
         <td><%= link_to 'Edit', edit_narrative_path(narrative) %></td>
         <td><%= link_to 'Destroy', narrative, method: :delete, data: { confirm: 'Are you sure?' } %></td>

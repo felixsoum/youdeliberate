@@ -3,7 +3,9 @@
 one:
   narrative: two
   audio_path: audio path
+  audio_number: 1
 
 two:
   narrative: two
   audio_path: audio path
+  audio_number: 2
