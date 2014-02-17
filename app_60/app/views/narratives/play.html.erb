@@ -98,7 +98,20 @@
 		  <tbody>
 			  <tr>
 				<td>
-					<p>Comments will be here</p>
+					<div data-id="comments">
+						<strong>Comments</strong><br/>
+						<% if @comments.each do |comment| %>
+							<p style="padding-left:1em">
+							<%= comment.content%> 
+								<p style="padding-left:4em">
+									at <%= comment.created_at%>
+								</p>
+							</p>
+							<hr/>
+						<% end.empty? %>
+  							Be the first to comment!
+						<% end %>
+					</div>
 					<div>
 						<div class="btn-group">
 						  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up"></span></button>

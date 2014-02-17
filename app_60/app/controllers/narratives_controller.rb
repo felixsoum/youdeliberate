@@ -48,7 +48,8 @@ class NarrativesController < ApplicationController
         poster: image
       )
     end
-    @audio_json = audio_array.to_json.html_safe 
+    @audio_json = audio_array.to_json.html_safe
+    @comments = get_comments_for_narrative(params[:id])
   end
 
   # POST /narratives
