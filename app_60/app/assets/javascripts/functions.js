@@ -6,6 +6,11 @@ function sortClassToggle(b){
   else {b.className = "btn btn-default btn-lg sort-select";}
 }
 
+function filterLanguageToggle(b){
+  $(".lang-select").removeClass("btn-primary").addClass("btn-default");
+  b.className = "btn btn-primary btn-lg lang-select";
+}
+
 // 3 color design
 function getCategoryColor(n){
   switch(n){
@@ -33,6 +38,11 @@ function getCategoryColor(n){
       return "#000";
   }
 }
+
+$(document).ready(function() {
+  $(".fancybox").fancybox();
+});
+
 
 /* 9 color design
 function getCategoryColor(n){

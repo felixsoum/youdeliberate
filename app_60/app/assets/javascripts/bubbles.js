@@ -1,6 +1,7 @@
 <!--Bubble generation : http://bl.ocks.org/mbostock/4063269-->
 
-//var bubbleDataSource = "example3.json"; //data from stub
+//var bubbleDataSource = "example3.json;" //data from stub with narratives grouped by category
+//var bubbleDataSource = "example4.json"; //data from stub with randomly placed narratives
 var bubbleDataSource = 'http://localhost:3000/narratives.json'; //data from DB
 
 var diameter = 0; //initialize global var
@@ -61,7 +62,7 @@ function drawBubbles(){
 		  .style("fill", function(d) { return getCategoryColor(d.category); })
 		  .style({ 'stroke': function(d) { return getCategoryColor(d.category); }, 'stroke-width': '3px'})
 		  .style("opacity",1)
-		  .duration(2000)
+		  .duration(3000)
 		  .ease("bounce");
 
 	  //Text on bubbles

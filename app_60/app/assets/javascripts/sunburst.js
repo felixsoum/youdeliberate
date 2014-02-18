@@ -20,7 +20,7 @@ function setArc() {
     partition = d3.layout.partition()
     .sort(null)
     .size([2 * Math.PI, radius * radius])
-    .value(function(d) { return 1; });
+    .value(function(d) { return d; }); // return 1 for previous animation style
 
     arc = d3.svg.arc()
     .startAngle(function(d) { return d.x; })
@@ -37,7 +37,7 @@ function onLoadAnim() {
     path
         .data(partition.value(value).nodes)
       .transition()
-        .duration(3000)
+        .duration(2700)
         //.delay(1000)
         .attrTween("d", arcTween);
 }
@@ -47,7 +47,6 @@ function getData() {
   d3.json("sunburst3.json", function(error, root) {
     path = svg.datum(root).selectAll("path")
         .data(partition.nodes)
-        //.data([1,0,0])
       .enter().append("path")
         .attr("display", function(d) { return d.depth ? null : "none"; }) // hide inner ring
         .attr("d", arc)
@@ -58,8 +57,9 @@ function getData() {
         .style("fill-rule", "evenodd")
         .on("mouseover",function(d){d3.select(this).style("stroke",function(d) { d3.select(this).style("opacity",0.5); return getArcMouseOverColor(d.name);  })})
         .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { d3.select(this).style("opacity",1); return getArcMouseOutColor(d.name);  })})
-        .on("click",function(d,i){alert(d.name)})
+        .on("click",function(d,i){alert("Displaying narratives in the category: " + d.name)})
         .each(stash);
+        
 
         // Only animate after D3 is done to avoid a race condition
         onLoadAnim();
