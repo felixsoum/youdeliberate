@@ -51,6 +51,8 @@ class NarrativesController < ApplicationController
       )
     end
     @audio_json = audio_array.to_json.html_safe 
+    
+    @n_comment = NComment.where(narrative_id: params[:id])
   end
 
   # POST /narratives
