@@ -13,6 +13,7 @@ function setArc() {
     svg = d3.select("#sunburst").append("svg")
       .attr("width", width)
       .attr("height", height+10)
+      .attr("id", "sunburst-svg")
       .append("g")
       .attr("transform", "translate(" + width / 2 + "," + height * .52 + ")")
 
@@ -32,7 +33,7 @@ function setArc() {
 
 //load animation
 function onLoadAnim() {
-  var value = function(d) { return d.size; };
+  var value = function(d) { return d.count; };
     
     path
         .data(partition.value(value).nodes)
@@ -44,20 +45,20 @@ function onLoadAnim() {
 
 //get data
 function getData() {
-  d3.json("sunburst3.json", function(error, root) {
+  d3.json("/sunburst.json", function(error, root) {
     path = svg.datum(root).selectAll("path")
         .data(partition.nodes)
       .enter().append("path")
         .attr("display", function(d) { return d.depth ? null : "none"; }) // hide inner ring
         .attr("d", arc)
         .style("opacity",1.0)
-        .style("stroke", function(d) { return getArcMouseOutColor(d.name); })
+        .style("stroke", function(d) { return getArcMouseOutColor(d.category_id); })
         .style("stroke-width","2px")
-        .style("fill", function(d) { return getCategoryColor(d.name); })
+        .style("fill", function(d) { return getCategoryColor(d.category_id); })
         .style("fill-rule", "evenodd")
-        .on("mouseover",function(d){d3.select(this).style("stroke",function(d) { d3.select(this).style("opacity",0.5); return getArcMouseOverColor(d.name);  })})
-        .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { d3.select(this).style("opacity",1); return getArcMouseOutColor(d.name);  })})
-        .on("click",function(d,i){alert("Displaying narratives in the category: " + d.name)})
+        .on("mouseover",function(d){d3.select(this).style("stroke",function(d) { d3.select(this).style("opacity",0.5); return getArcMouseOverColor(d.category_id);  })})
+        .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { d3.select(this).style("opacity",1); return getArcMouseOutColor(d.category_id);  })})
+        .on("click",function(d,i){alert("Displaying narratives in the category: " + d.category_id)})
         .each(stash);
         
 

@@ -21,12 +21,12 @@ function drawBubbles(){
 
 	var bubble = d3.layout.pack()
 		.sort(null)
-		.size([diameter, diameter])
+		.size([$("#bubbles").width(), $("#bubbles").height()])
 		.padding(4.5);
 		
 	var svg = d3.select("#bubbles").append("svg")
-		.attr("width", diameter)
-		.attr("height", diameter)
+		.attr("width", $("#bubbles").width())
+		.attr("height", $("#bubbles").height())
 		.attr("class", "bubble");
 
 	d3.json(bubbleDataSource, function(error, root) {
