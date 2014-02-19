@@ -2,7 +2,7 @@ module NarrativesHelper
   
   def narratives_json(narratives)
 
-    list = narratives.map do |narrative|
+    list = narratives.order(:category_id).map do |narrative|
       narrative_json(narrative)
     end  
     # Is this level structure really pertinent?
