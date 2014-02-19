@@ -2,7 +2,7 @@
 
 //var bubbleDataSource = "example3.json;" //data from stub with narratives grouped by category
 //var bubbleDataSource = "example4.json"; //data from stub with randomly placed narratives
-var bubbleDataSource = 'http://localhost:3000/narratives.json'; //data from DB
+var bubbleDataSource = '/narratives.json'; //data from DB
 
 var diameter = 0; //initialize global var
 
