@@ -25,6 +25,17 @@ class NarrativesController < ApplicationController
     end
   end
 
+  # GET /sunburst
+  # GET /sunburst.json
+  def sunburst
+    @narratives = Narrative.all
+    respond_to do |format|
+      format.html
+      # Support JSONP. Read more: http://henrysztul.info/post/14970402595/how-to-enable-jsonp-support-in-a-rails-app
+      format.json { render :json => sunburst_json(@narratives), :callback => params[:callback] }
+    end
+  end
+
   # GET /narratives/new
   def new
     @narrative = Narrative.new

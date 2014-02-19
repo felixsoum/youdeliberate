@@ -1,4 +1,4 @@
-.starter-template {
+.header-section {
   text-align: center;
 }
 #sunburst-info{
@@ -22,9 +22,19 @@ path:hover{
 
 svg.bubble{
 	position:relative;
-	top: -50px;
+	top: -5px;
 }
 #bubbles{
-	height:500px;
+	position:relative;
+	left:35px;
+	height:530px;
 	width:600px;
+}
+#language-select-label{
+	height:54px;
+}
+#sunburst-svg
+{
+	position:relative;
+	left:10px;
 }
