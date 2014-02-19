@@ -29,7 +29,7 @@
 						</div>
 						<div class="jp-interface">
 							<div class="jp-progress">
-								<div class="jp-seek-bar">
+								<div class="jp-seek-bar" align="left">
 									<div class="jp-play-bar"></div>
 								</div>
 							</div>
@@ -46,7 +46,7 @@
 									<li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>
 									<li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max volume</a></li>
 								</ul>
-								<div class="jp-volume-bar">
+								<div class="jp-volume-bar" align="left">
 									<div class="jp-volume-bar-value"></div>
 								</div>
 								<ul class="jp-toggles">
@@ -95,18 +95,20 @@
 	<div class="panel panel-primary" id="narrative">
 		<table>
 		  <tbody>
-			  <tr>
-				<td>
-					<p>Comments will be here</p>
-					<div>
-						<div class="btn-group">
-						  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up"></span></button>
-						  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-down"></span></button>
-						</div>
-						<span><%= @narrative.create_time %></span>
-					</div>					
-				</td>				
-			  </tr>
+		  	<% @n_comment.each do |comment| %>
+			<tr style="border-bottom:1px solid #009be3;">
+			  <td>
+				<p><%= comment.content %></p>
+				<div>
+				  <div class="btn-group">
+					<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+					<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-down"></span></button>
+				  </div>
+				  <span><%= @narrative.create_time %></span>
+				</div>					
+			  </td>					
+			</tr>
+			<% end %>
 		  </tbody>
 		</table>	
 	</div>
