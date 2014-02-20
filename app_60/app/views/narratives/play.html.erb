@@ -29,7 +29,7 @@
 						</div>
 						<div class="jp-interface">
 							<div class="jp-progress">
-								<div class="jp-seek-bar">
+								<div class="jp-seek-bar" align="left">
 									<div class="jp-play-bar"></div>
 								</div>
 							</div>
@@ -46,7 +46,7 @@
 									<li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>
 									<li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max volume</a></li>
 								</ul>
-								<div class="jp-volume-bar">
+								<div class="jp-volume-bar" align="left">
 									<div class="jp-volume-bar-value"></div>
 								</div>
 								<ul class="jp-toggles">
@@ -82,6 +82,7 @@
 		  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up"><%= @narrative.num_of_disagree %></span></button>
 		  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-down"><%= @narrative.num_of_agree %></span></button>
 		  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-flag"></span></button>
+		  <span> VIEWS: <%= @narrative.num_of_view %></span>
 		</div>
 	</div>
 	<div class="col-lg-6" id="narrative">
@@ -97,7 +98,20 @@
 		  <tbody>
 			  <tr>
 				<td>
-					<p>Comments will be here</p>
+					<div data-id="comments">
+						<strong>Comments</strong><br/>
+						<% if @comments.each do |comment| %>
+							<p style="padding-left:1em">
+							<%= comment.content%> 
+								<p style="padding-left:4em">
+									at <%= comment.created_at%>
+								</p>
+							</p>
+							<hr/>
+						<% end.empty? %>
+  							Be the first to comment!
+						<% end %>
+					</div>
 					<div>
 						<div class="btn-group">
 						  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up"></span></button>

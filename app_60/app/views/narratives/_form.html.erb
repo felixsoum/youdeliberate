@@ -25,7 +25,7 @@
   </div>
   <div class="field">
     <%= f.label :category_id %><br>
-    <%= f.number_field :category_id %>
+    <%= f.select :category_id, Category.all.collect {|p| [ p.category_name, p.id ] } %>
   </div>
   <div class="field">
     <%= f.label :first_image %><br>

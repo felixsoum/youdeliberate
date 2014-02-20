@@ -72,7 +72,7 @@ class AdminController < ApplicationController
           nar_date = nar_info.xpath("//submitDate").text
           nar_time = (nar_info.xpath("//time").text).gsub("-", ":")
           nar_create_time = "#{nar_date} #{nar_time}"
-          relative_narrative_path = narrative_path.from(narrative_path.index('public/narratives'))
+          relative_narrative_path = narrative_path.from(narrative_path.index('narratives/'))
           @narrative = Narrative.create(nar_name: narrative_name, nar_path: relative_narrative_path,
                                         language_id: narrative_language_id, category_id: 3,
                                         num_of_view: 0, num_of_agree: 0, num_of_disagree: 0,
@@ -86,7 +86,7 @@ class AdminController < ApplicationController
       accepted_image_formats = [".jpg", ".png"]
       Dir.foreach(narrative_path) do |file|
         next if file == '.' or file == '..'
-        relative_narrative_path = narrative_path.from(narrative_path.index('public/narratives'))
+        relative_narrative_path = narrative_path.from(narrative_path.index('narratives/'))
         if accepted_audio_formats.include? File.extname(file)
           Audio.create(audio_path: "#{relative_narrative_path}/#{file}",
                        narrative_id: @narrative.id,
