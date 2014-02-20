@@ -25,6 +25,17 @@ class NarrativesController < ApplicationController
     end
   end
 
+  # GET /sunburst
+  # GET /sunburst.json
+  def sunburst
+    @narratives = Narrative.all
+    respond_to do |format|
+      format.html
+      # Support JSONP. Read more: http://henrysztul.info/post/14970402595/how-to-enable-jsonp-support-in-a-rails-app
+      format.json { render :json => sunburst_json(@narratives), :callback => params[:callback] }
+    end
+  end
+
   # GET /narratives/new
   def new
     @narrative = Narrative.new
@@ -37,7 +48,7 @@ class NarrativesController < ApplicationController
     # GET /narratives/play/1
   def play   
     @narrative = Narrative.find(params[:id])
-    
+    images = Image.where(narrative_id: params[:id])
     root = "http://localhost:3000/"
     default_image_path = Image.where(narrative_id: params[:id]).pluck(:image_path).first || "narratives/default_narrative_image.jpg"
 
@@ -50,9 +61,8 @@ class NarrativesController < ApplicationController
         poster: root + image_path      
       )
     end
-    @audio_json = audio_array.to_json.html_safe 
-    
-    @n_comment = NComment.where(narrative_id: params[:id])
+    @audio_json = audio_array.to_json.html_safe
+    @comments = get_comments_for_narrative(params[:id])
   end
 
   # POST /narratives

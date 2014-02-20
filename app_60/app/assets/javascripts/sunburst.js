@@ -13,50 +13,54 @@ function setArc() {
     svg = d3.select("#sunburst").append("svg")
       .attr("width", width)
       .attr("height", height+10)
-    .append("g")
-    .attr("transform", "translate(" + width / 2 + "," + height * .52 + ")");
+      .attr("id", "sunburst-svg")
+      .append("g")
+      .attr("transform", "translate(" + width / 2 + "," + height * .52 + ")")
 
     //d3 layout magic
     partition = d3.layout.partition()
     .sort(null)
     .size([2 * Math.PI, radius * radius])
-    .value(function(d) { return 1; });
+    .value(function(d) { return d; }); // return 1 for previous animation style
 
     arc = d3.svg.arc()
     .startAngle(function(d) { return d.x; })
     .endAngle(function(d) { return d.x + d.dx; })
-    .innerRadius(function(d) { return Math.sqrt(d.y); })
+    //.innerRadius(function(d) { return Math.sqrt(d.y); })
+    .innerRadius(function(d) { return Math.sqrt(d.y / 1.5); })
     .outerRadius(function(d) { return Math.sqrt(d.y + d.dy); });
 }
 
 //load animation
 function onLoadAnim() {
-  var value = function(d) { return d.size; };
+  var value = function(d) { return d.count; };
     
     path
         .data(partition.value(value).nodes)
       .transition()
-        .duration(5000)
-        .delay(1000)
+        .duration(2700)
+        //.delay(1000)
         .attrTween("d", arcTween);
 }
 
 //get data
 function getData() {
-  d3.json("sunburst2.json", function(error, root) {
+  d3.json("/sunburst.json", function(error, root) {
     path = svg.datum(root).selectAll("path")
         .data(partition.nodes)
       .enter().append("path")
         .attr("display", function(d) { return d.depth ? null : "none"; }) // hide inner ring
         .attr("d", arc)
-        .style("opacity",0.75)
-        .style("stroke", "#fff")
-        .style("fill", function(d) { return getArcColor(d.name); })
+        .style("opacity",1.0)
+        .style("stroke", function(d) { return getArcMouseOutColor(d.category_id); })
+        .style("stroke-width","2px")
+        .style("fill", function(d) { return getCategoryColor(d.category_id); })
         .style("fill-rule", "evenodd")
-        .on("mouseover",function(d){d3.select(this).style("stroke",function(d) { d3.select(this).style("opacity",1); return getArcMouseOutColor(d.category);  })})
-        .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { d3.select(this).style("opacity",0.75); return getArcMouseOutColor(d.category);  })})
-        .on("click",function(d,i){alert(d.name)})
+        .on("mouseover",function(d){d3.select(this).style("stroke",function(d) { d3.select(this).style("opacity",0.5); return getArcMouseOverColor(d.category_id);  })})
+        .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { d3.select(this).style("opacity",1); return getArcMouseOutColor(d.category_id);  })})
+        .on("click",function(d,i){alert("Displaying narratives in the category: " + d.category_id)})
         .each(stash);
+        
 
         // Only animate after D3 is done to avoid a race condition
         onLoadAnim();
@@ -80,48 +84,16 @@ function arcTween(a) {
   };
 }
 
-//ghetto color selector
-function getArcColor(n){
-  switch(n){
-    case "For":
-    case "ForNeutral":
-    case 0:
-      return "#1E30FF";
-    case "ForAgreed":
-      return "#111774";
-    case "ForDisagreed":
-      return "#6670E8"; //3695ae
-    case "Against":
-    case "AgainstNeutral":
-    case 1:
-      return "#ff0000";
-    case "AgainstAgreed":
-      return "#8B0000";
-    case "AgainstDisagreed":
-      return "#EE6363"; //FF6B6B
-    case "Ambivalent":
-    case "AmbivalentNeutral":
-    case 2:
-      return "#c0c0c0";    
-    case "AmbivalentAgreed":
-      return "#615656";
-    case "AmbivalentDisagreed":
-      return "#a8bba8";
-    default:
-      return "#000";
-    }
-}
-
 function getArcMouseOverColor(n){
   //return "#aaa"    //Grey
   //return "#4CBB17" //Kelly Green
-  return "#000";
+  return "#fff";
 }
 
 function getArcMouseOutColor(n){
   //return "#aaa"    //Grey
   //return "#4CBB17" //Kelly Green
-  return "#fff";
+  return "#fff"
 }
 d3.select(self.frameElement).style("height", height + "px");
 

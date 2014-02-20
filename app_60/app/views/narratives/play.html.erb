@@ -82,6 +82,7 @@
 		  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up"><%= @narrative.num_of_disagree %></span></button>
 		  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-down"><%= @narrative.num_of_agree %></span></button>
 		  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-flag"></span></button>
+		  <span> VIEWS: <%= @narrative.num_of_view %></span>
 		</div>
 	</div>
 	<div class="col-lg-6" id="narrative">
@@ -95,20 +96,31 @@
 	<div class="panel panel-primary" id="narrative">
 		<table>
 		  <tbody>
-		  	<% @n_comment.each do |comment| %>
-			<tr style="border-bottom:1px solid #009be3;">
-			  <td>
-				<p><%= comment.content %></p>
-				<div>
-				  <div class="btn-group">
-					<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up"></span></button>
-					<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-down"></span></button>
-				  </div>
-				  <span><%= @narrative.create_time %></span>
-				</div>					
-			  </td>					
-			</tr>
-			<% end %>
+			  <tr>
+				<td>
+					<div data-id="comments">
+						<strong>Comments</strong><br/>
+						<% if @comments.each do |comment| %>
+							<p style="padding-left:1em">
+							<%= comment.content%> 
+								<p style="padding-left:4em">
+									at <%= comment.created_at%>
+								</p>
+							</p>
+							<hr/>
+						<% end.empty? %>
+  							Be the first to comment!
+						<% end %>
+					</div>
+					<div>
+						<div class="btn-group">
+						  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+						  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-down"></span></button>
+						</div>
+						<span><%= @narrative.create_time %></span>
+					</div>					
+				</td>				
+			  </tr>
 		  </tbody>
 		</table>	
 	</div>

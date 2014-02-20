@@ -2,17 +2,10 @@ module NarrativesHelper
   
   def narratives_json(narratives)
 
-    list = narratives.map do |narrative|
+    list = narratives.order(:category_id).map do |narrative|
       narrative_json(narrative)
     end  
-    # Is this level structure really pertinent?
-    {:name => "flare", :children =>  
-      [{
-        :name => "analytics", :children =>  
-          [{
-            :name => "Against", :children => list
-          }]
-      }]
+    {:name => "Narratives", :children => list
     }.to_json
   end
 
@@ -26,9 +19,30 @@ module NarrativesHelper
           :NumberDisagree => narrative.num_of_disagree,
           :NumberViews => narrative.num_of_view,
           :NarrativeID => narrative.id,
-          :category => narrative.category_id
-          #:category => "ForDisagreed"          
+          :category => narrative.category_id         
         }
+  end
+
+  def sunburst_json(narratives)
+
+    list = narratives.group(:category_id).count.map do |key, value|
+      sunburst_list(key, value)
+    end
+    
+    {
+      :name => "Narratives", :children => list
+    }.to_json
+  end
+
+  def sunburst_list(key, value)
+    {
+      :category_id => key,
+      :count => value
+    }
+  end
+  
+  def get_comments_for_narrative narrative_id
+    NComment.where(narrative_id: narrative_id)
   end
   
   def get_language_name language_id
