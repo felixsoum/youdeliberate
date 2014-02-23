@@ -65,6 +65,8 @@ gem 'html5shiv-rails'
 # Use respond-rails to shim CSS3 media queries
 gem 'respond-rails'
 
-gem 'guard-jasmine'
-
+# Use jasmienrice to test JavaScript
 gem 'jasminerice', :git => 'https://github.com/bradphelan/jasminerice.git'
+
+# Use guard-jasmine to automate Jasmine
+gem 'guard-jasmine'
