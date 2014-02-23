@@ -1,4 +1,4 @@
-//= require bubbles
+#= require bubbles
 
 describe "Mouse Over Color", ->
   it "is white by default", ->
