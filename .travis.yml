@@ -1,5 +1,6 @@
 language: ruby
 rvm:
+  - 1.9.3
   - 2.0.0
 before_install:
   - cd app_60
@@ -7,4 +8,11 @@ before_install:
 script: 'bundle exec rake && bundle exec guard-jasmine --server-timeout=60'
 branches:
   only:
-    - jasminerice
+    - master
+    - backend
+    - frontend
+notifications:
+  email:
+    - felix@felixsoum.com
+    - un.tremblay@gmailcom
+    - ldohxc@hotmail.com
