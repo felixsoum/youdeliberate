@@ -5,6 +5,7 @@ rvm:
 before_install:
   - cd app_60
   - gem install bundler --pre
+script: 'bundle exec rake && bundle exec guard-jasmine --server-timeout=60'
 branches:
   only:
     - master
