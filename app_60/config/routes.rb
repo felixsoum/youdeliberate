@@ -9,7 +9,7 @@ App60::Application.routes.draw do
   post 'admin/upload'
   resources :narratives
   
-  match ':controller(/:action(/:id))', :via => :get
+  match "narratives/:id/play" , :to => "narratives#play", :via => :get
 	
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
