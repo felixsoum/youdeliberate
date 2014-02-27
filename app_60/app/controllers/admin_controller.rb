@@ -19,22 +19,39 @@ class AdminController < ApplicationController
     else
       require 'rubygems'
       require 'zip'
-
+      
+      narratives_path = Rails.root.join('public', 'narratives').to_s
+      
       Zip::File.open(params[:narrative].path) do |zip_file|
+        narratives_unzip_pathes = Hash.new
+        
         # Create unique directory name for the next narrative
-        narrative_number = get_narrative_counter.value + 1
+        narrative_number = get_narrative_counter.value
+        number_after_upload_narrative = narrative_number
+        
+        #Use xml to count the number of narratives that need to be uploaded
+        #Also store its path inside the zip with corresponding narrative number in a hash
+        zip_file.each do |file|
+          if (file.name.last(4) == ".xml")
+            number_after_upload_narrative = number_after_upload_narrative + 1  
+            if (position_of_last_slash = file.name.rindex('/'))
+              narratives_unzip_pathes[file.name.to(position_of_last_slash)] = number_after_upload_narrative     
+            else
+              narratives_unzip_pathes[""] = number_after_upload_narrative
+            end
+          end   
+        end
 
-        narrative_path = Rails.root.join('public', 'narratives', narrative_number.to_s).to_s
-
-        extract_files(zip_file, narrative_path)
-
-        parse_xml_to_database(narrative_path)
-
-        set_counter_value(get_narrative_counter, narrative_number)
-
-        insert_image_audio_to_database(narrative_path)
+        extract_files(zip_file, narratives_path, narratives_unzip_pathes)
+        
+        narratives_unzip_pathes.each do |key, value|
+          narrative_path = "#{narratives_path}/#{value}"
+          parse_xml_to_database(narrative_path)
+          insert_image_audio_to_database(narrative_path)
+        end
+        set_counter_value(get_narrative_counter, number_after_upload_narrative)
+        @result = "#{number_after_upload_narrative-narrative_number} narrative(s) has been Uploaded to server successfully." 
       end
-      @result = "Upload completed"
     end
   end
   
@@ -53,9 +70,18 @@ class AdminController < ApplicationController
       counter.save
     end
 
-    def extract_files zip_file, folder_path
+    def extract_files zip_file, narratives_path, narratives_unzip_pathes
       zip_file.each do |file|
-        file_path = File.join(folder_path, file.name)
+        if (position_of_last_slash = file.name.rindex('/'))
+          #Ignore empty folder
+          next if(! nar_number= narratives_unzip_pathes[file.name.to(position_of_last_slash)])
+          folder_path = "#{narratives_path}/#{nar_number}"
+          file_name = file.name.from(position_of_last_slash + 1)
+        else
+          folder_path = "#{narratives_path}/#{narratives_unzip_pathes[""]}"
+          file_name = file.name
+        end             
+        file_path = File.join(folder_path, file_name)
         FileUtils.mkdir_p(File.dirname(file_path))
         zip_file.extract(file, file_path) unless File.exist?(file_path)
       end
