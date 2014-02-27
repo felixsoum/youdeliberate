@@ -45,7 +45,7 @@ class NarrativesController < ApplicationController
   def edit
   end
   
-    # GET /narratives/play/1
+  # GET /narratives/1/play/
   def play   
     @narrative = Narrative.find(params[:id])
     images = Image.where(narrative_id: params[:id])
@@ -63,6 +63,13 @@ class NarrativesController < ApplicationController
     end
     @audio_json = audio_array.to_json.html_safe
     @comments = get_comments_for_narrative(params[:id])
+  end
+
+  # POST narratives/1/comment
+  def comment
+    narrative_id = params[:narrative_id]
+    NComment.create(content: params[:comment], narrative_id: narrative_id)
+    redirect_to(:action => "play", :id => narrative_id)
   end
 
   # POST /narratives
