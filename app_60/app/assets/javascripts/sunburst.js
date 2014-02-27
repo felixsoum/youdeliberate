@@ -58,7 +58,7 @@ function getData() {
         .style("fill-rule", "evenodd")
         .on("mouseover",function(d){d3.select(this).style("stroke",function(d) { d3.select(this).style("opacity",0.5); return getArcMouseOverColor(d.category_id);  })})
         .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { d3.select(this).style("opacity",1); return getArcMouseOutColor(d.category_id);  })})
-        .on("click",function(d,i){alert("Displaying narratives in the category: " + d.category_id)})
+        .on("click",function(d,i){filterCategoryToggle(d.category_id)})
         .each(stash);
         
 

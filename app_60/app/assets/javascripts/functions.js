@@ -58,6 +58,37 @@ function filterLanguageToggle(b){
   });
 }
 
+function filterCategoryToggle(b){
+
+  if(b == currentCategoryFilter.value){
+    currentCategoryFilter = categoryFilter.ALL;
+  }
+  else{
+    switch(b)
+    {
+      case 1:
+      currentCategoryFilter = categoryFilter.FOR;
+      break;
+      case 2:
+      currentCategoryFilter = categoryFilter.AGAINST;
+      break;
+      case 3:
+      currentCategoryFilter = categoryFilter.AMBIVALENT;
+      break;
+    }
+  }
+
+  //Change sort criteria
+  
+
+  //alert(b.id);
+
+  //Update circle opacity
+  d3.selectAll("circle").each(function(c,i){
+    d3.select(this).transition().duration(1000).style("opacity",function(d){return getCircleOpacity(d)});
+  });
+}
+
 function getCircleOpacity(c){
   if((c.language == currentLanguageFilter.value || currentLanguageFilter == languageFilter.BILINGUAL) && (c.category == currentCategoryFilter.value || currentCategoryFilter == categoryFilter.ALL)){
     return 1;  
