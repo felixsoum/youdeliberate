@@ -80,4 +80,7 @@ App60::Application.configure do
 
   # Config respond-rails. Read more: https://github.com/gevans/respond-rails
   config.assets.precompile += %w( modernizr.js respond.js respond-proxy.html respond.proxy.js )
+  
+  # replace this with your development tracker code
+  GA.tracker = "UA-48522301-1"
 end

@@ -9,7 +9,9 @@
     <%= javascript_include_tag 'html5shiv-printshiv' %>
   <![endif]-->
   <%= respond_include_tags %>
+  <%= analytics_init :local => Rails.env.development? %>
   <%= yield(:head) %>
+  
 </head>
 <body>
 
