@@ -5,6 +5,7 @@
 var bubbleDataSource = '/narratives.json'; //data from DB
 
 var diameter = 0; //initialize global var
+var bubble; //lord help us global variables
 
 //Define sort criteria
 var sortCriteria = {
@@ -49,7 +50,7 @@ function drawBubbles(){
 		format = d3.format(",d"),
 		color = d3.scale.category20c();
 
-	var bubble = d3.layout.pack()
+	bubble = d3.layout.pack()
 		.sort(null)
 		.size([$("#bubbles").width(), $("#bubbles").height()])
 		.padding(4.5);
@@ -113,6 +114,23 @@ function drawBubbles(){
 	  */
 			
 	});		
+}
+
+function transitionBubbles(){
+
+	d3.json(bubbleDataSource, function(error, root) {
+
+	  d3.selectAll("circle")
+	  	.data(bubble.nodes(classes(root))
+	  	.filter(function(d) { return !d.children; }))			
+		  .transition()
+		  .attr("r", function(d) {
+		  	 return d.r; 
+		  	 })
+		  .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+		  .duration(1000)
+
+	});	
 }
 
 // Returns a flattened hierarchy containing all leaf nodes under the root.

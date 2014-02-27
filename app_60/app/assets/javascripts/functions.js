@@ -2,11 +2,8 @@
 function sortClassToggle(b){
 
   //Update button colors
-  if ( b.className.match(/(?:^|\s)btn-default(?!\S)/) ){
-    $(".sort-select").removeClass("btn-primary").addClass("btn-default");
-    b.className = "btn btn-primary btn-lg sort-select";
-  }
-  else {b.className = "btn btn-default btn-lg sort-select";}
+  $(".sort-select").removeClass("btn-primary").addClass("btn-default");
+  b.className = "btn btn-primary btn-lg sort-select";
 
   //Change sort criteria
   switch(b.id)
@@ -26,7 +23,10 @@ function sortClassToggle(b){
   }
 
   //Redraw bubbles
-  drawBubbles();
+  //drawBubbles();
+
+  //Transition bubbles
+  transitionBubbles();
 }
 
 //Filter by language handler
