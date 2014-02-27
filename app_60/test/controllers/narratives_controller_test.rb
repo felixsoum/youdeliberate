@@ -33,6 +33,11 @@ class NarrativesControllerTest < ActionController::TestCase
     get :edit, id: @narrative
     assert_response :success
   end
+  
+  test "should access play action in narrative controller" do
+    get :play, id: @narrative
+    assert_response :success
+  end
 
   test "should update narrative" do
     patch :update, id: @narrative, narrative: { category_id: @narrative.category_id, create_time: @narrative.create_time, first_image: @narrative.first_image, language_id: @narrative.language_id, nar_name: @narrative.nar_name, nar_path: @narrative.nar_path, num_of_agree: @narrative.num_of_agree, num_of_disagree: @narrative.num_of_disagree, num_of_flagged: @narrative.num_of_flagged, num_of_view: @narrative.num_of_view }
