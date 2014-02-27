@@ -6,6 +6,36 @@ var bubbleDataSource = '/narratives.json'; //data from DB
 
 var diameter = 0; //initialize global var
 
+//Define sort criteria
+var sortCriteria = {
+	SORTBYAGREES : {value: 0, name: "Sort by agrees", code: "A"}, 
+	SORTBYVIEWS: {value: 1, name: "Sort by views", code: "V"}, 
+	SORTBYCOMMENTS : {value: 2, name: "Sort by comments", code: "C"},
+	SORTBYTIME : {value: 3, name: "Sort by time uploaded", code: "T"}
+};
+
+var currentSortCriteria = sortCriteria.SORTBYVIEWS;
+
+//Define narrative language filters
+var languageFilter = {
+	ENGLISH : {value: 1, name: "English", code: "E"},
+	FRENCH: {value: 2, name: "Francais", code: "F"},
+	BILINGUAL: {value: 3, name: "Bilingual", code: "B"}
+}
+
+var currentLanguageFilter = languageFilter.BILINGUAL;
+
+//Define narrative category filters
+//Categories are currently hardcoded. TODO: Get categories dynamically
+var categoryFilter = {
+	FOR : {value: 1, name: "For", code: "F"},
+	AGAINST : {value: 2, name: "Against", code: "AG"},
+	AMBIVALENT: {value: 3, name: "Ambivalent", code: "AM"},
+	ALL: {value: 4, name: "All", code: "AL"}
+}
+
+var currentCategoryFilter = categoryFilter.ALL;
+
 //draw bubbles 
 function drawBubbles(){
 	//delete all children in div 
@@ -46,13 +76,15 @@ function drawBubbles(){
 		  	 })		
 		  .style("fill", function(d) { return "#FFF" })
 		  .style("stroke","#FFF")
-		  .attr("transform", function(d) { return "translate(" + 200 + "," + 200 + ")"; })
+		  .attr("languageID", function(d){return d.language; })
+		  .attr("categoryID", function(d){return d.category; })
+		  .attr("transform", function(d){ return "translate(" + 200 + "," + 200 + ")"; })
 		  //For fill-in selection color
 		  //.on("mouseover",function(d){d3.select(this).style("fill",function(d) { return getMouseOverColor(d.category); })})
 		  //.on("mouseout",function(d){d3.select(this).style("fill" function(d) { return getCategoryColor(d.category); })})
 		  //For outline selection color
-		  .on("mouseover",function(d){d3.select(this).style("stroke",function(d) { d3.select(this).style("opacity",0.5); return getMouseOverColor(d.category);  })})
-		  .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { d3.select(this).style("opacity",1); return getCategoryColor(d.category);  })})
+		  .on("mouseover",function(d){d3.select(this).style("stroke",function(d) { d3.select(this).style("opacity",0.7); return getMouseOverColor(d.category);  })})
+		  .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { d3.select(this).style("opacity",function(d){return getCircleOpacity(d)}); return getCategoryColor(d.category);  })})
 		  .on("click",function(d){$.fancybox({type: 'iframe',href: '/narratives/'+d.n_id+'/play/'});}) //Requests single-narrative view with appropriate ID
 		  .transition()
 		  .attr("r", function(d) {
@@ -61,7 +93,7 @@ function drawBubbles(){
 		  .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
 		  .style("fill", function(d) { return getCategoryColor(d.category); })
 		  .style({ 'stroke': function(d) { return getCategoryColor(d.category); }, 'stroke-width': '3px'})
-		  .style("opacity",1)
+		  .style("opacity",function(d){return getCircleOpacity(d)})
 		  .duration(3000)
 		  .ease("bounce");
 
@@ -89,11 +121,32 @@ function classes(root) {
 
   function recurse(name, node) {
     if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });
-    else classes.push({packageName: name, className: node.name, value: node.size, agree : node.NumberAgree, disagree: node.NumberDisagree, views: node.NumberViews, category: node.category, n_id: node.id });
+    else classes.push({packageName: name, className: node.name, value: getValueBySortCriteria(node), agree : node.numberAgree, disagree: node.numberDisagree, views: node.numberViews, category: node.category, n_id: node.id, language: node.language });
   }
 
   recurse(null, root);
   return {children: classes};
+}
+
+function getValueBySortCriteria(n){
+	switch(currentSortCriteria)
+	{
+		case sortCriteria.SORTBYVIEWS:
+		return n.numberViews;
+		break;
+		case sortCriteria.SORTBYCOMMENTS:
+		return n.numberComments;
+		break;
+		case sortCriteria.SORTBYTIME:
+		var date = new Date(n.uploadTime);
+		return date.getTime();
+		break;
+		case sortCriteria.SORTBYAGREES:
+		return n.numberAgree;
+		break;
+		default:
+		return n.numberAgree;
+	}
 }
 
 function getMouseOverColor(n){

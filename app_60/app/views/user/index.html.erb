@@ -65,10 +65,10 @@
           <div class="panel-footer">
             <div id="sort-buttons" class="btn-group">
               <button type="button" class="btn btn-default btn-lg sort-select" disabled="disabled">Sort By:</button>
-              <button type="button" class="btn btn-default btn-lg sort-select" onclick="sortClassToggle(this)"><span class="glyphicon glyphicon-eye-open"></span></button>
-              <button type="button" class="btn btn-default btn-lg sort-select" onclick="sortClassToggle(this)"><span class="glyphicon glyphicon-time"></span></button>
-              <button type="button" class="btn btn-default btn-lg sort-select" onclick="sortClassToggle(this)"><span class="glyphicon glyphicon-thumbs-up"></span></button>
-              <button type="button" class="btn btn-default btn-lg sort-select" onclick="sortClassToggle(this)"><span class="glyphicon glyphicon-comment"></span></button>
+              <button type="button" class="btn btn-default btn-lg sort-select" onclick="sortClassToggle(this)" id="sort-by-views"><span class="glyphicon glyphicon-eye-open"></span></button>
+              <button type="button" class="btn btn-default btn-lg sort-select" onclick="sortClassToggle(this)" id="sort-by-time"><span class="glyphicon glyphicon-time"></span></button>
+              <button type="button" class="btn btn-default btn-lg sort-select" onclick="sortClassToggle(this)" id="sort-by-agrees"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+              <button type="button" class="btn btn-default btn-lg sort-select" onclick="sortClassToggle(this)" id="sort-by-comments"><span class="glyphicon glyphicon-comment"></span></button>
             </div>
           </div>
         </div>    
@@ -84,9 +84,9 @@
           <div class="panel-footer">
             <div id="language-buttons" class="btn-group">
               <button type="button" class="btn btn-default btn-lg lang-select" id="language-select-label" disabled="disabled">Language:</button>
-              <button type="button" class="btn btn-default btn-lg lang-select" onclick="filterLanguageToggle(this)"><%= image_tag("FR-32.png", id:"gb-flag") %></button>
-              <button type="button" class="btn btn-default btn-lg lang-select" onclick="filterLanguageToggle(this)"><%= image_tag("EN-32.png", id:"gb-flag") %></button>
-              <button type="button" class="btn btn-primary btn-lg lang-select" onclick="filterLanguageToggle(this)"><%= image_tag("FR-EN-32.png", id:"frgb-flag") %></button>
+              <button type="button" class="btn btn-default btn-lg lang-select" onclick="filterLanguageToggle(this)" id="filter-french"><%= image_tag("FR-32.png", id:"gb-flag") %></button>
+              <button type="button" class="btn btn-default btn-lg lang-select" onclick="filterLanguageToggle(this)" id="filter-english"><%= image_tag("EN-32.png", id:"gb-flag") %></button>
+              <button type="button" class="btn btn-primary btn-lg lang-select" onclick="filterLanguageToggle(this)" id="filter-bilingual"><%= image_tag("FR-EN-32.png", id:"frgb-flag") %></button>
             </div>
           </div> 
         </div>

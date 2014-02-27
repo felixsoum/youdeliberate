@@ -1,14 +1,70 @@
+// Sort button handler
 function sortClassToggle(b){
+
+  //Update button colors
   if ( b.className.match(/(?:^|\s)btn-default(?!\S)/) ){
     $(".sort-select").removeClass("btn-primary").addClass("btn-default");
     b.className = "btn btn-primary btn-lg sort-select";
   }
   else {b.className = "btn btn-default btn-lg sort-select";}
+
+  //Change sort criteria
+  switch(b.id)
+  {
+    case "sort-by-views":
+    currentSortCriteria = sortCriteria.SORTBYVIEWS;
+    break;
+    case "sort-by-agrees":
+    currentSortCriteria = sortCriteria.SORTBYAGREES;
+    break;
+    case "sort-by-comments":
+    currentSortCriteria = sortCriteria.SORTBYCOMMENTS;
+    break;
+    case "sort-by-time":
+    currentSortCriteria = sortCriteria.SORTBYTIME;
+    break;
+  }
+
+  //Redraw bubbles
+  drawBubbles();
 }
 
+//Filter by language handler
 function filterLanguageToggle(b){
+
+  //Update button colors
   $(".lang-select").removeClass("btn-primary").addClass("btn-default");
   b.className = "btn btn-primary btn-lg lang-select";
+
+  //Change sort criteria
+  switch(b.id)
+  {
+    case "filter-french":
+    currentLanguageFilter = languageFilter.FRENCH;
+    break;
+    case "filter-english":
+    currentLanguageFilter = languageFilter.ENGLISH;
+    break;
+    case "filter-bilingual":
+    currentLanguageFilter = languageFilter.BILINGUAL;
+    break;
+  }
+
+  //alert(b.id);
+
+  //Update circle opacity
+  d3.selectAll("circle").each(function(c,i){
+    d3.select(this).transition().duration(1000).style("opacity",function(d){return getCircleOpacity(d)});
+  });
+}
+
+function getCircleOpacity(c){
+  if((c.language == currentLanguageFilter.value || currentLanguageFilter == languageFilter.BILINGUAL) && (c.category == currentCategoryFilter.value || currentCategoryFilter == categoryFilter.ALL)){
+    return 1;  
+  }
+  else{
+    return 0.1;
+  }    
 }
 
 // 3 color design
