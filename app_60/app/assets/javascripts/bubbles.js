@@ -84,8 +84,8 @@ function drawBubbles(){
 		  //.on("mouseover",function(d){d3.select(this).style("fill",function(d) { return getMouseOverColor(d.category); })})
 		  //.on("mouseout",function(d){d3.select(this).style("fill" function(d) { return getCategoryColor(d.category); })})
 		  //For outline selection color
-		  .on("mouseover",function(d){d3.select(this).style("stroke",function(d) { d3.select(this).style("opacity",0.7); return getMouseOverColor(d.category);  })})
-		  .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { d3.select(this).style("opacity",function(d){return getCircleOpacity(d)}); return getCategoryColor(d.category);  })})
+		  .on("mouseover",function(d){d3.select(this).style("stroke",function(d) { d3.select(this).style("opacity",0.7); highlightMatchingSunburstSegment(d3.select(this)); return getMouseOverColor(d.category);  })})
+		  .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { d3.select(this).style("opacity",function(d){return getCircleOpacity(d)}); deHighlightSunburstSegments(); return getCategoryColor(d.category);  })})
 		  .on("click",function(d){$.fancybox({type: 'iframe',href: '/narratives/'+d.n_id+'/play/'});}) //Requests single-narrative view with appropriate ID
 		  .transition()
 		  .attr("r", function(d) {
@@ -147,7 +147,8 @@ function classes(root) {
 }
 
 function getValueBySortCriteria(n){
-	var minimumCircleSize = 0.1 //Define size of bubbles with criteria value 0
+	//Define size of bubbles with criteria value 0
+	var minimumCircleSize = 0.1; 
 	switch(currentSortCriteria)
 	{
 		case sortCriteria.SORTBYVIEWS:

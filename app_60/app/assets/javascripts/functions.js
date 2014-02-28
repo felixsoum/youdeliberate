@@ -87,6 +87,9 @@ function filterCategoryToggle(b){
   d3.selectAll("circle").each(function(c,i){
     d3.select(this).transition().duration(1000).style("opacity",function(d){return getCircleOpacity(d)});
   });
+   d3.selectAll("path").each(function(c,i){
+    d3.select(this).transition().duration(1000).style("opacity",function(d){return getSunburstSegmentOpacity(d)});
+  });
 }
 
 function getCircleOpacity(c){
@@ -97,6 +100,22 @@ function getCircleOpacity(c){
     return 0.1;
   }    
 }
+
+
+function getSunburstSegmentOpacity(d){
+  if(d.category_id == currentCategoryFilter.value || currentCategoryFilter == categoryFilter.ALL){
+    return 1;
+  }
+  else{
+    return 0.1
+  }
+    
+}
+
+function setSunburstSegmentOpacities(){
+  //d3.selectAll
+}
+
 
 // 3 color design
 function getCategoryColor(n){
@@ -125,6 +144,30 @@ function getCategoryColor(n){
       return "#000";
   }
 }
+
+function highlightMatchingSunburstSegment(c){
+  d3.selectAll("path").filter(function(d){return d.category_id == c.attr("categoryID")}).transition().style("opacity",0.5);
+  //d3.selectAll("path").filter(function(d){for (var name in d) {alert(name);}});
+}
+
+
+function deHighlightSunburstSegments(){
+  //d3.selectAll("path").each{function(d){d.style("opacity",function(d){ return getSunburstSegmentOpacity(d);})}};
+  d3.selectAll("path").each( function(d){d3.select(this).transition().style("opacity",getSunburstSegmentOpacity(d));});
+}
+
+function highlightMatchingCircles(d){
+
+  d3.selectAll("circle").filter(function(c){return c.category == d.category_id}).transition().style("opacity",0.7).style("stroke",getMouseOverColor(d.category));
+
+}
+
+function deHighlightCircles(){
+
+  d3.selectAll("circle").each( function(c){d3.select(this).transition().style("opacity",getCircleOpacity(c)).style("stroke",getCategoryColor(c.category));}  );
+
+}
+
 
 $(document).ready(function() {
   $(".fancybox").fancybox();
