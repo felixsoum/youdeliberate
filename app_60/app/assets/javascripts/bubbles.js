@@ -147,23 +147,24 @@ function classes(root) {
 }
 
 function getValueBySortCriteria(n){
+	var minimumCircleSize = 0.1 //Define size of bubbles with criteria value 0
 	switch(currentSortCriteria)
 	{
 		case sortCriteria.SORTBYVIEWS:
-		return n.numberViews;
+		return n.numberViews == 0 ? minimumCircleSize : n.numberViews;
 		break;
 		case sortCriteria.SORTBYCOMMENTS:
-		return n.numberComments;
+		return n.numberComments == 0 ? minimumCircleSize : n.numberComments;
 		break;
 		case sortCriteria.SORTBYTIME:
 		var date = new Date(n.uploadTime);
-		return date.getTime();
+		return date.getTime() == 0 ? minimumCircleSize : date.getTime();
 		break;
 		case sortCriteria.SORTBYAGREES:
-		return n.numberAgree;
+		return n.numberAgree == 0 ? minimumCircleSize : n.numberAgree;
 		break;
 		default:
-		return n.numberAgree;
+		return n.numberViews == 0 ? minimumCircleSize : n.numberViews;
 	}
 }
 
