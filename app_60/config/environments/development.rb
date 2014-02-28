@@ -28,6 +28,6 @@ App60::Application.configure do
   config.assets.debug = true
   
   # replace this with your development tracker code
-  GA.tracker = "UA-48522301-1"
+  GA.tracker = "UA-48522301-2"
   
 end
