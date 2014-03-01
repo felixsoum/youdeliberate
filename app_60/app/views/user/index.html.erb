@@ -50,28 +50,34 @@
             <div id="sunburst"></div>
           </div>
           <div class="panel-footer">
-			<div id="filterSortDiv">
-				<div class="label-filter">
-					<span><font size="3.75">Trier&nbsp;</font><span class="glyphicon glyphicon-sort"></span><font size="3.75">&nbsp;Sort:</font><span>
-				</div>				
-				<div class="btn-group btn-group-justified">
-				  <div class="btn-group"><button type="button" class="btn btn-primary btn-lg sort-select " onclick="sortClassToggle(this)" id="sort-by-views" data-toggle="tooltip" data-placement="top" title="most views"><span class="glyphicon glyphicon-eye-open"></span></button></div>
-				  <div class="btn-group"><button type="button" class="btn btn-default btn-lg sort-select" onclick="sortClassToggle(this)" id="sort-by-time"  data-toggle="tooltip" data-placement="top" title="most recent"><span class="glyphicon glyphicon-time"></span></button></div>
-				  <div class="btn-group"><button type="button" class="btn btn-default btn-lg sort-select" onclick="sortClassToggle(this)" id="sort-by-agrees"  data-toggle="tooltip" data-placement="top" title="most agrees"><span class="glyphicon glyphicon-thumbs-up"></span></button></div>
-				  <div class="btn-group"><button type="button" class="btn btn-default btn-lg sort-select" onclick="sortClassToggle(this)" id="sort-by-comments"  data-toggle="tooltip" data-placement="top" title="most comments"><span class="glyphicon glyphicon-comment"></span></button></div>
-				</div>
-			</div> 
-					<div id="filterSortDiv">
-						<div class="label-filter">
-							<span id="label-filter"><font size="3.75">Language:</font><span>
-						</div>						
-						<div class="btn-group btn-group-justified">
+			<table>
+				<tr>
+					<td class='label-filter'>
+						<span><font size="3.75">Trier&nbsp;</font><span class="glyphicon glyphicon-sort"></span><font size="3.75">&nbsp;Sort:</font><span>
+					</td>
+					<td class='button'>
+						<div class="btn-group btn-group-justified" id="tooltip-sort">
+						  <div class="btn-group"><button type="button" class="btn btn-primary btn-lg sort-select " onclick="sortClassToggle(this)" id="sort-by-views" data-toggle="tooltip" data-placement="top" title="most views"><span class="glyphicon glyphicon-eye-open"></span></button></div>
+						  <div class="btn-group"><button type="button" class="btn btn-default btn-lg sort-select" onclick="sortClassToggle(this)" id="sort-by-time"  data-toggle="tooltip" data-placement="top" title="most recent"><span class="glyphicon glyphicon-time"></span></button></div>
+						  <div class="btn-group"><button type="button" class="btn btn-default btn-lg sort-select" onclick="sortClassToggle(this)" id="sort-by-agrees"  data-toggle="tooltip" data-placement="top" title="most agrees"><span class="glyphicon glyphicon-thumbs-up"></span></button></div>
+						  <div class="btn-group"><button type="button" class="btn btn-default btn-lg sort-select" onclick="sortClassToggle(this)" id="sort-by-comments"  data-toggle="tooltip" data-placement="top" title="most comments"><span class="glyphicon glyphicon-comment"></span></button></div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td class='label-filter'>
+						<span id="label-filter"><font size="3.75">Language:</font><span>
+					</td>
+					<td class='button'>
+						<div class="btn-group btn-group-justified" id="tooltip-filter">
 						  <div class="btn-group"><button type="button" class="btn btn-default btn-lg lang-select" onclick="filterLanguageToggle(this)" id="filter-french"  data-toggle="tooltip" data-placement="top" title="French"><%= image_tag("FR-24.png", id:"gb-flag") %></button></div>
 						  <div class="btn-group"><button type="button" class="btn btn-default btn-lg lang-select" onclick="filterLanguageToggle(this)" id="filter-english"  data-toggle="tooltip" data-placement="top" title="English"><%= image_tag("EN-24.png", id:"gb-flag") %></button></div>
 						  <div class="btn-group"><button type="button" class="btn btn-primary btn-lg lang-select" onclick="filterLanguageToggle(this)" id="filter-bilingual"  data-toggle="tooltip" data-placement="top" title="French & English"><%= image_tag("FR-EN-24.png", id:"frgb-flag") %></button></div>
-						</div>
-					</div>					
-          </div>
+						</div>	
+					</td>
+				</tr>
+			</table>
+			</div>
         </div>    
       </div> <!-- End Left Column -->
 
@@ -102,6 +108,7 @@
 <% end %>
 <script type="text/javascript">
 	jQuery(document).ready(function() {
-	   jQuery('#sort-buttons .btn-group').tooltip();
+	   jQuery('#tooltip-sort .btn').tooltip();
+	   jQuery('#tooltip-filter .btn').tooltip({container:'body'});
 	});
 </script>

@@ -35,26 +35,18 @@ svg.bubble{
 	position:relative;
 	left:10px;
 }
-.panel-footer .btn-group-justified {
+.panel-footer .button {
 	width: 66%;
-	float: left;
-}
-.panel-footer .btn-group-justified > div{
-	overflow:hidden; 
+	padding-top:5px; 
+	padding-bottom:5px; 
 }
 .panel-footer {
 	padding: 10px 5px 10px 15px;
-	overflow: hidden;
-}
-.panel-footer > div
-{
-	padding-top:5px;
-	padding-bottom:5px;
-	overflow:hidden; 
 }
 .label-filter
 {
-	float: left;
 	width: 33%;
 	margin-top:1em; 
+	padding-top:5px; 
+	padding-bottom:5px; 
 }
