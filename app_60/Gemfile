@@ -70,3 +70,6 @@ gem 'jasminerice', :git => 'https://github.com/bradphelan/jasminerice.git'
 
 # Use guard-jasmine to automate Jasmine
 gem 'guard-jasmine'
+
+# Use google-analytics-rails for simple analytics
+gem 'google-analytics-rails'
