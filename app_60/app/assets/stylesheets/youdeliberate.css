@@ -50,3 +50,6 @@ svg.bubble{
 	padding-top:5px; 
 	padding-bottom:5px; 
 }
+.tooltip-inner {
+    min-width: 125px;
+}

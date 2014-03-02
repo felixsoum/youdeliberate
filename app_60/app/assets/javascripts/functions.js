@@ -97,7 +97,7 @@ function getCircleOpacity(c){
     return 1;  
   }
   else{
-    return 0.1;
+    return 0.3;
   }    
 }
 
@@ -107,7 +107,7 @@ function getSunburstSegmentOpacity(d){
     return 1;
   }
   else{
-    return 0.1
+    return 0.3;
   }
     
 }
