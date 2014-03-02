@@ -2,5 +2,6 @@
 <p><%= @upload_message %></p>
 <%= form_tag({action: :upload}, multipart: true) do %>
   <%= file_field_tag 'narrative'  , accept: 'application/zip'%>
+  <%= hidden_field_tag 'upload_path' %>
   <%= submit_tag("Upload") %>
 <% end %>

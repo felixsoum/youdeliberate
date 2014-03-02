@@ -6,11 +6,7 @@ class NarrativesController < ApplicationController
   # GET /narratives.json
   def index
     @narratives = Narrative.all
-    respond_to do |format|
-      format.html
-      # Support JSONP. Read more: http://henrysztul.info/post/14970402595/how-to-enable-jsonp-support-in-a-rails-app
-      format.json { render :json => narratives_json(@narratives), :callback => params[:callback] }
-    end
+    render_to_home(narratives_json(@narratives))
   end
 
   # GET /narratives/1
@@ -21,7 +17,8 @@ class NarrativesController < ApplicationController
     respond_to do |format|
       format.html
       # Support JSONP. Read more: http://henrysztul.info/post/14970402595/how-to-enable-jsonp-support-in-a-rails-app
-      format.json { render :json => narrative_json(@narrative), :callback => params[:callback] }
+      format.json { render :json => narrative_json(@narrative),
+                           :callback => params[:callback] }
     end
   end
 
@@ -29,11 +26,7 @@ class NarrativesController < ApplicationController
   # GET /sunburst.json
   def sunburst
     @narratives = Narrative.all
-    respond_to do |format|
-      format.html
-      # Support JSONP. Read more: http://henrysztul.info/post/14970402595/how-to-enable-jsonp-support-in-a-rails-app
-      format.json { render :json => sunburst_json(@narratives), :callback => params[:callback] }
-    end
+    render_to_home(sunburst_json(@narratives))
   end
 
   # GET /narratives/new
@@ -46,23 +39,24 @@ class NarrativesController < ApplicationController
   end
   
   # GET /narratives/1/play/
-  def play   
-    @narrative = Narrative.find(params[:id])
-    images = Image.where(narrative_id: params[:id])
+  def play
+    selected_narrative_id = params[:id]
+    @narrative = Narrative.find(selected_narrative_id)
+    images = Image.where(narrative_id: selected_narrative_id)
     root = "http://localhost:3000/"
-    default_image_path = Image.where(narrative_id: params[:id]).pluck(:image_path).first || "narratives/default_narrative_image.jpg"
+    default_image_path = Image.where(narrative_id: selected_narrative_id).pluck(:image_path).first || "narratives/default_narrative_image.jpg"
 
     audio_array = []
-    Audio.where(narrative_id: params[:id]).each do |audio|
-      image_path = Image.where(narrative_id: params[:id]).where("image_number <= ?", audio.audio_number).pluck(:image_path).last || default_image_path      
-      audio_array.push(  
+    Audio.where(narrative_id: selected_narrative_id).each do |audio|
+      image_path = Image.where(narrative_id: selected_narrative_id).where("image_number <= ?", audio.audio_number).pluck(:image_path).last || default_image_path
+      audio_array.push(
         #mp3: Rails.public_path + audio.audio_path,
         mp3: root + audio.audio_path,
         poster: root + image_path      
       )
     end
     @audio_json = audio_array.to_json.html_safe
-    @comments = get_comments_for_narrative(params[:id])
+    @comments = get_comments_for_narrative(selected_narrative_id)
   end
 
   # POST narratives/1/comment
@@ -79,8 +73,10 @@ class NarrativesController < ApplicationController
 
     respond_to do |format|
       if @narrative.save
-        format.html { redirect_to @narrative, notice: 'Narrative was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @narrative }
+        format.html { redirect_to @narrative,
+                                  notice: 'Narrative was successfully created.' }
+        format.json { render action: 'show', status: :created,
+                             location: @narrative }
       else
         render_after_fail(format, 'new')
       end
@@ -92,7 +88,8 @@ class NarrativesController < ApplicationController
   def update
     respond_to do |format|
       if @narrative.update(narrative_params)
-        format.html { redirect_to @narrative, notice: 'Narrative was successfully updated.' }
+        format.html { redirect_to @narrative, 
+                                  notice: 'Narrative was successfully updated.' }
         format.json { head :no_content }
       else
         render_after_fail(format, 'edit')
@@ -119,12 +116,26 @@ class NarrativesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def narrative_params
-      params.require(:narrative).permit(:nar_name, :nar_path, :language_id, :category_id, :first_image,
-                                        :num_of_view, :num_of_agree, :num_of_disagree, :num_of_flagged, :create_time)
+      params.require(:narrative).permit(:nar_name, :nar_path, :language_id,
+                                        :category_id, :first_image,
+                                        :num_of_view, :num_of_agree,
+                                        :num_of_disagree, :num_of_flagged,
+                                        :create_time)
     end
-    
+
     def render_after_fail format, act
       format.html { render action: act }
-      format.json { render json: @narrative.errors, status: :unprocessable_entity }
+      format.json { render json: @narrative.errors,
+                           status: :unprocessable_entity }
     end
+
+    def render_to_home json_data
+      respond_to do |format|
+        format.html
+        # Support JSONP. Read more: http://henrysztul.info/post/14970402595/how-to-enable-jsonp-support-in-a-rails-app
+        format.json { render :json => json_data,
+                             :callback => params[:callback] }
+      end
+    end
+
 end
