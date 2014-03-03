@@ -97,7 +97,7 @@ function getCircleOpacity(c){
     return 1;  
   }
   else{
-    return 0.3;
+    return 0.2;
   }    
 }
 
@@ -107,7 +107,7 @@ function getSunburstSegmentOpacity(d){
     return 1;
   }
   else{
-    return 0.3;
+    return 0.2;
   }
     
 }
@@ -139,7 +139,7 @@ function getCategoryColor(n){
     case "AmbivalentAgreed":
     case "AmbivalentDisagreed":
     case 3:
-      return "#c0c0c0";   //Grey
+      return "#A0A0A0";   //Grey
     default:
       return "#000";
   }
