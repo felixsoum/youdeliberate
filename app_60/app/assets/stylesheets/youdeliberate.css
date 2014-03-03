@@ -30,11 +30,26 @@ svg.bubble{
 	height:530px;
 	width:600px;
 }
-#language-select-label{
-	height:54px;
-}
 #sunburst-svg
 {
 	position:relative;
 	left:10px;
+}
+.panel-footer .button {
+	width: 66%;
+	padding-top:5px; 
+	padding-bottom:5px; 
+}
+.panel-footer {
+	padding: 10px 5px 10px 15px;
+}
+.label-filter
+{
+	width: 33%;
+	margin-top:1em; 
+	padding-top:5px; 
+	padding-bottom:5px; 
+}
+.tooltip-inner {
+    min-width: 125px;
 }
