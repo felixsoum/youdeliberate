@@ -15,6 +15,7 @@
             <li class="list-spacer">&nbsp;</li>
             <li><a class="fancybox" data-fancybox-type="iframe" href="about">Au Sujet <span class="glyphicon glyphicon-flash"></span> About</a></li>
             <li><a class="fancybox" data-fancybox-type="iframe" href="contact">Nous Rejoindre <span class="glyphicon glyphicon-flash"></span> Contact Us</a></li>
+			<li><a class="fancybox" data-fancybox-type="iframe" href="tutorial" data-toggle="tooltip" data-placement="right" title="Watch tutorial"><span class="glyphicon glyphicon-info-sign"></span></a></li>
             <!-- Language Dropdown Menu
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Language <b class="caret"></b></a>
@@ -110,5 +111,6 @@
 	jQuery(document).ready(function() {
 	   jQuery('#tooltip-sort .btn').tooltip();
 	   jQuery('#tooltip-filter .btn').tooltip({container:'body'});
+	   jQuery('.fancybox').tooltip({container:'body'});
 	});
 </script>

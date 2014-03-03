@@ -2,6 +2,9 @@ App60::Application.routes.draw do
   root :to => redirect('user/index')
   get 'user' => redirect('user/index')
   get 'user/index'
+  get 'user/about'
+  get 'user/contact'
+  get 'user/tutorial'
   get 'narratives/narrative'
   get 'sunburst' => 'narratives#sunburst'
   get 'admin' => redirect('admin/index')
