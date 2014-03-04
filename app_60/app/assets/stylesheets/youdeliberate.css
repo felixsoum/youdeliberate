@@ -1,6 +1,9 @@
 .header-section {
   text-align: center;
 }
+#content-container{
+	width: 1300px;
+}
 #sunburst-info{
 	text-align:center;
 	position:relative;
@@ -26,14 +29,13 @@ svg.bubble{
 }
 #bubbles{
 	position:relative;
-	left:35px;
-	height:530px;
-	width:600px;
+	height:623px;
+	width:750px;
 }
 #sunburst-svg
 {
 	position:relative;
-	left:10px;
+	left:30px;
 }
 .panel-footer .button {
 	width: 66%;
