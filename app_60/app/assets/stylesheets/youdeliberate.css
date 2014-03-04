@@ -1,6 +1,37 @@
 .header-section {
   text-align: center;
 }
+.container {
+width:100%;
+height:90%;
+}
+
+.col-lg-4 {
+	text-align:center;
+	position:absolute;
+	left:1%;
+	width:30%;
+	height:100%;
+}
+.col-lg-8 {
+	text-align:center;
+	position:absolute;
+	left:31%;
+	width:69%;
+	height:100%;
+}
+#filter-sort {
+width:100%;
+height:60%;
+}
+#legend {
+width:100%;
+height:18.5%;
+}
+#bubble-container {
+width:100%;
+height:80%;
+}
 #sunburst-info{
 	text-align:center;
 	position:relative;
@@ -22,13 +53,11 @@ path:hover{
 
 svg.bubble{
 	position:relative;
-	top: -5px;
 }
 #bubbles{
-	position:relative;
-	left:35px;
-	height:530px;
-	width:600px;
+	position:absolute;
+	height:60%;
+	width:90%;
 }
 #sunburst-svg
 {
