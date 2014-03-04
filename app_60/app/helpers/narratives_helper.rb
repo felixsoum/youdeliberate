@@ -1,10 +1,10 @@
 module NarrativesHelper
-  
+
   def narratives_json(narratives)
 
     list = narratives.order(:category_id).map do |narrative|
       narrative_json(narrative)
-    end  
+    end
     {:name => "Narratives", :children => list
     }.to_json
   end
@@ -19,7 +19,7 @@ module NarrativesHelper
           :NumberDisagree => narrative.num_of_disagree,
           :NumberViews => narrative.num_of_view,
           :NarrativeID => narrative.id,
-          :category => narrative.category_id         
+          :category => narrative.category_id
         }
   end
 
@@ -28,7 +28,7 @@ module NarrativesHelper
     list = narratives.group(:category_id).count.map do |key, value|
       sunburst_list(key, value)
     end
-    
+
     {
       :name => "Narratives", :children => list
     }.to_json
@@ -40,11 +40,11 @@ module NarrativesHelper
       :count => value
     }
   end
-  
+
   def get_comments_for_narrative narrative_id
     NComment.where(narrative_id: narrative_id)
   end
-  
+
   def get_language_name language_id
     query = "SELECT language_name FROM languages WHERE id = \'#{language_id}\'"
     result = ActiveRecord::Base.connection.execute(query).first;
@@ -54,7 +54,7 @@ module NarrativesHelper
       return nil
     end
   end
-  
+
   def get_category_name category_id
     Category.find(category_id).category_name
   end

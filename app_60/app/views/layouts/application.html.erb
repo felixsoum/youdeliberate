@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>App60</title>
+  <%= analytics_init :local => Rails.env.development? %>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
@@ -10,6 +11,7 @@
   <![endif]-->
   <%= respond_include_tags %>
   <%= yield(:head) %>
+  
 </head>
 <body>
 
