@@ -84,7 +84,7 @@
 	</div>
 	<div class="col-lg-6" id="narrative">
 			<div class="form-inline">
-				<%= form_tag("comment", method: "post", id: @narrative.id) do %>
+				<%= form_tag("/narratives/:id/comment", method: "post") do %>
 				<div class="input-group">
 					<%= text_field_tag(:comment, nil, class: "form-control") %>
 					<%= hidden_field_tag 'narrative_id', @narrative.id %>
