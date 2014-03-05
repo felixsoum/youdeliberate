@@ -84,10 +84,9 @@
 	</div>
 	<div class="col-lg-6" id="narrative">
 			<div class="form-inline">
-				<%= form_tag("/narratives/:id/comment", method: "post") do %>
+				<%= form_tag("/narratives/"+@narrative.id.to_s+"/comment", method: "post") do %>
 				<div class="input-group">
 					<%= text_field_tag(:comment, nil, class: "form-control") %>
-					<%= hidden_field_tag 'narrative_id', @narrative.id %>
 					<span class="input-group-btn">
 						<%= button_tag(type: "submit", class: "btn btn-default") do %>
 							<span class="glyphicon glyphicon-comment"></span>

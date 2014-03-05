@@ -61,7 +61,7 @@ class NarrativesController < ApplicationController
 
   # POST narratives/1/comment
   def comment
-    narrative_id = params[:narrative_id]
+    narrative_id = params[:id]
     NComment.create(content: params[:comment], narrative_id: narrative_id)
     redirect_to(:action => "play", :id => narrative_id)
   end
