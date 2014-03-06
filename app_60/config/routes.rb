@@ -1,5 +1,5 @@
 App60::Application.routes.draw do
-  root :to => redirect('user/index')
+  root 'user#index'
   get 'user' => redirect('user/index')
   get 'user/index'
   get 'user/about'
