@@ -70,3 +70,6 @@ gem 'jasminerice', :git => 'https://github.com/bradphelan/jasminerice.git'
 
 # Use guard-jasmine to automate Jasmine
 gem 'guard-jasmine'
+
+# Use fancybox2-rails to display content in a Mac-style lightbox 
+gem 'fancybox2-rails'

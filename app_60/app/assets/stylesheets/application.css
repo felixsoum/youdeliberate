@@ -9,8 +9,9 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require bootstrap.min
- *= require_self
+ *= require fancybox
  *= require_tree .
+ *= require_self
  */
 
 /* Override glyphicons path. Read more: http://rvg.me/2013/11/using-bootstrap-3-with-rails-4/ */
