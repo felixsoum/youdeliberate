@@ -37,7 +37,7 @@ class NarrativesControllerTest < ActionController::TestCase
   
   test "should redirect to single narrative view" do
     post :comment, id: @narrative.id, comment: "I hate you and your goddamned opinion!"
-    assert_redirected_to narrative_play_path(id: @narrative.id)
+    assert_redirected_to play_narrative_path(@narrative.id)
   end
 
   test "should get edit" do

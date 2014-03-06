@@ -84,7 +84,7 @@
 	</div>
 	<div class="col-lg-6" id="narrative">
 			<div class="form-inline">
-				<%= form_tag("/narratives/"+@narrative.id.to_s+"/comment", method: "post") do %>
+				<%= form_tag(comment_add_path(@narrative.id), method: "post") do %>
 				<div class="input-group">
 					<%= text_field_tag(:comment, nil, class: "form-control") %>
 					<span class="input-group-btn">
