@@ -7,7 +7,6 @@
   	<%= javascript_include_tag "jquery.jplayer.min" %>
 	<%= javascript_include_tag "jplayer.playlist.min" %>
 	<%= stylesheet_link_tag 'jplayer.blue.monday.css' %>
-  	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	
   <%= csrf_meta_tags %>
   <!--[if lt IE 9]>
@@ -152,6 +151,8 @@ $(document).ready(function(){
 		keyEnabled: true,
 		audioFullScreen: true
 	});
+
+	jQuery('.btn').tooltip();
 });
 //]]>
 </script>
