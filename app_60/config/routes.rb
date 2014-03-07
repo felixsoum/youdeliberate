@@ -1,15 +1,19 @@
 App60::Application.routes.draw do
-  root :to => redirect('user/index')
+  root 'user#index'
   get 'user' => redirect('user/index')
   get 'user/index'
+  get 'user/about'
+  get 'user/contact'
+  get 'user/tutorial'
   get 'narratives/narrative'
   get 'sunburst' => 'narratives#sunburst'
   get 'admin' => redirect('admin/index')
   get 'admin/index', as: 'index_admin'
+  get 'narratives/:id/play', to: 'narratives#play', as: 'play_narrative'
+  post 'narratives/:id/comment/', to: 'narratives#comment', as: 'comment_add'
   post 'admin/upload'
   resources :narratives
-  
-  match ':controller(/:action(/:id))', :via => :get
+ 
 	
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

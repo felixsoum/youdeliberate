@@ -1,20 +1,15 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>App60</title>
   	<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   	<%= javascript_include_tag "jquery.jplayer.min" %>
 	<%= javascript_include_tag "jplayer.playlist.min" %>
 	<%= stylesheet_link_tag 'jplayer.blue.monday.css' %>
-  	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	
   <%= csrf_meta_tags %>
   <!--[if lt IE 9]>
     <%= javascript_include_tag 'html5shiv-printshiv' %>
   <![endif]-->
   <%= respond_include_tags %>
-</head>
 <body>
 <div>
 	<div id="narrative" align="center">
@@ -78,19 +73,26 @@
 				</div>
 			</div>
 		</div>
-		<div class="btn-group">
-		  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up"><%= @narrative.num_of_disagree %></span></button>
-		  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-down"><%= @narrative.num_of_agree %></span></button>
-		  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-flag"></span></button>
-		  <span> VIEWS: <%= @narrative.num_of_view %></span>
+		</br>
+		<div class="btn-group" id="single-view-tooltip">
+		  <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Nombre de désaccord / Number of Disagrees"><span class="glyphicon glyphicon-thumbs-up">&nbsp<%= @narrative.num_of_disagree %></span></button>
+		  <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Nombre de d'accord / Number of Agrees" ><span class="glyphicon glyphicon-thumbs-down">&nbsp<%= @narrative.num_of_agree %></span></button>
+		  <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Signaler un recit innaproprier / Flag an inappropriate narrative" >&nbsp<span class="glyphicon glyphicon-flag"></span></button>
+		  <button type="button" class="btn btn-default" disabled="disabled"><span class="glyphicon glyphicon-eye-open">&nbsp<%= @narrative.num_of_view %></span></button>
 		</div>
 	</div>
 	<div class="col-lg-6" id="narrative">
-		<div class="input-group">
-		  <input type="text" class="form-control">
-		  <span class="input-group-btn">
-			<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-comment"></button>
-		  </span>
+			<div class="form-inline">
+				<%= form_tag(comment_add_path(@narrative.id), method: "post") do %>
+				<div class="input-group">
+					<%= text_field_tag(:comment, nil, class: "form-control") %>
+					<span class="input-group-btn">
+						<%= button_tag(type: "submit", class: "btn btn-default") do %>
+							<span class="glyphicon glyphicon-comment"></span>
+						<% end %>
+					</span>
+					</div>
+				<% end %>
 		</div>
 	</div>
 	<div class="panel panel-primary" id="narrative">
@@ -125,8 +127,6 @@
 		</table>	
 	</div>
 </div>
-</body>
-</html>	
 
 <script type="text/javascript">
 //<![CDATA[
@@ -151,6 +151,8 @@ $(document).ready(function(){
 		keyEnabled: true,
 		audioFullScreen: true
 	});
+
+	jQuery('.btn').tooltip(); 
 });
 //]]>
 </script>
