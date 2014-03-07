@@ -22,5 +22,6 @@ module App60
 
     # Ignore test warning. Read more: http://stackoverflow.com/questions/20361428/rails-i18n-validation-deprecation-warning
     config.i18n.enforce_available_locales = false
+    config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
   end
 end
