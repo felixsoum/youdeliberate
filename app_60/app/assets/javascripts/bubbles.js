@@ -53,7 +53,7 @@ function drawBubbles(){
 		  //For outline selection color
 		  .on("mouseover",function(d){d3.select(this).style("stroke",function(d) { d3.select(this).style("opacity",0.5); return getMouseOverColor(d.category);  })})
 		  .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { d3.select(this).style("opacity",1); return getCategoryColor(d.category);  })})
-		  .on("click",function(d){$.fancybox({type: 'iframe',href: 'http://localhost:3000/narratives/play/'+d.n_id});}) //Requests single-narrative view with appropriate ID
+		  .on("click",function(d){$.fancybox({type: 'iframe',href: Routes.play_narrative_path(d.n_id)});}) //Requests single-narrative view with appropriate ID
 		  .transition()
 		  .attr("r", function(d) {
 		  	 return d.r; 

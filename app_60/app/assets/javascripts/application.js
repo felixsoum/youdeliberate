@@ -15,3 +15,4 @@
 //= require jquery.turbolinks
 //= require turbolinks
 //= require bootstrap.min
+//= require js-routes

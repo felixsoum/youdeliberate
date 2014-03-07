@@ -73,3 +73,6 @@ gem 'guard-jasmine'
 
 # Use google-analytics-rails for simple analytics
 gem 'google-analytics-rails'
+
+# Use js-routes to allow usage of Rails routes in JS code.
+gem "js-routes"
