@@ -65,8 +65,14 @@ gem 'html5shiv-rails'
 # Use respond-rails to shim CSS3 media queries
 gem 'respond-rails'
 
-# Use jasmienrice to test JavaScript
+# Use jasminerice to test JavaScript
 gem 'jasminerice', :git => 'https://github.com/bradphelan/jasminerice.git'
 
 # Use guard-jasmine to automate Jasmine
 gem 'guard-jasmine'
+
+# Use fancybox2-rails to display content in a Mac-style lightbox 
+gem 'fancybox2-rails', '~> 0.2.8'
+
+# Use bootstrap-sass for front-end development
+gem 'bootstrap-sass', '~> 3.1.1'

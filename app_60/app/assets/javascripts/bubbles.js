@@ -46,18 +46,18 @@ function drawBubbles(){
 		node1.removeChild(node1.lastChild);
 	}	
 	
-	var diameter = $("#bubbles").width()
+	var diameter = $("#bubble-inner-panel").width()
 		format = d3.format(",d"),
 		color = d3.scale.category20c();
 
 	bubble = d3.layout.pack()
 		.sort(null)
-		.size([$("#bubbles").width(), $("#bubbles").height()])
+		.size([diameter, $("#bubble-inner-panel").height()])
 		.padding(4.5);
 		
 	var svg = d3.select("#bubbles").append("svg")
-		.attr("width", $("#bubbles").width())
-		.attr("height", $("#bubbles").height())
+		.attr("width", diameter)
+		.attr("height", $("#bubble-inner-panel").height())
 		.attr("class", "bubble");
 
 	d3.json(bubbleDataSource, function(error, root) {

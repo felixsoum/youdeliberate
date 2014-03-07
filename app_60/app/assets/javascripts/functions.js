@@ -97,7 +97,7 @@ function getCircleOpacity(c){
     return 1;  
   }
   else{
-    return 0.3;
+    return 0.2;
   }    
 }
 
@@ -107,7 +107,7 @@ function getSunburstSegmentOpacity(d){
     return 1;
   }
   else{
-    return 0.3;
+    return 0.2;
   }
     
 }
@@ -139,35 +139,39 @@ function getCategoryColor(n){
     case "AmbivalentAgreed":
     case "AmbivalentDisagreed":
     case 3:
-      return "#c0c0c0";   //Grey
+      return "#A0A0A0";   //Grey
     default:
       return "#000";
   }
 }
 
 function highlightMatchingSunburstSegment(c){
-  d3.selectAll("path").filter(function(d){return d.category_id == c.attr("categoryID")}).transition().style("opacity",0.5);
-  //d3.selectAll("path").filter(function(d){for (var name in d) {alert(name);}});
+  //with transition
+  //d3.selectAll("path").filter(function(d){return d.category_id == c.attr("categoryID")}).transition().style("opacity",0.5);
+  //instantaneous
+  d3.selectAll("path").filter(function(d){return d.category_id == c.attr("categoryID")}).style("opacity",0.5);
 }
 
-
 function deHighlightSunburstSegments(){
-  //d3.selectAll("path").each{function(d){d.style("opacity",function(d){ return getSunburstSegmentOpacity(d);})}};
-  d3.selectAll("path").each( function(d){d3.select(this).transition().style("opacity",getSunburstSegmentOpacity(d));});
+  //with transition
+  //d3.selectAll("path").each( function(d){d3.select(this).transition().style("opacity",getSunburstSegmentOpacity(d));});
+  //instantaneous
+  d3.selectAll("path").each( function(d){d3.select(this).style("opacity",getSunburstSegmentOpacity(d));});
 }
 
 function highlightMatchingCircles(d){
-
-  d3.selectAll("circle").filter(function(c){return c.category == d.category_id}).transition().style("opacity",0.7).style("stroke",getMouseOverColor(d.category));
-
+  //with transition
+  //d3.selectAll("circle").filter(function(c){return c.category == d.category_id}).transition().style("opacity",0.7).style("stroke",getMouseOverColor(d.category));
+  //instantaneous
+  d3.selectAll("circle").filter(function(c){return c.category == d.category_id}).style("opacity",0.7).style("stroke",getMouseOverColor(d.category));
 }
 
 function deHighlightCircles(){
-
-  d3.selectAll("circle").each( function(c){d3.select(this).transition().style("opacity",getCircleOpacity(c)).style("stroke",getCategoryColor(c.category));}  );
-
+  //with transition
+  //d3.selectAll("circle").each( function(c){d3.select(this).transition().style("opacity",getCircleOpacity(c)).style("stroke",getCategoryColor(c.category));}  );
+  //instantaneous
+  d3.selectAll("circle").each( function(c){d3.select(this).style("opacity",getCircleOpacity(c)).style("stroke",getCategoryColor(c.category));}  );
 }
-
 
 $(document).ready(function() {
   $(".fancybox").fancybox();
