@@ -55,7 +55,7 @@ class NarrativesControllerTest < ActionController::TestCase
     assert_redirected_to narrative_path(assigns(:narrative))
   end
 
-  test "Should be bale to destroy narrative" do
+  test "Should be able to destroy narrative" do
     assert_difference('Narrative.count', -1) do
       delete :destroy, id: @narrative
     end
