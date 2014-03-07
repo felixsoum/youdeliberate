@@ -14,7 +14,7 @@ class NarrativeTest < ActiveSupport::TestCase
     @nar_2 = nil
   end
   
-  test "should not save narratives without name or path" do
+  test "Should not save narratives without name or path" do
     nar_no_name = Narrative.new(nar_path: "narrative_path", language_id: 1, num_of_view: 0,
                                       num_of_agree: 0, num_of_disagree: 0, num_of_flagged: 0)
     assert !nar_no_name.save
@@ -24,19 +24,19 @@ class NarrativeTest < ActiveSupport::TestCase
     assert !nar_no_path.save
   end
   
-  test "should have has_many relationship between narratives and images" do
+  test "Should be able to have many images for a narrative" do
     #check the number of children is correct
     assert_equal(2, @nar_1.images.count)
     #check the children can be reached from parent and their foreign keys are correct.
     assert_equal([980190962,980190962], @nar_1.images.collect {|img| img.narrative_id })
   end
   
-  test "should have has_many relationship between narratives and audios" do
+  test "Should be able to have many audios for a narrative" do
     assert_equal(2, @nar_2.audios.count)
     assert_equal([298486374,298486374], @nar_2.audios.collect {|aud| aud.narrative_id })
   end
   
-  test "should destroy corresponding images when destroy a narrative" do
+  test "Destroying a narrative should destroy corresponding the images" do
     #check the total number of images should be changed correct.
     assert_difference("Image.count", -@nar_1.images.count) do
       @nar_1.destroy
@@ -45,7 +45,7 @@ class NarrativeTest < ActiveSupport::TestCase
     assert_nil(Image.find_by_narrative_id(980190962))
   end
   
-  test "should destroy corresponding audios when destroy a narrative" do
+  test "Destroying a narrative should destroy corresponding the audios" do
     assert_difference("Audio.count", -@nar_2.audios.count) do
       @nar_2.destroy
     end
