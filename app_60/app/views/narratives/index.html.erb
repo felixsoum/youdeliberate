@@ -37,7 +37,7 @@
           <div class="panel-heading"><h4>Télécharger des Récits&nbsp;&nbsp;<span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;Upload Narratives</h4></div>
           <div>
             <p class="with-left-margin title">Please choose a zip file:</p>
-			<%= form_tag({controller: "admin", action: :upload}, multipart: true) do %>
+			<%= form_tag(upload_narrative_path, multipart: true) do %>
 			  <div><%= file_field_tag 'narrative', accept: 'application/zip' %></div>
 			  <div><%= hidden_field_tag 'upload_path' %></div>
 			  <div class="with-left-margin with-bottom-margin"><%= submit_tag("Upload") %></div>
