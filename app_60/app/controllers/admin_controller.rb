@@ -39,7 +39,7 @@ class AdminController < ApplicationController
         number_of_uploaded_narrative = narratives_unzip_pathes.length
         narrative_number = narrative_number + number_of_uploaded_narrative
         set_counter_value(get_narrative_counter, narrative_number)
-        @result = "#{number_of_uploaded_narrative} narrative(s) has been Uploaded to server successfully."
+        flash[:success] = "#{number_of_uploaded_narrative} narrative(s) has been Uploaded to server successfully."
       end
     end
 
@@ -160,13 +160,7 @@ class AdminController < ApplicationController
     end
 
     def get_language_id language
-      query = "SELECT id FROM languages WHERE language_name = \'#{language}\'"
-      result = ActiveRecord::Base.connection.execute(query).first;
-      if result != nil
-        return narrative_language = result["id"]
-      else
-        return 1
-      end
+      Language.select("id").where(language_name: language)
     end
 
 end

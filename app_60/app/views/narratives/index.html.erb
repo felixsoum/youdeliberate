@@ -3,7 +3,7 @@
   <%= javascript_include_tag "jquery.fancybox.pack" %>
   <script type="text/javascript">
 	function playNarrative(id){
-		$.fancybox({type: 'iframe',href: 'http://localhost:3000/narratives/play/'+id});
+	  $.fancybox({type: 'iframe', href: Routes.play_narrative_path(id)});
 	} 
   </script>
 <% end %> 
