@@ -13,7 +13,7 @@
 <body>
 <div>
 	<div id="narrative" align="center">
-		<div>Narrative name: <%= @narrative.nar_name %></div>
+		<div class="page-header"><h1><small>Narrative name: <%= @narrative.nar_name %></small></h1></div>
 		<div data-id="media_element">
 				<div id="jp_container_1" class="jp-video jp-video-270p">
 				<div class="jp-type-playlist">
@@ -95,37 +95,33 @@
 				<% end %>
 		</div>
 	</div>
-	<div class="panel panel-primary" id="narrative">
-		<table>
-		  <tbody>
-			  <tr>
-				<td>
-					<div data-id="comments">
-						<strong>Comments</strong><br/>
-						<% if @comments.each do |comment| %>
-							<p style="padding-left:1em">
-							<%= comment.content%> 
-								<p style="padding-left:4em">
-									at <%= comment.created_at%>
+	<div class="panel panel-default">
+		  <div class="panel-heading"><font size="4">Comments</font></div>
+		  <div class="panel-body">
+		    <table>
+			  <tbody>
+				  <tr>
+					<td>
+						<div data-id="comments">
+							<% if @comments.each do |comment| %>
+								<p style="margin:0;">
+								<%= comment.content%></p> 
+								<p style="padding-left:1em;margin:0;">
+								<font size="1">at <%= comment.created_at%></font>
 								</p>
-							</p>
-							<hr/>
-						<% end.empty? %>
-  							Be the first to comment!
-						<% end %>
-					</div>
-					<div>
-						<div class="btn-group">
-						  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up"></span></button>
-						  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-down"></span></button>
-						</div>
-						<span><%= @narrative.create_time %></span>
-					</div>					
-				</td>				
-			  </tr>
-		  </tbody>
-		</table>	
-	</div>
+							<% end.empty? %>
+	  							Be the first to comment!
+							<% end %>							
+						</div>								
+					</td>				
+				  </tr>
+			  </tbody>
+			</table>
+		  </div>
+	</div>	
+	<div>
+		<span><b>Crée/Created:</b> <%= @narrative.create_time %></span>
+	</div>	
 </div>
 
 <script type="text/javascript">
