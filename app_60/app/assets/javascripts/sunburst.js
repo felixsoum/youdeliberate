@@ -51,14 +51,15 @@ function getData() {
       .enter().append("path")
         .attr("display", function(d) { return d.depth ? null : "none"; }) // hide inner ring
         .attr("d", arc)
-        .style("opacity",1.0)
+        .attr("categoryID",function(d){ return d.category_id; })
+        .style("opacity",function(d){ return getSunburstSegmentOpacity(d); })
         .style("stroke", function(d) { return getArcMouseOutColor(d.category_id); })
         .style("stroke-width","2px")
         .style("fill", function(d) { return getCategoryColor(d.category_id); })
         .style("fill-rule", "evenodd")
-        .on("mouseover",function(d){d3.select(this).style("stroke",function(d) { d3.select(this).style("opacity",0.5); return getArcMouseOverColor(d.category_id);  })})
-        .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { d3.select(this).style("opacity",1); return getArcMouseOutColor(d.category_id);  })})
-        .on("click",function(d,i){alert("Displaying narratives in the category: " + d.category_id)})
+        .on("mouseover",function(d){d3.select(this).style("stroke",function(d) { d3.select(this).style("opacity",0.5); highlightMatchingCircles(d); return getArcMouseOverColor(d.category_id);  })})
+        .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { d3.select(this).style("opacity",function(d){ return getSunburstSegmentOpacity(d); }); deHighlightCircles(); return getArcMouseOutColor(d.category_id);  })})
+        .on("click",function(d,i){filterCategoryToggle(d.category_id)})
         .each(stash);
         
 

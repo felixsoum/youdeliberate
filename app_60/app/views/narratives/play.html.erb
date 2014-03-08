@@ -4,7 +4,6 @@
   	<%= javascript_include_tag "jquery.jplayer.min" %>
 	<%= javascript_include_tag "jplayer.playlist.min" %>
 	<%= stylesheet_link_tag 'jplayer.blue.monday.css' %>
-  	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	
   <%= csrf_meta_tags %>
   <!--[if lt IE 9]>
@@ -75,10 +74,10 @@
 			</div>
 		</div>
 		</br>
-		<div class="btn-group">
-		  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up">&nbsp<%= @narrative.num_of_disagree %></span></button>
-		  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-down">&nbsp<%= @narrative.num_of_agree %></span></button>
-		  <button type="button" class="btn btn-default">&nbsp<span class="glyphicon glyphicon-flag"></span></button>
+		<div class="btn-group" id="single-view-tooltip">
+		  <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Nombre de désaccord / Number of Disagrees"><span class="glyphicon glyphicon-thumbs-up">&nbsp<%= @narrative.num_of_disagree %></span></button>
+		  <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Nombre de d'accord / Number of Agrees" ><span class="glyphicon glyphicon-thumbs-down">&nbsp<%= @narrative.num_of_agree %></span></button>
+		  <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Signaler un recit innaproprier / Flag an inappropriate narrative" >&nbsp<span class="glyphicon glyphicon-flag"></span></button>
 		  <button type="button" class="btn btn-default" disabled="disabled"><span class="glyphicon glyphicon-eye-open">&nbsp<%= @narrative.num_of_view %></span></button>
 		</div>
 	</div>
@@ -152,6 +151,8 @@ $(document).ready(function(){
 		keyEnabled: true,
 		audioFullScreen: true
 	});
+
+	jQuery('.btn').tooltip(); 
 });
 //]]>
 </script>

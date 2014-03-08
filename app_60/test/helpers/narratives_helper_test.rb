@@ -8,7 +8,7 @@ class NarrativesHelperTest < ActionView::TestCase
   test "narratives_json request should return the expected object structure" do
     result = JSON.parse(narratives_json(@narratives))
     assert result.assert_valid_keys('name', 'children')
-    assert result['children'][0].assert_valid_keys('id', 'name', 'picture', 'size', 'language', 'NumberAgree', 'NumberDisagree', 'NumberViews', 'NarrativeID', 'category')
+    assert result['children'][0].assert_valid_keys('id', 'name', 'language', 'numberAgree', 'numberDisagree', 'numberViews', 'numberComments', 'narrativeID', 'category', 'uploadTime')
   end
   
   test "sunburst_json request should return the expected object structure" do

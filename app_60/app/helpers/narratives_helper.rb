@@ -12,14 +12,14 @@ module NarrativesHelper
   def narrative_json(narrative)
         { :id => " #{narrative.id}",
           :name => narrative.nar_name,
-          :picture => narrative.first_image,
-          :size => narrative.num_of_view == 0 ? 1 : narrative.num_of_view, # Send back '1' by default
           :language => narrative.language_id,
-          :NumberAgree => narrative.num_of_agree,
-          :NumberDisagree => narrative.num_of_disagree,
-          :NumberViews => narrative.num_of_view,
-          :NarrativeID => narrative.id,
-          :category => narrative.category_id
+          :numberAgree => narrative.num_of_agree,
+          :numberDisagree => narrative.num_of_disagree,
+          :numberViews => narrative.num_of_view,
+          :numberComments => narrative.n_comments.count,
+          :narrativeID => narrative.id,
+          :category => narrative.category_id,
+          :uploadTime => narrative.updated_at 
         }
   end
 

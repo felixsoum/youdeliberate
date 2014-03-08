@@ -1,9 +1,0 @@
-{
- "name": "sunburst",
- "children": [
-      {"name": "For", "size": 10},
-      {"name": "Against", "size":14},  
-      {"name": "Ambivalent", "size":7} 
-     ]
-}
-  
