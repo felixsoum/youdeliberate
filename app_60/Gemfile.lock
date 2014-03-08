@@ -190,8 +190,8 @@ DEPENDENCIES
   bootstrap-sass (~> 3.1.1)
   coffee-rails (~> 4.0.0)
   coveralls
-  google-analytics-rails
   fancybox2-rails (~> 0.2.8)
+  google-analytics-rails
   guard-jasmine
   html5shiv-rails
   jasminerice!

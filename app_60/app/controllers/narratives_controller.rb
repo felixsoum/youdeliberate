@@ -88,11 +88,12 @@ class NarrativesController < ApplicationController
   def update
     respond_to do |format|
       if @narrative.update(narrative_params)
-        format.html { redirect_to @narrative, 
-                                  notice: 'Narrative was successfully updated.' }
+        format.html { redirect_to narratives_url }
         format.json { head :no_content }
+        flash[:success] = "The narrative has been updated."
       else
-        render_after_fail(format, 'edit')
+        #render_after_fail(format, 'edit')
+        flash[:error] = "Fail.The narrative cannot be updated."
       end
     end
   end

@@ -46,13 +46,7 @@ module NarrativesHelper
   end
 
   def get_language_name language_id
-    query = "SELECT language_name FROM languages WHERE id = \'#{language_id}\'"
-    result = ActiveRecord::Base.connection.execute(query).first;
-    if result != nil
-      return narrative_language = result["language_name"]
-    else
-      return nil
-    end
+    Language.find(language_id).language_name
   end
 
   def get_category_name category_id

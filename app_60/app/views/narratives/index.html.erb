@@ -1,45 +1,96 @@
-<h1>Listing narratives</h1>
+<% content_for(:head) do %>
+  <%= stylesheet_link_tag "jquery.fancybox" %>
+  <%= javascript_include_tag "jquery.fancybox.pack" %>
+  <script type="text/javascript">
+	function playNarrative(id){
+		$.fancybox({type: 'iframe',href: 'http://localhost:3000/narratives/play/'+id});
+	} 
+  </script>
+<% end %> 
 
-<table>
-  <thead>
-    <tr>
-      <th>Nar name</th>
-      <th>Nar path</th>
-      <th>Language</th>
-      <th>Category</th>
-      <th>First image</th>
-      <th>Num of view</th>
-      <th>Num of agree</th>
-      <th>Num of disagree</th>
-      <th>Num of flagged</th>
-      <th>Create time</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+    <!-- <div class="navbar navbar-inverse navbar-fixed-top" role="navigation"> -->
+    <div class="navbar navbar-default navbar-static-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand">VousDélibérez! <span class="glyphicon glyphicon-flash"></span> YouDeliberate!</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="list-spacer">&nbsp;</li>
+            <li><a class="fancybox" href="">Récits <span class="glyphicon glyphicon-flash"></span> Narratives</a></li>
+            <li><a class="fancybox" href="">Tableau de Bord <span class="glyphicon glyphicon-flash"></span> Dashboard</a></li>
+            <li class="list-spacer">&nbsp;</li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
 
-  <tbody>
-    <% @narratives.each do |narrative| %>
-      <tr>
-        <td><%= narrative.nar_name %></td>
-        <td><%= narrative.nar_path %></td>
-        <td><%= get_language_name(narrative.language_id) %></td>
-        <td><%= get_category_name(narrative.category_id) %></td>
-        <td><%= narrative.first_image %></td>
-        <td><%= narrative.num_of_view %></td>
-        <td><%= narrative.num_of_agree %></td>
-        <td><%= narrative.num_of_disagree %></td>
-        <td><%= narrative.num_of_flagged %></td>
-        <td><%= narrative.create_time.to_formatted_s(:db) %></td>
-        <td><%= link_to 'Show', narrative %></td>
-        <td><%= link_to 'Edit', edit_narrative_path(narrative) %></td>
-        <td><%= link_to 'Destroy', narrative, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <!-- content container -->
+    <div class="container">
 
-<br>
+      <!-- page headline -->
+      <div class="header-section"><br/></div> 
+      
+      <!-- Upload narrative section -->
+      <div class="col-lg-12">
+      	<div class="panel panel-primary">
+          <div class="panel-heading"><h4>Télécharger des Récits&nbsp;&nbsp;<span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;Upload Narratives</h4></div>
+          <div>
+            <p class="with-left-margin title">Please choose a zip file:</p>
+			<%= form_tag({controller: "admin", action: :upload}, multipart: true) do %>
+			  <div><%= file_field_tag 'narrative', accept: 'application/zip' %></div>
+			  <div><%= hidden_field_tag 'upload_path' %></div>
+			  <div class="with-left-margin with-bottom-margin"><%= submit_tag("Upload") %></div>
+			<% end %>
+		  </div>
+      	</div>
+      </div><!-- End upload narrative section -->
+      
+      <div><br/><br/></div>
+      
+      <!-- Listing narrative section -->
+      <div class="col-lg-12">
+      	<div class="panel panel-primary">
+          <div class="panel-heading"><h4>Listing des Récits&nbsp;&nbsp;<span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;Listing Narratives</h4></div>
+			<div class="table-responsive with-padding">
+				<table class="table">
+				  <thead>
+				    <tr>
+				      <th>Name</th>
+				      <th>Language</th>
+				      <th>Category</th>
+				      <th>View #</th>
+				      <th>Agree #</th>
+				      <th>Disagree #</th>
+				      <th>Flagged #</th>
+				      <th>Create Time</th>
+				      <th></th>
+				    </tr>
+				  </thead>
+				  
+				  <tbody>
+				    <% @narratives.each do |narrative| %>
+				      <%= form_for(narrative) do |f| %>
+				      <tr>
+				        <td><%= f.text_field :nar_name %></td>
+				        <td><%= f.select :language_id, Language.all.collect {|p| [ p.language_name, p.id ] } %></td>
+				        <td><%= f.select :category_id, Category.all.collect {|p| [ p.category_name, p.id ] } %></td>
+				        <td><%= narrative.num_of_view %></td>
+				        <td><%= f.number_field :num_of_agree %></td>
+				        <td><%= f.number_field :num_of_disagree %></td>
+				        <td><%= narrative.num_of_flagged %></td>
+				        <td><%= narrative.create_time.to_formatted_s(:db) %></td>
+				       	<td><span class="play-button" onclick="playNarrative(<%= narrative.id %>)">Play<span></td>
+				       	<td><%= f.submit "Save", :class => 'save-button'%></td>
+				        <td><%= link_to 'Delete', narrative, method: :delete, data: { confirm: 'Are you sure?' }, :class => "delete-button" %></td>
+				      </tr>
+				      <% end %>
+				    <% end %>
+				  </tbody>
+				</table>
+			</div>
+          </div>
+        </div>
+      </div> <!-- End listing narrative section -->
 
-<%= link_to 'New Narrative', index_admin_path %>
+    </div><!-- End content container -->
