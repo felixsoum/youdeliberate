@@ -17,8 +17,7 @@ class NarrativesController < ApplicationController
     respond_to do |format|
       format.html
       # Support JSONP. Read more: http://henrysztul.info/post/14970402595/how-to-enable-jsonp-support-in-a-rails-app
-      format.json { render :json => narrative_json(@narrative),
-                           :callback => params[:callback] }
+      format.json { render :json => narrative_json(@narrative), :callback => params[:callback] }
     end
   end
 
@@ -75,8 +74,7 @@ class NarrativesController < ApplicationController
       if @narrative.save
         format.html { redirect_to @narrative,
                                   notice: 'Narrative was successfully created.' }
-        format.json { render action: 'show', status: :created,
-                             location: @narrative }
+        format.json { render action: 'show', status: :created, location: @narrative }
       else
         render_after_fail(format, 'new')
       end
@@ -88,11 +86,12 @@ class NarrativesController < ApplicationController
   def update
     respond_to do |format|
       if @narrative.update(narrative_params)
-        format.html { redirect_to @narrative, 
-                                  notice: 'Narrative was successfully updated.' }
+        format.html { redirect_to narratives_url }
         format.json { head :no_content }
+        flash[:success] = "The narrative has been updated."
       else
-        render_after_fail(format, 'edit')
+        #render_after_fail(format, 'edit')
+        flash[:error] = "Fail.The narrative cannot be updated."
       end
     end
   end
@@ -125,16 +124,14 @@ class NarrativesController < ApplicationController
 
     def render_after_fail format, act
       format.html { render action: act }
-      format.json { render json: @narrative.errors,
-                           status: :unprocessable_entity }
+      format.json { render json: @narrative.errors, status: :unprocessable_entity }
     end
 
     def render_to_home json_data
       respond_to do |format|
         format.html
         # Support JSONP. Read more: http://henrysztul.info/post/14970402595/how-to-enable-jsonp-support-in-a-rails-app
-        format.json { render :json => json_data,
-                             :callback => params[:callback] }
+        format.json { render :json => json_data, :callback => params[:callback] }
       end
     end
 

@@ -17,3 +17,4 @@
 //= require js-routes
 //= require bootstrap
 //= require fancybox
+//= require narratives

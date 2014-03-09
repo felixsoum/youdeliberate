@@ -9,19 +9,22 @@ class AdminController < ApplicationController
   def upload
     narratives_zip = params[:narrative]
     if narratives_zip.nil?
-      @upload_message = "Failed. Nothing to upload"
-      render :index
+      flash[:error] = "Failed. Nothing to upload."
+      #@upload_message = "Failed. Nothing to upload"
+      #render :index
     elsif narratives_zip.content_type != "application/zip" and
           narratives_zip.content_type != "application/octet-stream" and
           narratives_zip.content_type != "application/x-zip-compressed"
       # The MIME type of a zip file is sometimes octet-stream. Read more: http://stackoverflow.com/questions/856013/mime-type-for-zip-file-in-google-chrome
-      @upload_message = "Failed. Please choose a zip file."
-      render :index
+      #@upload_message = "Failed. Please choose a zip file."
+      #render :index
+      flash[:error] = "Failed. Please choose a zip file."
     else
       require 'rubygems'
       require 'zip'
       upload_narratives(narratives_zip)
     end
+    redirect_to narratives_path
   end
 
   private
@@ -36,7 +39,7 @@ class AdminController < ApplicationController
         number_of_uploaded_narrative = narratives_unzip_pathes.length
         narrative_number = narrative_number + number_of_uploaded_narrative
         set_counter_value(get_narrative_counter, narrative_number)
-        @result = "#{number_of_uploaded_narrative} narrative(s) has been Uploaded to server successfully."
+        flash[:success] = "#{number_of_uploaded_narrative} narrative(s) has been Uploaded to server successfully."
       end
     end
 
@@ -157,13 +160,7 @@ class AdminController < ApplicationController
     end
 
     def get_language_id language
-      query = "SELECT id FROM languages WHERE language_name = \'#{language}\'"
-      result = ActiveRecord::Base.connection.execute(query).first;
-      if result != nil
-        return narrative_language = result["id"]
-      else
-        return 1
-      end
+      Language.select("id").where(language_name: language)
     end
 
 end
