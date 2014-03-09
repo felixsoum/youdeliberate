@@ -1,6 +1,32 @@
 //= require functions
 
 // I don't know where to stop, since coverage tool not set up at this time (istanbul tool)
+/*
+describe("Sort Class Toggle", function(){
+
+    var b;
+    
+    beforeEach(function(){
+        b = {id:"sort-by-views", className: "btn btn-primary btn-lg sort-select"};
+       //sortClassToggle(b); 
+        spyOn('sortClassToggle');//.and.callThrough();
+        sortClassToggle(b);
+    });
+    
+    
+    it("call function", function(){
+        sortClassToggle(b);
+    });
+    
+    
+    it("see call", function(){
+        expect(sortClassToggle).toHaveBeenCalledWith(b);
+    });
+    
+});
+*/
+
+
 describe("Jignesh - Circle Opacity 1", function(){
    
     var c, languageFilter, categoryFilter;
@@ -93,32 +119,3 @@ it("will dim the Sunburst", function(){
 });
     
 });
-
-
-/*
-describe("Sunburst Opacity", function(){
-    var a, d;
-    var currentCategoryFilter;
-    
-    var categoryFilter = {
-	FOR : {value: 1, name: "For", code: "F"},
-	AGAINST : {value: 2, name: "Against", code: "AG"},
-	AMBIVALENT: {value: 3, name: "Ambivalent", code: "AM"},
-	ALL: {value: 4, name: "All", code: "AL"}
-}
-    
-beforeEach(function(){    
-    d = {category_id:2};
-    currentCategoryFilter = categoryFilter.ALL; 
-});
-    
-it("calls the method", function(){
-    a = getSunburstSegmentOpacity(d);
-});
-
-it("will not dim the Sunburst", function(){           
-    expect(a).toEqual(0.2);
-});
-    
-});
-*/
