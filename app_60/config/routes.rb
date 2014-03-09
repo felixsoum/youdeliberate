@@ -1,10 +1,10 @@
 App60::Application.routes.draw do
   root 'user#index'
-  get 'user' => redirect('user/index')
-  get 'user/index'
-  get 'user/about'
-  get 'user/contact'
-  get 'user/tutorial'
+  get 'user' => redirect('/')
+  get 'user/index' => redirect('/')
+  get 'user/about', as: 'about'
+  get 'user/contact', as: 'contact'
+  get 'user/tutorial', as: 'tutorial'
   get 'narratives/narrative'
   get 'sunburst' => 'narratives#sunburst'
   get 'admin' => redirect('admin/index')

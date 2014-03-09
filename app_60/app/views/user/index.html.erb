@@ -13,9 +13,26 @@
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="list-spacer">&nbsp;</li>
-            <li><a class="fancybox" data-fancybox-type="iframe" href="about">Au Sujet <span class="glyphicon glyphicon-flash"></span> About</a></li>
-            <li><a class="fancybox" data-fancybox-type="iframe" href="contact">Nous Rejoindre <span class="glyphicon glyphicon-flash"></span> Contact Us</a></li>
-			<li><a class="fancybox" data-fancybox-type="iframe" href="tutorial" data-toggle="tooltip" data-placement="right" title="Regarder tutoriel / Watch tutorial"><span class="glyphicon glyphicon-info-sign"></span></a></li>
+
+            <li>
+              <%= link_to about_path, :class => 'fancybox', :'data-fancybox-type' => 'iframe' do %>
+                Au Sujet <span class="glyphicon glyphicon-flash"></span> About
+              <% end %>
+            </li>
+
+            <li>
+              <%= link_to contact_path, :class => 'fancybox', :'data-fancybox-type' => 'iframe' do %>
+                Nous Rejoindre <span class="glyphicon glyphicon-flash"></span> Contact Us
+              <% end %>
+            </li>
+
+            <li>
+              <%= link_to tutorial_path, :class => 'fancybox', :'data-fancybox-type' => 'iframe',
+              :'data-toggle' => 'tooltip', :'data-placement' => 'right', :title => 'Regarder tutoriel / Watch tutorial' do %>
+                <span class="glyphicon glyphicon-info-sign"></span>
+              <% end %>
+            </li>
+
             <!-- Language Dropdown Menu
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Language <b class="caret"></b></a>
