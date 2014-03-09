@@ -11,7 +11,7 @@ class AudioTest < ActiveSupport::TestCase
     @aud = nil
   end
   
-  test "should not save image without audio path or correct narrative id" do
+  test "Should not be able to save image without audio path or correct narrative id" do
     aud_no_parent = Audio.new(audio_path: "path")
     assert !aud_no_parent.save
     
@@ -22,7 +22,7 @@ class AudioTest < ActiveSupport::TestCase
     assert !aud_wrong_parent.save       
   end
   
-  test "should have belongs_to relationship between audios and narratives" do
+  test "Should have belongs_to relationship between audios and narratives" do
     #check the foreign key of the audio is correct.
     assert_equal(298486374, @aud.narrative_id)
     #check parent(narrative) can be reached from child(audio)

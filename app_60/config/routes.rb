@@ -11,7 +11,7 @@ App60::Application.routes.draw do
   get 'admin/index', as: 'index_admin'
   get 'narratives/:id/play', to: 'narratives#play', as: 'play_narrative'
   post 'narratives/:id/comment/', to: 'narratives#comment', as: 'comment_add'
-  post 'admin/upload'
+  post 'admin/upload', as: 'upload_narrative'
   resources :narratives
  
 	
