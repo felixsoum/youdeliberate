@@ -18,6 +18,20 @@ class NarrativesHelperTest < ActionView::TestCase
     strong_assert_valid_keys(result, ['name', 'children'])
     strong_assert_valid_keys(result['children'][0], ['category_id', 'count'])
   end
+
+  test "get_language_name should give the expected name" do
+    language = Language.new(language_name: "foobar")
+    language.save
+    assert_equal("foobar", get_language_name(language.id))
+    language.destroy
+  end
+
+  test "get_category_name should give the expected name" do
+    category = Category.new(category_name: "foobar")
+    category.save
+    assert_equal("foobar", get_category_name(category.id))
+    category.destroy
+  end
   
   private
     def strong_assert_valid_keys hash, array_of_keys 
