@@ -11,6 +11,12 @@ class NarrativesControllerTest < ActionController::TestCase
     assert_not_nil assigns(:narratives)
   end
 
+  test "Narrative should get sunburst" do
+    get :sunburst, :format => :json
+    assert_response :success
+    assert_not_nil assigns(:narratives)
+  end
+
   test "Should have a route to create a new narrative" do
     get :new
     assert_response :success
