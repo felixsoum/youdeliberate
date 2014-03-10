@@ -85,7 +85,7 @@
 			<div class="form-inline">
 				<%= form_tag(comment_add_path(@narrative.id), method: "post") do %>
 				<div class="input-group">
-					<%= text_field_tag(:comment, nil, class: "form-control") %>
+					<%= text_field_tag(:comment, nil, placeholder: "Votre commentaire / Your comment", class: "form-control") %>
 					<span class="input-group-btn">
 						<%= button_tag(type: "submit", class: "btn btn-default") do %>
 							<span class="glyphicon glyphicon-comment"></span>
@@ -111,7 +111,7 @@
 							</p>
 							<hr/>
 						<% end.empty? %>
-  							Be the first to comment!
+  							Aucun commentaire / No comments
 						<% end %>
 					</div>
 					<div>
