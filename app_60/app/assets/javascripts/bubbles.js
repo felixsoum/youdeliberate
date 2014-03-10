@@ -99,7 +99,7 @@ function drawBubbles(){
 		  .ease("bounce");
 
 	  //Text on bubbles
-	  /*
+	  
 	  node.append("text")
 		  .attr("dy", ".3em")
 		  .style("text-anchor", "middle")
@@ -109,9 +109,9 @@ function drawBubbles(){
 		  .transition()
 		  .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
 		  .style("opacity",1)
-		  .duration(2000)
+		  .duration(3000)
 		  .ease("bounce");
-	  */
+	  
 			
 	});		
 }
@@ -128,8 +128,14 @@ function transitionBubbles(){
 		  	 return d.r; 
 		  	 })
 		  .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-		  .duration(1000)
+		  .duration(1000);
 
+	d3.selectAll("text")
+	.data(bubble.nodes(classes(root))
+	  	.filter(function(d) { return !d.children; }))
+		.transition()
+		  .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+		  .duration(1000);
 	});	
 }
 
