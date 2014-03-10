@@ -42,7 +42,7 @@ module NarrativesHelper
   end
 
   def get_comments_for_narrative narrative_id
-    NComment.where(narrative_id: narrative_id)
+    NComment.where(narrative_id: narrative_id).order("created_at DESC")
   end
 
   def get_language_name language_id
