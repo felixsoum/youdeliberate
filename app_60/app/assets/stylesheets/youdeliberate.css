@@ -2,7 +2,7 @@
   text-align: center;
 }
 #content-container{
-	width: 1300px;
+	width: 1350px;
 }
 #sunburst-info{
 	text-align:center;
@@ -29,7 +29,7 @@ svg.bubble{
 }
 #bubbles{
 	position:relative;
-	height:623px;
+	height:618px;
 	width:750px;
 }
 #sunburst-svg

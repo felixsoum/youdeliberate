@@ -84,8 +84,8 @@ function drawBubbles(){
 		  //.on("mouseover",function(d){d3.select(this).style("fill",function(d) { return getMouseOverColor(d.category); })})
 		  //.on("mouseout",function(d){d3.select(this).style("fill" function(d) { return getCategoryColor(d.category); })})
 		  //For outline selection color
-		  .on("mouseover",function(d){d3.select(this).style("stroke",function(d) { d3.select(this).style("opacity",0.5); return getMouseOverColor(d.category);  })})
-		  .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { d3.select(this).style("opacity",1); return getCategoryColor(d.category);  })})
+		  .on("mouseover",function(d){d3.select(this).style("stroke",function(d) { d3.select(this).style("opacity",0.5); highlightMatchingSunburstSegment(d3.select(this)); return getMouseOverColor(d.category);  })})
+		  .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { d3.select(this).style("opacity",1); deHighlightSunburstSegments(); return getCategoryColor(d.category);  })})
 		  .on("click",function(d){$.fancybox({type: 'iframe',href: Routes.play_narrative_path(d.n_id)});}) //Requests single-narrative view with appropriate ID
 		  .transition()
 		  .attr("r", function(d) {
@@ -99,7 +99,7 @@ function drawBubbles(){
 		  .ease("bounce");
 
 	  //Text on bubbles
-	  /*
+	  
 	  node.append("text")
 		  .attr("dy", ".3em")
 		  .style("text-anchor", "middle")
@@ -109,9 +109,9 @@ function drawBubbles(){
 		  .transition()
 		  .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
 		  .style("opacity",1)
-		  .duration(2000)
+		  .duration(3000)
 		  .ease("bounce");
-	  */
+	  
 			
 	});		
 }
@@ -128,8 +128,14 @@ function transitionBubbles(){
 		  	 return d.r; 
 		  	 })
 		  .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-		  .duration(1000)
+		  .duration(1000);
 
+	d3.selectAll("text")
+	.data(bubble.nodes(classes(root))
+	  	.filter(function(d) { return !d.children; }))
+		.transition()
+		  .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+		  .duration(1000);
 	});	
 }
 

@@ -16,7 +16,7 @@
 
             <li>
               <%= link_to about_path, :class => 'fancybox', :'data-fancybox-type' => 'iframe' do %>
-                Au Sujet <span class="glyphicon glyphicon-flash"></span> About
+                À Propos <span class="glyphicon glyphicon-flash"></span> About
               <% end %>
             </li>
 
@@ -89,7 +89,7 @@
 					<td class='button'>
 						<div class="btn-group btn-group-justified" id="tooltip-filter">
 						  <div class="btn-group"><button type="button" class="btn btn-default btn-lg lang-select" onclick="filterLanguageToggle(this)" id="filter-french"  data-toggle="tooltip" data-placement="top" title="Francais / French"><%= image_tag("FR-24.png", id:"gb-flag") %></button></div>
-						  <div class="btn-group"><button type="button" class="btn btn-default btn-lg lang-select" onclick="filterLanguageToggle(this)" id="filter-english"  data-toggle="tooltip" data-placement="top" title="Anlais / English"><%= image_tag("EN-24.png", id:"gb-flag") %></button></div>
+						  <div class="btn-group"><button type="button" class="btn btn-default btn-lg lang-select" onclick="filterLanguageToggle(this)" id="filter-english"  data-toggle="tooltip" data-placement="top" title="Anglais / English"><%= image_tag("EN-24.png", id:"gb-flag") %></button></div>
 						  <div class="btn-group"><button type="button" class="btn btn-primary btn-lg lang-select" onclick="filterLanguageToggle(this)" id="filter-bilingual"  data-toggle="tooltip" data-placement="top" title="Francais & Anglais / French & English"><%= image_tag("FR-EN-24.png", id:"frgb-flag") %></button></div>
 						</div>	
 					</td>
@@ -105,19 +105,19 @@
 						<td>
 							<span class="label label-against">&nbsp;&nbsp;</span>
 						</td>
-						<td>&nbsp;Against</td>
+						<td>&nbsp;Contre&nbsp;<span class="glyphicon glyphicon-flash"></span>&nbsp;Against </td>
 					</tr>
 					<tr>
 						<td>
 							<span class="label label-for">&nbsp;&nbsp;</span>
 						</td>
-						<td>&nbsp;For</td>
+						<td>&nbsp;Pour&nbsp;<span class="glyphicon glyphicon-flash"></span>&nbsp;For</td>
 					</tr>
 					<tr>
 						<td>
 							<span class="label label-ambivalent">&nbsp;&nbsp;</span>
 						</td>
-						<td>&nbsp;Ambivalent</td>
+						<td>&nbsp;Ambivalent(e)&nbsp;<span class="glyphicon glyphicon-flash"></span>&nbsp;Ambivalent</td>
 					</tr>
 				</table>
 			</div>						
@@ -145,7 +145,6 @@
   <%= javascript_include_tag "functions" %>
   <%= javascript_include_tag "bubbles" %>
   <%= javascript_include_tag "sunburst" %>
-  <%= javascript_include_tag "bootstrap-tooltip" %>
 <% end %>
 <script type="text/javascript">
 	jQuery(document).ready(function() {

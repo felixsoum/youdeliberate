@@ -39,7 +39,6 @@ function onLoadAnim() {
         .data(partition.value(value).nodes)
       .transition()
         .duration(2700)
-        //.delay(1000)
         .attrTween("d", arcTween);
 }
 
@@ -52,6 +51,7 @@ function getData() {
         .attr("display", function(d) { return d.depth ? null : "none"; }) // hide inner ring
         .attr("d", arc)
         .attr("categoryID",function(d){ return d.category_id; })
+        .attr("class","sunburst-path")
         .style("opacity",function(d){ return getSunburstSegmentOpacity(d); })
         .style("stroke", function(d) { return getArcMouseOutColor(d.category_id); })
         .style("stroke-width","2px")
@@ -96,7 +96,7 @@ function getArcMouseOutColor(n){
   //return "#4CBB17" //Kelly Green
   return "#fff"
 }
-d3.select(self.frameElement).style("height", height + "px");
+//d3.select(self.frameElement).style("height", height + "px");
 
 // jQuery.ready() with turbolinks. Read more: http://stackoverflow.com/a/17600195
 var init = function() {
