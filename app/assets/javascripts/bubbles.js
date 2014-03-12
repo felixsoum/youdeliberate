@@ -5,6 +5,7 @@
 var bubbleDataSource = '/narratives.json'; //data from DB
 
 var diameter = 0; //initialize global var
+var dateHash = {}; //I have no idea what I'm doing
 var bubble; //lord help us global variables
 
 //Define sort criteria
@@ -145,11 +146,26 @@ function classes(root) {
 
   function recurse(name, node) {
     if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });
-    else classes.push({packageName: name, className: node.name, value: getValueBySortCriteria(node), agree : node.numberAgree, disagree: node.numberDisagree, views: node.numberViews, category: node.category, n_id: node.id, language: node.language });
+    else classes.push({packageName: name, className: node.name, value: getValueBySortCriteria(node), agree : node.numberAgree, disagree: node.numberDisagree, views: node.numberViews, category: node.category, n_id: node.id, date: node.uploadTime, language: node.language });
   }
 
   recurse(null, root);
+  populateDateHash(classes);
   return {children: classes};
+}
+
+function populateDateHash(c){
+
+	var dates = [];
+	var date;
+	for(i=0; i<c.length; i++){
+		date = new Date(c[i].date);
+		dates.push(date.getTime());
+	}
+	dates.sort(function(a,b){return a-b});
+	for(i=0; i<dates.length; i++){
+		dateHash[dates[i]]=i;
+	}
 }
 
 function getValueBySortCriteria(n){
@@ -165,7 +181,7 @@ function getValueBySortCriteria(n){
 		break;
 		case sortCriteria.SORTBYTIME:
 		var date = new Date(n.uploadTime);
-		return date.getTime() == 0 ? minimumCircleSize : date.getTime();
+		return date.getTime() == 0 ? minimumCircleSize : dateHash[date.getTime()] //wtf am I writing;
 		break;
 		case sortCriteria.SORTBYAGREES:
 		return n.numberAgree == 0 ? minimumCircleSize : n.numberAgree;
