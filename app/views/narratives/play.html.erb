@@ -1,16 +1,37 @@
-<!DOCTYPE html>
-  	<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  	<%= javascript_include_tag "jquery.jplayer.min" %>
+<% content_for(:head) do %>
+	<%= javascript_include_tag "jquery.jplayer.min" %>
 	<%= javascript_include_tag "jplayer.playlist.min" %>
-	<%= stylesheet_link_tag 'jplayer.blue.monday.css' %>
-	
-  <%= csrf_meta_tags %>
-  <!--[if lt IE 9]>
-    <%= javascript_include_tag 'html5shiv-printshiv' %>
-  <![endif]-->
-  <%= respond_include_tags %>
-<body>
+	<%= stylesheet_link_tag "jplayer.blue.monday" %>
+  <script type="text/javascript">
+//<![CDATA[
+
+var playlistDetails = <%= @audio_json %>
+
+$(document).ready(function(){
+
+  new jPlayerPlaylist({
+    jPlayer: "#jquery_jplayer_1",
+    cssSelectorAncestor: "#jp_container_1"
+  },   playlistDetails, 
+    {
+    playlistOptions: {
+        autoPlay: false
+    },
+    swfPath: "js",
+    //solution: "flash, html",
+    solution: "html",
+    supplied: "webmv, ogv, m4v, oga, mp3",
+    smoothPlayBar: false,
+    keyEnabled: true,
+    audioFullScreen: true
+  });
+
+  jQuery('.btn').tooltip(); 
+});
+//]]>
+</script>
+<% end %>
+
 <div>
 	<div id="narrative" align="center">
 		<div class="page-header"><h1><small>Narrative name: <%= @narrative.nar_name %></small></h1></div>
@@ -113,34 +134,3 @@
 		<span><b>Crée/Created:</b> <%= @narrative.create_time %></span>
 	</div>	
 </div>
-
-<script type="text/javascript">
-//<![CDATA[
-
-var playlistDetails = <%= @audio_json %>
-
-$(document).ready(function(){
-
-	new jPlayerPlaylist({
-		jPlayer: "#jquery_jplayer_1",
-		cssSelectorAncestor: "#jp_container_1"
-	},	 playlistDetails,	
-		{
-		playlistOptions: {
-		    autoPlay: false
-		},
-		swfPath: "js",
-		//solution: "flash, html",
-		solution: "html",
-		supplied: "webmv, ogv, m4v, oga, mp3",
-		smoothPlayBar: false,
-		keyEnabled: true,
-		audioFullScreen: true
-	});
-
-	jQuery('.btn').tooltip(); 
-});
-//]]>
-</script>
-
-
