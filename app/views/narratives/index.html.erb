@@ -1,3 +1,4 @@
+
     <!-- <div class="navbar navbar-inverse navbar-fixed-top" role="navigation"> -->
     <div class="navbar navbar-default navbar-static-top" role="navigation">
       <div class="container">
@@ -10,6 +11,7 @@
             <li><a class="fancybox" href="">Récits <span class="glyphicon glyphicon-flash"></span> Narratives</a></li>
             <li><a class="fancybox" href="">Tableau de Bord <span class="glyphicon glyphicon-flash"></span> Dashboard</a></li>
             <li class="list-spacer">&nbsp;</li>
+            <li class="list-spacer" align="right"><%= link_to "Sign out", signout_path, method: "delete" %></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -66,8 +68,8 @@
 				        <td><%= f.select :language_id, Language.all.collect {|p| [ p.language_name, p.id ] } %></td>
 				        <td><%= f.select :category_id, Category.all.collect {|p| [ p.category_name, p.id ] } %></td>
 				        <td><%= narrative.num_of_view %></td>
-				        <td><%= f.number_field :num_of_agree %></td>
-				        <td><%= f.number_field :num_of_disagree %></td>
+				        <td><%= narrative.num_of_agree %></td>
+				        <td><%= narrative.num_of_disagree %></td>
 				        <td><%= narrative.num_of_flagged %></td>
 				        <td><%= narrative.create_time.to_formatted_s(:db) %></td>
 				       	<td><a href="#" class="play-button" data-narrative-id="<%= narrative.id %>">Play</a></td>

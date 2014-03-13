@@ -1,7 +1,8 @@
 class NarrativesController < ApplicationController
   include NarrativesHelper
   before_action :set_narrative, only: [:show, :edit, :update, :destroy]
-
+  before_filter :require_login, :except => :play, :unless => :format_json?
+  
   # GET /narratives
   # GET /narratives.json
   def index
@@ -42,20 +43,15 @@ class NarrativesController < ApplicationController
     selected_narrative_id = params[:id]
     @narrative = Narrative.find(selected_narrative_id)
     images = Image.where(narrative_id: selected_narrative_id)
-    root = "http://localhost:3000/"
-    default_image_path = Image.where(narrative_id: selected_narrative_id).pluck(:image_path).first || "narratives/default_narrative_image.jpg"
-
+    default_image_path = images.first.try(:image_path) || "default_narrative_image.jpg"
     audio_array = []
     Audio.where(narrative_id: selected_narrative_id).each do |audio|
-      image_path = Image.where(narrative_id: selected_narrative_id).where("image_number <= ?", audio.audio_number).pluck(:image_path).last || default_image_path
-      audio_array.push(
-        #mp3: Rails.public_path + audio.audio_path,
-        mp3: root + audio.audio_path,
-        poster: root + image_path      
-      )
+      image_path = images.where("image_number <= ?", audio.audio_number).last.try(:image_path) || default_image_path
+      audio_array.push(mp3: root_url + audio.audio_path, poster: root_url + image_path)
     end
     @audio_json = audio_array.to_json.html_safe
     @comments = get_comments_for_narrative(selected_narrative_id)
+    @audio_count = audio_array.size
   end
 
   # POST narratives/1/comment
@@ -135,4 +131,13 @@ class NarrativesController < ApplicationController
       end
     end
 
+    def require_login
+      unless signed_in?
+        redirect_to signin_path
+      end
+    end
+    
+    def format_json?
+      request.format.json?
+    end
 end
