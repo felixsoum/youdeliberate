@@ -52,6 +52,7 @@ class NarrativesController < ApplicationController
     @audio_json = audio_array.to_json.html_safe
     @comments = get_comments_for_narrative(selected_narrative_id)
     @audio_count = audio_array.size
+    @share_link = share_narrative_url params[:id].strip
   end
 
   # POST narratives/1/comment
