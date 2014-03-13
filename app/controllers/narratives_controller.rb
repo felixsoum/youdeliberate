@@ -50,6 +50,7 @@ class NarrativesController < ApplicationController
     end
     @audio_json = audio_array.to_json.html_safe
     @comments = get_comments_for_narrative(selected_narrative_id)
+    @audio_count = audio_array.size
   end
 
   # POST narratives/1/comment

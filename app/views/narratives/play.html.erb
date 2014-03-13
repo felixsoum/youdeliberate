@@ -5,26 +5,31 @@
   <script type="text/javascript">
 //<![CDATA[
 
-var playlistDetails = <%= @audio_json %>
+var playlistDetails = <%= @audio_json %>;
 
 $(document).ready(function(){
-
-  new jPlayerPlaylist({
+  var currentTrack = $("#jp-current-track");
+  var myPlaylist = new jPlayerPlaylist({
     jPlayer: "#jquery_jplayer_1",
     cssSelectorAncestor: "#jp_container_1"
-  },   playlistDetails, 
-    {
-    playlistOptions: {
-        autoPlay: false
     },
-    swfPath: "js",
-    //solution: "flash, html",
-    solution: "html",
-    supplied: "webmv, ogv, m4v, oga, mp3",
-    smoothPlayBar: false,
-    keyEnabled: true,
-    audioFullScreen: true
-  });
+    playlistDetails,{
+      playlistOptions: {
+          autoPlay: false
+      },
+      swfPath: "js",
+      //solution: "flash, html",
+      solution: "html",
+      supplied: "webmv, ogv, m4v, oga, mp3",
+      smoothPlayBar: false,
+      keyEnabled: true,
+      audioFullScreen: true,
+      play: setTrackId
+    });
+
+  function setTrackId(e) {
+    currentTrack.text(myPlaylist.current + 1);
+  }
 
   jQuery('.btn').tooltip(); 
 });
@@ -36,53 +41,7 @@ $(document).ready(function(){
 	<div id="narrative" align="center">
 		<div class="page-header"><h1><small>Narrative name: <%= @narrative.nar_name %></small></h1></div>
 		<div data-id="media_element">
-				<div id="jp_container_1" class="jp-video jp-video-270p">
-				<div class="jp-type-playlist">
-					<div id="jquery_jplayer_1" class="jp-jplayer"></div>
-					<div class="jp-gui">
-						<div class="jp-video-play">
-							<a href="javascript:;" class="jp-video-play-icon" tabindex="1">play</a>
-						</div>
-						<div class="jp-interface">
-							<div class="jp-progress">
-								<div class="jp-seek-bar" align="left">
-									<div class="jp-play-bar"></div>
-								</div>
-							</div>
-							<div class="jp-current-time"></div>
-							<div class="jp-duration"></div>
-							<div class="jp-controls-holder">
-								<ul class="jp-controls">
-									<li><a href="javascript:;" class="jp-previous" tabindex="1">previous</a></li>
-									<li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
-									<li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
-									<li><a href="javascript:;" class="jp-next" tabindex="1">next</a></li>
-									<li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a></li>
-									<li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>
-								</ul>
-								<div class="jp-volume-bar" align="left">
-									<div class="jp-volume-bar-value"></div>
-								</div>
-							</div>
-							<div class="jp-title">
-								<ul>
-									<li></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="jp-playlist" style="display:none;">
-						<ul>
-							<!-- The method Playlist.displayPlaylist() uses this unordered list -->
-							<li></li>
-						</ul>
-					</div>
-					<div class="jp-no-solution">
-						<span>Update Required</span>
-						To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
-					</div>
-				</div>
-			</div>
+      <%= render "jp" %>
 		</div>
 		</br>
 		<div class="btn-group" id="single-view-tooltip">
