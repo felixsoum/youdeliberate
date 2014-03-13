@@ -13,7 +13,9 @@ App60::Application.routes.draw do
   post 'narratives/:id/comment/', to: 'narratives#comment', as: 'comment_add'
   post 'admin/upload', as: 'upload_narrative'
   resources :narratives
- 
+  resources :sessions, only: [:new, :create, :destroy]
+  get '/signin',  to: 'sessions#new'
+  delete '/signout', to: 'sessions#destroy' 
 	
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

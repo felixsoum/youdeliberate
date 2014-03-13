@@ -1,7 +1,8 @@
 class NarrativesController < ApplicationController
   include NarrativesHelper
   before_action :set_narrative, only: [:show, :edit, :update, :destroy]
-
+  before_filter :require_login, :except => :play, :unless => :format_json?
+  
   # GET /narratives
   # GET /narratives.json
   def index
@@ -135,4 +136,13 @@ class NarrativesController < ApplicationController
       end
     end
 
+    def require_login
+      unless signed_in?
+        redirect_to signin_path
+      end
+    end
+    
+    def format_json?
+      request.format.json?
+    end
 end
