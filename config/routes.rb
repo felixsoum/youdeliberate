@@ -12,6 +12,8 @@ App60::Application.routes.draw do
   get 'narratives/:id/play', to: 'narratives#play', as: 'play_narrative'
   post 'narratives/:id/comment/', to: 'narratives#comment', as: 'comment_add'
   post 'narratives/:id/flag/', to: 'narratives#flag', as: 'increment_flag'
+  post 'narratives/:id/agree', to: 'narratives#agree', as: 'agree_with_narrative'
+  post 'narratives/:id/disagree', to: 'narratives#disagree', as: 'disagree_with_narrative'
   post 'admin/upload', as: 'upload_narrative'
   resources :narratives
   resources :sessions, only: [:new, :create, :destroy]

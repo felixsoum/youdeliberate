@@ -1,7 +1,7 @@
 class NarrativesController < ApplicationController
   include NarrativesHelper
   before_action :set_narrative, only: [:show, :edit, :update, :destroy]
-  before_filter :require_login, :except => [:play, :comment, :flag], :unless => :format_json?
+  before_filter :require_login, :except => [:play, :comment, :flag, :agree, :disagree], :unless => :format_json?
   
   # GET /narratives
   # GET /narratives.json
@@ -69,6 +69,20 @@ class NarrativesController < ApplicationController
     flag = @narrative.num_of_flagged + 1
     @narrative.update(num_of_flagged: flag)
     FlagMailer.flag_reason_email(narrative_id, params[:flag]).deliver
+    redirect_to(:action => "play", :id => narrative_id)
+  end
+  
+  # POST narratives/1/agree
+  def agree
+    narrative_id = params[:id]
+    Narrative.increment_counter(:num_of_agree, narrative_id)
+    redirect_to(:action => "play", :id => narrative_id)
+  end
+  
+  # POST narratives/1/disagree
+  def disagree
+    narrative_id = params[:id]
+    Narrative.increment_counter(:num_of_disagree, narrative_id)
     redirect_to(:action => "play", :id => narrative_id)
   end
   
