@@ -37,9 +37,12 @@ window.paginate = (n) ->
       if leftmostTrack < audioCount - maxPagination + 1
         leftmostTrack++
     else
+      # Convert to Number
       currentTrack = +n
-      if currentTrack > leftmostTrack + maxPagination - 1
-        leftmostTrack++
+      # Bound right
+      leftmostTrack = currentTrack - maxPagination + 1 if currentTrack > leftmostTrack + maxPagination - 1
+      # Bound left
+      leftmostTrack = currentTrack if currentTrack < leftmostTrack
 
   # Left button
   leftAttr = if leftmostTrack is 1 then " class=\"disabled\"" else ""
