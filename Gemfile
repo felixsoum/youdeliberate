@@ -84,4 +84,4 @@ gem 'fancybox2-rails', '~> 0.2.8'
 gem 'bootstrap-sass', '~> 3.1.1'
 
 # use bcrypt-ruby to encrypt the admin's password 
-gem 'bcrypt'
+gem 'bcrypt-ruby'
