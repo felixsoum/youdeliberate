@@ -37,15 +37,10 @@ class NarrativesControllerTest < ActionController::TestCase
 
   test "Should create comment for specified narrative" do
     assert_difference('NComment.where(narrative_id: @narrative.id).count') do
-      post :comment, id: @narrative.id, comment: "I hate you and your goddamned opinion!"
+      post :comment, :format => 'js', id: @narrative.id, user_submitted_comment:  "I hate you and your goddamned opinion!"
     end
   end
   
-  test "Creating a comment should redirect to that single narrative view" do
-    post :comment, id: @narrative.id, comment: "I hate you and your goddamned opinion!"
-    assert_redirected_to play_narrative_path(@narrative.id)
-  end
-
   test "Should have a route to edit a narrative" do
     get :edit, id: @narrative
     assert_response :success

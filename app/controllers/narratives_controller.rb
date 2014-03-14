@@ -58,8 +58,11 @@ class NarrativesController < ApplicationController
   # POST narratives/1/comment
   def comment
     narrative_id = params[:id]
-    NComment.create(content: params[:comment], narrative_id: narrative_id)
-    redirect_to(:action => "play", :id => narrative_id)
+    NComment.create(content: params[:user_submitted_comment], narrative_id: narrative_id)
+    @comments = get_comments_for_narrative(narrative_id)
+    respond_to do |format|
+      format.js
+    end
   end
 
   # POST narratives/1/flag

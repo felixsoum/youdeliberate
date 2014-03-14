@@ -57,9 +57,9 @@ $(document).ready(function(){
 	</div>
 	<div class="col-lg-6" id="narrative">
 			<div class="form-inline">
-				<%= form_tag(comment_add_path(@narrative.id), method: "post") do %>
+				<%= form_tag(comment_add_path(@narrative.id), method: "post", remote: true) do %>
 				<div class="input-group">
-					<%= text_field_tag(:comment, nil, placeholder: "Votre commentaire / Your comment", class: "form-control") %>
+					<%= text_field_tag(:user_submitted_comment, nil, placeholder: "Votre commentaire / Your comment", class: "form-control") %>
 					<span class="input-group-btn">
 						<%= button_tag(type: "submit", class: "btn btn-default") do %>
 							<span class="glyphicon glyphicon-comment"></span>
@@ -72,7 +72,9 @@ $(document).ready(function(){
 
 		</div>
 	</div>
-	<%= render "comments"%>
+	<div id="comments-container">
+		<%= render "comments"%>
+	</div>
 	<div>
 		<span><b>Crée/Created:</b> <%= @narrative.create_time %></span>
 	</div>
