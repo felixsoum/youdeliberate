@@ -6,6 +6,7 @@
 audioCount = 1
 currentTrack = 1
 leftmostTrack = 1
+maxPagination = 5
 paginationContainer =
 "
 ░░░░░▄▄▄▄▀▀▀▀▀▀▀▀▄▄▄▄▄▄░░░░░░░
@@ -26,7 +27,23 @@ paginationContainer =
 "
 
 paginate = (n) ->
-  paginationContainer.replaceWith("<h2>Foobar</h2>")
+  switch n
+    when '«'
+      if leftmostTrack > 1
+        leftmostTrack--
+    when '»'
+      if leftmostTrack < audioCount - maxPagination + 1
+        leftmostTrack++
+    else alert n
+
+  paginationText = "<li id=\"pagination-control-left\"><a href=\"#\">«</a></li>"
+  for index in [leftmostTrack..(leftmostTrack + maxPagination - 1)]
+    paginationText += "<li"
+    if index is currentTrack
+      paginationText += " class=\"active\""
+    paginationText += "><a href=\"#\">#{index}</a></li>"
+  paginationText += "<li id=\"pagination-control-right\"><a href=\"#\">»</a></li>"
+  paginationContainer.html(paginationText)
   addClickListeners()
 
 addClickListeners = ->
