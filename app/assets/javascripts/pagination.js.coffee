@@ -7,6 +7,8 @@ audioCount = 1
 currentTrack = 1
 leftmostTrack = 1
 maxPagination = 5
+
+# Hack solution: http://stackoverflow.com/a/12319131
 paginationContainer =
 "
 ░░░░░▄▄▄▄▀▀▀▀▀▀▀▀▄▄▄▄▄▄░░░░░░░
@@ -26,7 +28,7 @@ paginationContainer =
 ░░░░░░░░░░░░░░▀▄▄▄▄▄░░░░░░░░█░░
 "
 
-paginate = (n) ->
+window.paginate = (n) ->
   switch n
     when '«'
       if leftmostTrack > 1
@@ -34,22 +36,32 @@ paginate = (n) ->
     when '»'
       if leftmostTrack < audioCount - maxPagination + 1
         leftmostTrack++
-    else alert n
+    else
+      currentTrack = +n
+      if currentTrack > leftmostTrack + maxPagination - 1
+        leftmostTrack++
 
-  paginationText = "<li id=\"pagination-control-left\"><a href=\"#\">«</a></li>"
+  # Left button
+  leftAttr = if leftmostTrack is 1 then " class=\"disabled\"" else ""
+  paginationText = "<li#{leftAttr}><a href=\"#\">«</a></li>"
+
+  # Page buttons
   for index in [leftmostTrack..(leftmostTrack + maxPagination - 1)]
-    paginationText += "<li"
-    if index is currentTrack
-      paginationText += " class=\"active\""
-    paginationText += "><a href=\"#\">#{index}</a></li>"
-  paginationText += "<li id=\"pagination-control-right\"><a href=\"#\">»</a></li>"
-  paginationContainer.html(paginationText)
-  addClickListeners()
+    break if index > audioCount
+    pageAttr = if index is currentTrack then " class=\"active\"" else ""
+    paginationText += "<li#{pageAttr}><a href=\"#\">#{index}</a></li>"
 
-addClickListeners = ->
+  # Right button
+  rightAttr = if leftmostTrack + maxPagination > audioCount then " class=\"disabled\"" else ""
+  paginationText += "<li#{rightAttr}><a href=\"#\">»</a></li>"
+  paginationContainer.html(paginationText)
+
+  # Add click listeners
   $(".pagination.pagination-sm a[href='#']").click (e) ->
     e.preventDefault()
-    paginate($(this).text())
+    trackId = $(this).text()
+    playTrack(trackId)
+    paginate(trackId)
 
 $ ->
   paginationContainer = $(".pagination.pagination-sm")

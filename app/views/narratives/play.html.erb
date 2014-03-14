@@ -5,10 +5,10 @@
   <script type="text/javascript">
   //<![CDATA[
   var playlistDetails = <%= @audio_json %>;
-
+  var myPlaylist;
 	$(document).ready(function(){
 	  var currentTrack = $("#jp-current-track");
-	  var myPlaylist = new jPlayerPlaylist({
+	  myPlaylist = new jPlayerPlaylist({
 	    jPlayer: "#jquery_jplayer_1",
 	    cssSelectorAncestor: "#jp_container_1"
 	    },
@@ -27,12 +27,17 @@
 	    });
 
 	  function setTrackId(e) {
-	    currentTrack.text(myPlaylist.current + 1);
+	  	var trackId = myPlaylist.current + 1;
+	    currentTrack.text(trackId);
+	    window.paginate(trackId)
 	  }
 
 	  jQuery('.btn').tooltip(); 
 	});
 	//]]>
+	function playTrack(n) {
+		myPlaylist.play(n - 1);
+	}
 	</script>
 <% end %>
 
