@@ -146,10 +146,14 @@
   <%= javascript_include_tag "bubbles" %>
   <%= javascript_include_tag "sunburst" %>
 <% end %>
+
 <script type="text/javascript">
 	jQuery(document).ready(function() {
 	   jQuery('#tooltip-sort .btn').tooltip();
 	   jQuery('#tooltip-filter .btn').tooltip({container:'body'});
 	   jQuery('.fancybox').tooltip({container:'body'});
+<% if params[:id] %>
+		window.playNarrative(<%= params[:id] %>);
+<% end %>
 	});
 </script>

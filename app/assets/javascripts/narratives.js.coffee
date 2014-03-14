@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 # Unobtrusive JavaScript: http://guides.rubyonrails.org/working_with_javascript_in_rails.html
 
-playNarrative = (id) ->
+window.playNarrative = (id) ->
   $.fancybox({type: 'iframe', href: Routes.play_narrative_path(id)})
 
 $ ->
@@ -11,4 +11,4 @@ $ ->
     e.preventDefault()
  
     narrativeId = $(this).data("narrative-id")
-    playNarrative(narrativeId)
+    window.playNarrative(narrativeId)
