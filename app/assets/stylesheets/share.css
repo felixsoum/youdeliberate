@@ -1,0 +1,5 @@
+input.form-control[readonly="readonly"]{
+	text-decoration: none;
+	cursor: auto;
+	background: white;
+}

@@ -44,6 +44,13 @@ $(document).ready(function(){
       <%= render "jp" %>
 		</div>
 		</br>
+
+		<div class="input-group">
+				<span class="input-group-addon"><span class="glyphicon glyphicon-link"></span></span>				
+				<input type="text" onClick="this.select();" readonly="readonly" value="<%= @share_link %>" class="form-control" placeholder="">
+		</div>		
+
+		</br>
 		<div class="btn-group" id="single-view-tooltip">
 		  <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Nombre de d'accord / Number of Agrees"><span class="glyphicon glyphicon-thumbs-up">&nbsp<%= @narrative.num_of_disagree %></span></button>
 		  <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Nombre de désaccord / Number of Disagrees" ><span class="glyphicon glyphicon-thumbs-down">&nbsp<%= @narrative.num_of_agree %></span></button>
@@ -63,10 +70,7 @@ $(document).ready(function(){
 					</span>
 					</div>
 				<% end %>
-				
-			<%= @share_link %>
-
-		</div>
+			</div>
 	</div>
 	<div class="panel panel-default">
 		  <div class="panel-heading"><font size="4">Comments</font></div>
