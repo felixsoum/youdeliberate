@@ -68,32 +68,7 @@ $(document).ready(function(){
 
 		</div>
 	</div>
-	<div class="panel panel-default">
-		  <div class="panel-heading"><font size="4">Comments</font></div>
-		  <div class="panel-body">
-		    <table>
-			  <tbody>
-				  <tr>
-					<td>
-						<div data-id="comments">
-							<% if @comments.each do |comment| %>
-								<p style="margin:0;">
-								<%= comment.content%></p> 
-								<p style="padding-left:1em;margin:0;">
-								<font size="1">at <%= comment.created_at%></font>
-								</p>
-							<% end.empty? %>
-	  							Be the first to comment!
-	  							
-							<% end %>		
-							
-						</div>								
-					</td>				
-				  </tr>
-			  </tbody>
-			</table>
-		  </div>
-	</div>	
+	<%= render "comments"%>
 	<div>
 		<span><b>Crée/Created:</b> <%= @narrative.create_time %></span>
 	</div>
