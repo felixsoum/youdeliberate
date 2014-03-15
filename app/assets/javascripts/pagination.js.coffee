@@ -6,7 +6,7 @@
 audioCount = 1
 currentTrack = 1
 leftmostTrack = 1
-maxPagination = 5
+maxPagination = 10
 
 # Hack solution: http://stackoverflow.com/a/12319131
 paginationContainer =
@@ -44,9 +44,11 @@ window.paginate = (n) ->
       # Bound left
       leftmostTrack = currentTrack if currentTrack < leftmostTrack
 
+  # Append pagination html
+  paginationText = ""
+
   # Left button
-  leftAttr = if leftmostTrack is 1 then " class=\"disabled\"" else ""
-  paginationText = "<li#{leftAttr}><a href=\"#\">«</a></li>"
+  paginationText += "<li><a href=\"#\">«</a></li>" unless leftmostTrack is 1
 
   # Page buttons
   for index in [leftmostTrack..(leftmostTrack + maxPagination - 1)]
@@ -55,8 +57,8 @@ window.paginate = (n) ->
     paginationText += "<li#{pageAttr}><a href=\"#\">#{index}</a></li>"
 
   # Right button
-  rightAttr = if leftmostTrack + maxPagination > audioCount then " class=\"disabled\"" else ""
-  paginationText += "<li#{rightAttr}><a href=\"#\">»</a></li>"
+  paginationText += "<li><a href=\"#\">»</a></li>" unless leftmostTrack + maxPagination > audioCount
+  
   paginationContainer.html(paginationText)
 
   # Add click listeners
