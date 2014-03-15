@@ -44,6 +44,13 @@ $(document).ready(function(){
       <%= render "jp" %>
 		</div>
 		</br>
+
+		<div class="input-group">
+				<span class="input-group-addon"><span class="glyphicon glyphicon-link"></span></span>				
+				<input type="text" onClick="this.select();" readonly="readonly" value="<%= @share_link %>" class="form-control" placeholder="">
+		</div>		
+
+		</br>
 		<div class="btn-group" id="single-view-tooltip">
 			<%= button_to agree_with_narrative_path(@narrative.id), {:class=>"btn btn-default", :title=> "Nombre votes en accord / Number of Agrees", :data => { :toggle=>"tooltip", :placement => "top"}} do %>
 				<span class='glyphicon glyphicon-thumbs-up'>&nbsp;<%= @narrative.num_of_agree %></span>
@@ -67,10 +74,7 @@ $(document).ready(function(){
 					</span>
 					</div>
 				<% end %>
-				
-			<%= @share_link %>
-
-		</div>
+			</div>
 	</div>
 	<div id="comments-container">
 		<%= render "comments"%>
