@@ -3,6 +3,7 @@ require 'test_helper'
 class NarrativesControllerTest < ActionController::TestCase
   setup do
     @narrative = narratives(:one)
+    cookies[:user_id] = Admin.take.id
   end
 
   test "Narrative should get index" do
