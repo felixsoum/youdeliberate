@@ -10,7 +10,7 @@ describe("Sunburst stroke color", function() {
   	expect( getArcMouseOutColor(1) == "#fff").toBe(true);
   });
 });
-
+/*
 describe('Sunburst element (using HTML fixtures)', function () {
 
 	beforeEach(function(){
@@ -42,7 +42,7 @@ describe('Sunburst element (using HTML fixtures)', function () {
   	});
 
 });
-
+*/
 //Louis: jasmine-jquery not working? I think there's a problem getting loadFixtures going properly
 /*
 describe('test with jasmine-jquery', function () {
