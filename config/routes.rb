@@ -1,4 +1,5 @@
 App60::Application.routes.draw do
+  # User
   root 'user#index'
   get 'user' => redirect('/')
   get 'user/index' => redirect('/')
@@ -6,19 +7,23 @@ App60::Application.routes.draw do
   get 'user/about', as: 'about'
   get 'user/contact', as: 'contact'
   get 'user/tutorial', as: 'tutorial'
+
+  # Narratives
   get 'sunburst' => 'narratives#sunburst'
-  get 'admin', to: 'narratives#index'  
   get 'narratives/:id/play', to: 'narratives#play', as: 'play_narrative'
   post 'narratives/:id/comment/', to: 'narratives#comment', as: 'comment_add'
   post 'narratives/:id/flag/', to: 'narratives#flag', as: 'increment_flag'
   post 'narratives/:id/agree', to: 'narratives#agree', as: 'agree_with_narrative'
   post 'narratives/:id/disagree', to: 'narratives#disagree', as: 'disagree_with_narrative'
-  post 'admin/upload', as: 'upload_narrative'
-  get 'admin/*any' => redirect('/admin')
   resources :narratives
-  resources :sessions, only: [:new, :create, :destroy]
+  
+  # Admin
+  get 'admin', to: 'narratives#index'
   get 'admin/login',  to: 'sessions#new', as: 'signin'
   delete 'admin/logout', to: 'sessions#destroy', as: 'signout'
+  post 'admin/upload', as: 'upload_narrative'
+  get 'admin/*any' => redirect('/admin')
+  resources :sessions, only: [:new, :create, :destroy]
 	
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

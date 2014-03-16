@@ -33,7 +33,7 @@ group :doc do
 end
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
+gem 'bcrypt-ruby', '~> 3.1.2'
 
 # Use unicorn as the app server
 # gem 'unicorn'
@@ -82,6 +82,3 @@ gem 'fancybox2-rails', '~> 0.2.8'
 
 # Use bootstrap-sass for front-end development
 gem 'bootstrap-sass', '~> 3.1.1'
-
-# use bcrypt-ruby to encrypt the admin's password 
-gem 'bcrypt-ruby'
