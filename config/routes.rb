@@ -5,13 +5,12 @@ App60::Application.routes.draw do
   get 'user/about', as: 'about'
   get 'user/contact', as: 'contact'
   get 'user/tutorial', as: 'tutorial'
-  get 'narratives/narrative'
   get 'sunburst' => 'narratives#sunburst'
-  get 'admin' => redirect('admin/index')
-  get 'admin/index', as: 'index_admin'
+  get 'admin', to: 'narratives#index'  
   get 'narratives/:id/play', to: 'narratives#play', as: 'play_narrative'
   post 'narratives/:id/comment/', to: 'narratives#comment', as: 'comment_add'
   post 'admin/upload', as: 'upload_narrative'
+  get 'admin/*any' => redirect('/admin')
   resources :narratives
  
 	

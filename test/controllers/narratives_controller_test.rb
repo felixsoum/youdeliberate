@@ -5,10 +5,15 @@ class NarrativesControllerTest < ActionController::TestCase
     @narrative = narratives(:one)
   end
 
-  test "Narrative should get index" do
+  test "Accessing Admin Portal should successfully reach the portal's index" do
     get :index
     assert_response :success
     assert_not_nil assigns(:narratives)
+  end
+
+  test "Admin Portal should have a form to upload" do
+    get :index
+    assert_select "form"
   end
 
   test "Narrative should get sunburst" do
