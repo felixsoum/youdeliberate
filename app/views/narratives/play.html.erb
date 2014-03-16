@@ -1,0 +1,88 @@
+<% content_for(:head) do %>
+	<%= javascript_include_tag "jquery.jplayer.min" %>
+	<%= javascript_include_tag "jplayer.playlist.min" %>
+	<%= stylesheet_link_tag "jplayer.blue.monday" %>
+  <script type="text/javascript">
+//<![CDATA[
+
+var playlistDetails = <%= @audio_json %>;
+
+$(document).ready(function(){
+  var currentTrack = $("#jp-current-track");
+  var myPlaylist = new jPlayerPlaylist({
+    jPlayer: "#jquery_jplayer_1",
+    cssSelectorAncestor: "#jp_container_1"
+    },
+    playlistDetails,{
+      playlistOptions: {
+          autoPlay: false
+      },
+      swfPath: "js",
+      //solution: "flash, html",
+      solution: "html",
+      supplied: "webmv, ogv, m4v, oga, mp3",
+      smoothPlayBar: false,
+      keyEnabled: true,
+      audioFullScreen: true,
+      play: setTrackId
+    });
+
+  function setTrackId(e) {
+    currentTrack.text(myPlaylist.current + 1);
+  }
+
+  jQuery('.btn').tooltip(); 
+});
+//]]>
+</script>
+<% end %>
+
+<div>
+	<div id="narrative" align="center">
+		<div class="page-header"><h1><small>Narrative name: <%= @narrative.nar_name %></small></h1></div>
+		<div data-id="media_element">
+      <%= render "jp" %>
+		</div>
+		</br>
+
+		<div class="input-group">
+				<span class="input-group-addon"><span class="glyphicon glyphicon-link"></span></span>				
+				<input type="text" onClick="this.select();" readonly="readonly" value="<%= @share_link %>" class="form-control" placeholder="">
+		</div>		
+
+		</br>
+		<div class="btn-group" id="single-view-tooltip">
+			<%= button_to agree_with_narrative_path(@narrative.id), {:class=>"btn btn-default", :title=> "Nombre votes en accord / Number of Agrees", :data => { :toggle=>"tooltip", :placement => "top"}} do %>
+				<span class='glyphicon glyphicon-thumbs-up'>&nbsp;<%= @narrative.num_of_agree %></span>
+			<%end%>
+			<%= button_to disagree_with_narrative_path(@narrative.id), {:class=>"btn btn-default", :title=> "Nombre de votes en désaccord / Number of Disagrees", :data => { :toggle=>"tooltip", :placement => "top"}} do %>
+				<span class="glyphicon glyphicon-thumbs-down">&nbsp;<%= @narrative.num_of_disagree %></span>
+			<%end%>
+			<a class="btn btn-default" data-toggle="modal" href="#flag-modal" rel="tooltip" data-placement="top" data-original-title="Signaler un recit innaproprier / Flag an inappropriate narrative" ><span class="glyphicon glyphicon-flag">&nbsp;<%= @narrative.num_of_flagged %></span></a>
+			<button type="button" class="btn btn-default" disabled="disabled"><span class="glyphicon glyphicon-eye-open">&nbsp;<%= @narrative.num_of_view %></span></button>
+		</div>
+	</div>
+	<div class="col-lg-6" id="narrative">
+			<div class="form-inline">
+				<%= form_tag(comment_add_path(@narrative.id), method: "post", remote: true) do %>
+				<div class="input-group">
+					<%= text_field_tag(:user_submitted_comment, nil, placeholder: "Votre commentaire / Your comment", class: "form-control") %>
+					<span class="input-group-btn">
+						<%= button_tag(type: "submit", class: "btn btn-default") do %>
+							<span class="glyphicon glyphicon-comment"></span>
+						<% end %>
+					</span>
+					</div>
+				<% end %>
+			</div>
+	</div>
+	<div id="comments-container">
+		<%= render "comments"%>
+	</div>
+	<div>
+		<span><b>Crée/Created:</b> <%= @narrative.create_time %></span>
+	</div>
+	
+	<!-- Popup for flag reason-->
+	<%= render 'flag' %>
+</div>
