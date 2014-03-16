@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+  App60
+</title>
+
+<!-- Google Analytics -->  
+<%= analytics_init :local => Rails.env.development? %>
+
+<!-- Stylesheets -->
+<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+
+<!-- JavaScripts -->
+<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+<%= csrf_meta_tags %>
+<!--[if lt IE 9]>
+<%= javascript_include_tag 'html5shiv-printshiv' %>
+<![endif]-->
+<%= respond_include_tags %>
+<%= yield(:head) %>
+
+</head>
+<body>
+<%= render partial: "shared/flash_messages", flash: flash %> 
+<%= yield %>
+</body>
+</html>
