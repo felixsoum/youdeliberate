@@ -1,0 +1,34 @@
+<div class="col-lg-offset-4 col-lg-4 login-form">
+	<div class="panel panel-primary">
+		<div class="panel-heading login-title"><h4>CONNECTER&nbsp;&nbsp;<span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;SIGN IN</h4></div>
+			<%= form_for(:session, url: sessions_path, :html => {:class => 'form-horizontal'}) do |f| %>
+			    <div class="form-group">
+			        <div class="col-lg-offset-1 col-lg-10">
+			            <!--input type="email" class="form-control" id="inputEmail" placeholder="Email"-->
+			            <%= f.email_field :email, class: 'form-control', placeholder: 'Email' %>
+			        </div>
+			    </div>
+			    <div class="form-group">
+			        <div class="col-lg-offset-1 col-lg-10">
+			            <%= f.password_field :password, class: 'form-control', placeholder: 'Password' %>
+			        </div>
+			    </div>
+			    <div class="form-group">
+			        <div class="col-lg-offset-1 col-lg-10">
+			            <div class="checkbox">
+			                <label><input type="checkbox"> Remember me</label>
+			            </div>
+			        </div>
+			    </div>
+			    <div class="form-group">
+			        <div class="col-lg-offset-1 col-lg-10">
+			            <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
+			        </div>
+			    </div>
+			<% end %>
+		</div>
+	</div>
+</div>
+
+      
+    
