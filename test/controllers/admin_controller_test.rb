@@ -1,15 +1,6 @@
 require 'test_helper'
 
 class AdminControllerTest < ActionController::TestCase
-  test "Accessing Admin Portal should successfully reach the portal's index" do
-    get :index
-    assert_response :success
-  end
-
-  test "Admin Portal should have a form to upload" do
-    get :index
-    assert_select "form"
-  end
 
   test "Should not be able to upload without including a file" do
     post :upload
