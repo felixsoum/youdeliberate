@@ -89,5 +89,17 @@ class NarrativesControllerTest < ActionController::TestCase
       post :disagree, id: @narrative.id, :format => :js
     end
   end
+  
+  test "Undoing agreement with a narrative should decrement num_of_agree" do
+    assert_difference("Narrative.find(@narrative.id).num_of_agree", -1) do
+      post :undo_agree, id: @narrative.id, :format => :js
+    end
+  end
+  
+  test "Undoing disagreement with a narrative should decrement num_of_disagree" do
+    assert_difference("Narrative.find(@narrative.id).num_of_disagree", -1) do
+      post :undo_disagree, id: @narrative.id, :format => :js
+    end
+  end
 
 end

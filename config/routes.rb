@@ -14,7 +14,9 @@ App60::Application.routes.draw do
   post 'narratives/:id/comment/', to: 'narratives#comment', as: 'comment_add'
   post 'narratives/:id/flag/', to: 'narratives#flag', as: 'increment_flag'
   post 'narratives/:id/agree', to: 'narratives#agree', as: 'agree_with_narrative'
+  post 'narratives/:id/undo_agree', to: 'narratives#undo_agree', as: 'undo_agree_with_narrative'
   post 'narratives/:id/disagree', to: 'narratives#disagree', as: 'disagree_with_narrative'
+  post 'narratives/:id/undo_disagree', to: 'narratives#undo_disagree', as: 'undo_disagree_with_narrative'
   resources :narratives
   
   # Admin

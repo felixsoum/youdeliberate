@@ -34,9 +34,15 @@
 
 	  jQuery('.btn').tooltip();
 	  $('#agree-button, #disagree-button').on("click", function() {
-	  	$(this).attr('disabled', true);
+	  	var url = $(this).attr('data-ajax-primary-action');
+	  		  	
+	  	// Swap the actions to allow the user to undo what they've just done.
+	  	$(this).attr('data-ajax-primary-action', $(this).attr('data-ajax-secondary-action'));
+	  	$(this).attr('data-ajax-secondary-action', url);
+	  	
+	  	// Send out request
 	  	$.ajax({
-			url: $(this).attr('data-ajax-path'),
+			url: url,
 			type: 'POST'
 		})
 	  }) 
@@ -64,10 +70,10 @@
 
 		</br>
 		<div class="btn-group" id="single-view-tooltip">
-			<button id="agree-button" type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Nombre votes en accord / Number of Agrees" data-ajax-path="<%= agree_with_narrative_path(@narrative.id) %>">
+			<button id="agree-button" type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Nombre votes en accord / Number of Agrees" data-ajax-primary-action="<%= agree_with_narrative_path(@narrative.id) %>", data-ajax-secondary-action="<%= undo_agree_with_narrative_path(@narrative.id) %>">
 				<span id="num-agree-votes" class="glyphicon glyphicon-thumbs-up">&nbsp;<%= @narrative.num_of_agree %></span>
 			</button>
- 			<button id="disagree-button" type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Nombre de votes en désaccord / Number of Disagrees" data-ajax-path="<%= disagree_with_narrative_path(@narrative.id) %>" >
+ 			<button id="disagree-button" type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Nombre de votes en désaccord / Number of Disagrees" data-ajax-primary-action="<%= disagree_with_narrative_path(@narrative.id) %>", data-ajax-secondary-action="<%= undo_disagree_with_narrative_path(@narrative.id) %>">
  				<span id="num-disagree-votes" class="glyphicon glyphicon-thumbs-down">&nbsp;<%= @narrative.num_of_disagree %></span>
  			</button>
 			<a class="btn btn-default" data-toggle="modal" href="#flag-modal" rel="tooltip" data-placement="top" data-original-title="Signaler un recit innaproprier / Flag an inappropriate narrative" ><span class="glyphicon glyphicon-flag">&nbsp;<%= @narrative.num_of_flagged %></span></a>

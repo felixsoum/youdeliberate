@@ -1,7 +1,7 @@
 class NarrativesController < ApplicationController
   include NarrativesHelper
   before_action :set_narrative, only: [:show, :edit, :update, :destroy]
-  before_filter :require_login, :except => [:play, :comment, :flag, :agree, :disagree], :unless => :format_json?
+  before_filter :require_login, :except => [:play, :comment, :flag, :agree, :disagree, :undo_agree, :undo_disagree], :unless => :format_json?
   
   # GET /narratives
   # GET /narratives.json
@@ -88,6 +88,20 @@ class NarrativesController < ApplicationController
   def disagree
     narrative_id = params[:id]
     Narrative.increment_counter(:num_of_disagree, narrative_id)
+    refresh_narrative_value(Narrative.find(narrative_id).num_of_disagree.to_s, "num-disagree-votes")
+  end
+  
+  # POST narratives/1/undo_agree
+  def undo_agree
+    narrative_id = params[:id]
+    Narrative.decrement_counter(:num_of_agree, narrative_id)
+    refresh_narrative_value(Narrative.find(narrative_id).num_of_agree.to_s, "num-agree-votes")
+  end
+  
+  # POST narratives/1/undo_disagree
+  def undo_disagree
+    narrative_id = params[:id]
+    Narrative.decrement_counter(:num_of_disagree, narrative_id)
     refresh_narrative_value(Narrative.find(narrative_id).num_of_disagree.to_s, "num-disagree-votes")
   end
   
