@@ -79,14 +79,14 @@ class NarrativesController < ApplicationController
   def agree
     narrative_id = params[:id]
     Narrative.increment_counter(:num_of_agree, narrative_id)
-    redirect_to(:action => "play", :id => narrative_id)
+    refresh_narrative_value(Narrative.find(narrative_id).num_of_agree.to_s, "num-agree-votes")
   end
   
   # POST narratives/1/disagree
   def disagree
     narrative_id = params[:id]
     Narrative.increment_counter(:num_of_disagree, narrative_id)
-    redirect_to(:action => "play", :id => narrative_id)
+    refresh_narrative_value(Narrative.find(narrative_id).num_of_disagree.to_s, "num-disagree-votes")
   end
   
   # POST /narratives
@@ -132,6 +132,12 @@ class NarrativesController < ApplicationController
   end
 
   private
+    def refresh_narrative_value update_value, update_id
+      respond_to do |format|
+        format.js { render 'refresh_narrative_value.js.erb', :locals => {:update_value => update_value, :update_id => update_id} }
+      end
+    end
+  
     # Use callbacks to share common setup or constraints between actions.
     def set_narrative
       @narrative = Narrative.find(params[:id])

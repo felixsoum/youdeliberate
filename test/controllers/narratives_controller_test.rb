@@ -80,13 +80,13 @@ class NarrativesControllerTest < ActionController::TestCase
   
   test "Agreeing with a narrative should increment num_of_agree" do
     assert_difference("Narrative.find(@narrative.id).num_of_agree", 1) do
-      post :agree, id: @narrative.id
+      post :agree, id: @narrative.id, :format => :js
     end
   end
   
   test "Disagreeing with a narrative should increment num_of_disagree" do
     assert_difference("Narrative.find(@narrative.id).num_of_disagree", 1) do
-      post :disagree, id: @narrative.id
+      post :disagree, id: @narrative.id, :format => :js
     end
   end
 

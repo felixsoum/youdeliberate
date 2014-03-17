@@ -56,11 +56,11 @@
 
 		</br>
 		<div class="btn-group" id="single-view-tooltip">
-			<%= button_to agree_with_narrative_path(@narrative.id), {:class=>"btn btn-default", :title=> "Nombre votes en accord / Number of Agrees", :data => { :toggle=>"tooltip", :placement => "top"}} do %>
-				<span class='glyphicon glyphicon-thumbs-up'>&nbsp;<%= @narrative.num_of_agree %></span>
+			<%= button_to agree_with_narrative_path(@narrative.id), {:remote => true, :class=>"btn btn-default", :title=> "Nombre votes en accord / Number of Agrees", :data => { :toggle=>"tooltip", :placement => "top"}} do %>
+				<span id="num-agree-votes" class='glyphicon glyphicon-thumbs-up'>&nbsp;<%= @narrative.num_of_agree %></span>
 			<%end%>
-			<%= button_to disagree_with_narrative_path(@narrative.id), {:class=>"btn btn-default", :title=> "Nombre de votes en désaccord / Number of Disagrees", :data => { :toggle=>"tooltip", :placement => "top"}} do %>
-				<span class="glyphicon glyphicon-thumbs-down">&nbsp;<%= @narrative.num_of_disagree %></span>
+			<%= button_to disagree_with_narrative_path(@narrative.id), {:remote => true, :class=>"btn btn-default", :title=> "Nombre de votes en désaccord / Number of Disagrees", :data => { :toggle=>"tooltip", :placement => "top"}} do %>
+				<span id="num-disagree-votes" class="glyphicon glyphicon-thumbs-down">&nbsp;<%= @narrative.num_of_disagree %></span>
 			<%end%>
 			<a class="btn btn-default" data-toggle="modal" href="#flag-modal" rel="tooltip" data-placement="top" data-original-title="Signaler un recit innaproprier / Flag an inappropriate narrative" ><span class="glyphicon glyphicon-flag">&nbsp;<%= @narrative.num_of_flagged %></span></a>
 			<button type="button" class="btn btn-default" disabled="disabled"><span class="glyphicon glyphicon-eye-open">&nbsp;<%= @narrative.num_of_view %></span></button>
