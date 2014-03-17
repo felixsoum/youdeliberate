@@ -81,6 +81,7 @@ function drawBubbles(){
 		  .attr("languageID", function(d){return d.language; })
 		  .attr("categoryID", function(d){return d.category; })
 		  .attr("transform", function(d){ return "translate(" + 200 + "," + 200 + ")"; })
+		  .attr("id",function(d){return "narrative"+d.n_id})
 		  //For fill-in selection color
 		  //.on("mouseover",function(d){d3.select(this).style("fill",function(d) { return getMouseOverColor(d.category); })})
 		  //.on("mouseout",function(d){d3.select(this).style("fill" function(d) { return getCategoryColor(d.category); })})
