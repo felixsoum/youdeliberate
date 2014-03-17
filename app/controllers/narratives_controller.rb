@@ -7,7 +7,8 @@ class NarrativesController < ApplicationController
   # GET /narratives.json
   def index
     @narratives = Narrative.all
-    render_to_home(narratives_json(@narratives))
+    published_narratives = Narrative.where(is_published: true)
+    render_to_home(narratives_json(published_narratives))
   end
 
   # GET /narratives/1
@@ -26,7 +27,8 @@ class NarrativesController < ApplicationController
   # GET /sunburst.json
   def sunburst
     @narratives = Narrative.all
-    render_to_home(sunburst_json(@narratives))
+    published_narratives = Narrative.where(is_published: true)
+    render_to_home(sunburst_json(published_narratives))
   end
 
   # GET /narratives/new
@@ -149,7 +151,7 @@ class NarrativesController < ApplicationController
                                         :category_id, :first_image,
                                         :num_of_view, :num_of_agree,
                                         :num_of_disagree, :num_of_flagged,
-                                        :create_time)
+                                        :create_time, :is_published)
     end
 
     def render_after_fail format, act

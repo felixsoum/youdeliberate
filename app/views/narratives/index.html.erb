@@ -56,6 +56,7 @@
 				      <th>Disagree #</th>
 				      <th>Flagged #</th>
 				      <th>Create Time</th>
+				      <th>Published</th>
 				      <th></th>
 				    </tr>
 				  </thead>
@@ -72,6 +73,7 @@
 				        <td><%= narrative.num_of_disagree %></td>
 				        <td><%= narrative.num_of_flagged %></td>
 				        <td><%= narrative.create_time.to_formatted_s(:db) %></td>
+				        <td><%= f.check_box :is_published %></td>
 				       	<td><a href="#" class="play-button" data-narrative-id="<%= narrative.id %>">Play</a></td>
 				       	<td><%= f.submit "Save", :class => 'save-button'%></td>
 				        <td><%= link_to 'Delete', narrative, method: :delete, data: { confirm: 'Are you sure?' }, :class => "delete-button" %></td>
