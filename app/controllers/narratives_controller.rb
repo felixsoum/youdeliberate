@@ -131,6 +131,7 @@ class NarrativesController < ApplicationController
       format.html { redirect_to narratives_url }
       format.json { head :no_content }
     end
+    flash[:success] = "The narrative has been delete."
   end
 
   private
