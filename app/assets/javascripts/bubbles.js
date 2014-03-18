@@ -147,7 +147,7 @@ function classes(root) {
 
   function recurse(name, node) {
     if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });
-    else classes.push({packageName: name, className: node.name, value: getValueBySortCriteria(node), agree : node.numberAgree, disagree: node.numberDisagree, views: node.numberViews, category: node.category, n_id: node.id, date: node.uploadTime, language: node.language });
+    else classes.push({packageName: name, className: node.name, value: getValueBySortCriteria(node), agree : node.numberAgree, disagree: node.numberDisagree, views: node.numberViews, category: node.category, n_id: node.narrativeID, date: node.uploadTime, language: node.language });
   }
 
   recurse(null, root);
