@@ -32,7 +32,7 @@
                 file = File.open("app/views/user/_tutorial_popover.html.erb", "r")
                 contents = file.read 
               %>
-              <%= link_to tutorial_path, :class => 'fancybox',:id=>'tutorial', :'data-fancybox-type' => 'iframe',:'data-placement' => 'bottom', :rel=>'popover', :'data-content'=> contents, :'data-original-title'=>'<h3>Regarder le tutorial/Watch Tuorial</h3>' do %>
+              <%= link_to tutorial_path, :class => 'fancybox',:id=>'tutorial', :'data-fancybox-type' => 'iframe',:'data-placement' => 'bottom', :rel=>'popover', :'data-content'=> contents, :'data-original-title'=>'<h3>Regarder le tutorial <span class="glyphicon glyphicon-info-sign"></span> Watch Tutorial</h3>' do %>
                 <span class="glyphicon glyphicon-info-sign"></span>
               <% end %>
             </li>
