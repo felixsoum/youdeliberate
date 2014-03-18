@@ -3,10 +3,10 @@ App60::Application.routes.draw do
   root 'user#index'
   get 'user' => redirect('/')
   get 'user/index' => redirect('/')
-  get 'user/index/:id/play', to: 'user#index', as: 'share_narrative'
   get 'user/about', as: 'about'
   get 'user/contact', as: 'contact'
   get 'user/tutorial', as: 'tutorial'
+  get 'share/:id', to: 'user#index', as: 'share_narrative'
 
   # Narratives
   get 'sunburst' => 'narratives#sunburst'
