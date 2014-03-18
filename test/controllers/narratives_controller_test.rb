@@ -3,12 +3,18 @@ require 'test_helper'
 class NarrativesControllerTest < ActionController::TestCase
   setup do
     @narrative = narratives(:one)
+    cookies[:user_id] = Admin.take.id
   end
 
-  test "Narrative should get index" do
+  test "Accessing Admin Portal should successfully reach the portal's index" do
     get :index
     assert_response :success
     assert_not_nil assigns(:narratives)
+  end
+
+  test "Admin Portal should have a form to upload" do
+    get :index
+    assert_select "form"
   end
 
   test "Narrative should get sunburst" do
@@ -37,15 +43,10 @@ class NarrativesControllerTest < ActionController::TestCase
 
   test "Should create comment for specified narrative" do
     assert_difference('NComment.where(narrative_id: @narrative.id).count') do
-      post :comment, id: @narrative.id, comment: "I hate you and your goddamned opinion!"
+      post :comment, :format => 'js', id: @narrative.id, user_submitted_comment:  "I hate you and your goddamned opinion!"
     end
   end
   
-  test "Creating a comment should redirect to that single narrative view" do
-    post :comment, id: @narrative.id, comment: "I hate you and your goddamned opinion!"
-    assert_redirected_to play_narrative_path(@narrative.id)
-  end
-
   test "Should have a route to edit a narrative" do
     get :edit, id: @narrative
     assert_response :success
@@ -75,6 +76,30 @@ class NarrativesControllerTest < ActionController::TestCase
     end
 
     assert_template :new
+  end
+  
+  test "Agreeing with a narrative should increment num_of_agree" do
+    assert_difference("Narrative.find(@narrative.id).num_of_agree", 1) do
+      post :agree, id: @narrative.id, :format => :js
+    end
+  end
+  
+  test "Disagreeing with a narrative should increment num_of_disagree" do
+    assert_difference("Narrative.find(@narrative.id).num_of_disagree", 1) do
+      post :disagree, id: @narrative.id, :format => :js
+    end
+  end
+  
+  test "Undoing agreement with a narrative should decrement num_of_agree" do
+    assert_difference("Narrative.find(@narrative.id).num_of_agree", -1) do
+      post :undo_agree, id: @narrative.id, :format => :js
+    end
+  end
+  
+  test "Undoing disagreement with a narrative should decrement num_of_disagree" do
+    assert_difference("Narrative.find(@narrative.id).num_of_disagree", -1) do
+      post :undo_disagree, id: @narrative.id, :format => :js
+    end
   end
 
 end

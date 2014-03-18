@@ -18,3 +18,4 @@
 //= require bootstrap
 //= require fancybox
 //= require narratives
+//= require pagination

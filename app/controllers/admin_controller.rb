@@ -1,10 +1,5 @@
 class AdminController < ApplicationController
 
-  # GET /admin
-  def index
-    @upload_message = "Upload a narrative in zip format"
-  end
-
   # POST admin/upload
   def upload
     narratives_zip = params[:narrative]
