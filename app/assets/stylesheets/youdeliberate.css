@@ -62,5 +62,9 @@ background-color: #ff0000;
 background-color: #428BCA;
 }
 .label-ambivalent {
-background-color: #A0A0A0;
+background-color: #A0A0A0; 
+}
+.popover {
+	min-width: 500px; 
+	min-height: 200px; 
 }
