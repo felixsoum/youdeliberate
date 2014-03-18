@@ -6,17 +6,17 @@ App60::Application.routes.draw do
   get 'user/about', as: 'about'
   get 'user/contact', as: 'contact'
   get 'user/tutorial', as: 'tutorial'
-  get 'narratives/narrative'
   get 'sunburst' => 'narratives#sunburst'
   get 'admin' => redirect('admin/index')
   get 'admin/index', as: 'index_admin'
   get 'narratives/:id/play', to: 'narratives#play', as: 'play_narrative'
   post 'narratives/:id/comment/', to: 'narratives#comment', as: 'comment_add'
+  post 'narratives/:id/flag/', to: 'narratives#flag', as: 'increment_flag'
   post 'admin/upload', as: 'upload_narrative'
   resources :narratives
   resources :sessions, only: [:new, :create, :destroy]
-  get '/signin',  to: 'sessions#new'
-  delete '/signout', to: 'sessions#destroy' 
+  get 'admin/login',  to: 'sessions#new', as: 'signin'
+  delete 'admin/logout', to: 'sessions#destroy', as: 'signout'
 	
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

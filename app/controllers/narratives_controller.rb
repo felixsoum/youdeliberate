@@ -1,7 +1,7 @@
 class NarrativesController < ApplicationController
   include NarrativesHelper
   before_action :set_narrative, only: [:show, :edit, :update, :destroy]
-  before_filter :require_login, :except => :play, :unless => :format_json?
+  before_filter :require_login, :except => [:play, :flag], :unless => :format_json?
   
   # GET /narratives
   # GET /narratives.json
@@ -62,6 +62,16 @@ class NarrativesController < ApplicationController
     redirect_to(:action => "play", :id => narrative_id)
   end
 
+  # POST narratives/1/flag
+  def flag
+    narrative_id = params[:id]
+    @narrative = Narrative.find(narrative_id)
+    flag = @narrative.num_of_flagged + 1
+    @narrative.update(num_of_flagged: flag)
+    FlagMailer.flag_reason_email(narrative_id, params[:flag]).deliver
+    redirect_to(:action => "play", :id => narrative_id)
+  end
+  
   # POST /narratives
   # POST /narratives.json
   def create
