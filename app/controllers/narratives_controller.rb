@@ -2,7 +2,7 @@ class NarrativesController < ApplicationController
   include NarrativesHelper
   before_action :set_narrative, only: [:show, :edit, :update, :destroy]
   before_filter :require_login, :except => [:play, :comment, :flag, :agree, :disagree], :unless => :format_json?
-  
+
   # GET /narratives
   # GET /narratives.json
   def index
@@ -14,7 +14,7 @@ class NarrativesController < ApplicationController
   # GET /narratives/1.json
   def show
     @narrative = Narrative.find(params[:id])
-    
+
     respond_to do |format|
       format.html
       # Support JSONP. Read more: http://henrysztul.info/post/14970402595/how-to-enable-jsonp-support-in-a-rails-app
@@ -37,7 +37,7 @@ class NarrativesController < ApplicationController
   # GET /narratives/1/edit
   def edit
   end
-  
+
   # GET /narratives/1/play/
   def play
     selected_narrative_id = params[:id]

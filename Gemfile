@@ -77,7 +77,7 @@ gem 'google-analytics-rails'
 # Use js-routes to allow usage of Rails routes in JS code.
 gem "js-routes"
 
-# Use fancybox2-rails to display content in a Mac-style lightbox 
+# Use fancybox2-rails to display content in a Mac-style lightbox
 gem 'fancybox2-rails', '~> 0.2.8'
 
 # Use bootstrap-sass for front-end development

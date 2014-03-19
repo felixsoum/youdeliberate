@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  
+
   def new
   end
 
@@ -18,5 +18,5 @@ class SessionsController < ApplicationController
     sign_out #delete cookies
     redirect_to signin_path
   end
-  
+
 end

@@ -19,7 +19,7 @@ module NarrativesHelper
           :numberComments => narrative.n_comments.count,
           :narrativeID => narrative.id,
           :category => narrative.category_id,
-          :uploadTime => narrative.updated_at 
+          :uploadTime => narrative.updated_at
         }
   end
 
