@@ -79,30 +79,26 @@ class NarrativesController < ApplicationController
   
   # POST narratives/1/agree
   def agree
-    narrative_id = params[:id]
-    Narrative.increment_counter(:num_of_agree, narrative_id)
-    refresh_narrative_value(Narrative.find(narrative_id).num_of_agree.to_s, "num-agree-votes")
+    is_ok = Narrative.increment_counter(:num_of_agree, params[:id])
+    return_status_code is_ok
   end
   
   # POST narratives/1/disagree
   def disagree
-    narrative_id = params[:id]
-    Narrative.increment_counter(:num_of_disagree, narrative_id)
-    refresh_narrative_value(Narrative.find(narrative_id).num_of_disagree.to_s, "num-disagree-votes")
+    is_ok = Narrative.increment_counter(:num_of_disagree, params[:id])
+    return_status_code is_ok
   end
   
   # POST narratives/1/undo_agree
   def undo_agree
-    narrative_id = params[:id]
-    Narrative.decrement_counter(:num_of_agree, narrative_id)
-    refresh_narrative_value(Narrative.find(narrative_id).num_of_agree.to_s, "num-agree-votes")
+    is_ok = Narrative.decrement_counter(:num_of_agree, params[:id])
+    return_status_code is_ok
   end
   
   # POST narratives/1/undo_disagree
   def undo_disagree
-    narrative_id = params[:id]
-    Narrative.decrement_counter(:num_of_disagree, narrative_id)
-    refresh_narrative_value(Narrative.find(narrative_id).num_of_disagree.to_s, "num-disagree-votes")
+    is_ok = Narrative.decrement_counter(:num_of_disagree, params[:id])
+    return_status_code is_ok    
   end
   
   # POST /narratives
@@ -149,12 +145,16 @@ class NarrativesController < ApplicationController
   end
 
   private
-    def refresh_narrative_value update_value, update_id
+    def return_status_code is_ok
       respond_to do |format|
-        format.js { render 'refresh_narrative_value.js.erb', :locals => {:update_value => update_value, :update_id => update_id} }
+        if is_ok == 1
+          format.json { head :ok }
+        else
+          format.json { head :error }
+        end 
       end
     end
-  
+    
     # Use callbacks to share common setup or constraints between actions.
     def set_narrative
       @narrative = Narrative.find(params[:id])
