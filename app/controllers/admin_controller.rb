@@ -6,7 +6,7 @@ class AdminController < ApplicationController
   def upload
     narratives_zip = params[:narrative]
     if narratives_zip.nil?
-      flash.now[:error] = "Failed. Nothing to upload."
+      flash[:error] = "Failed. Nothing to upload."
       #@upload_message = "Failed. Nothing to upload"
       #render :index
     elsif narratives_zip.content_type != "application/zip" and
@@ -15,7 +15,7 @@ class AdminController < ApplicationController
       # The MIME type of a zip file is sometimes octet-stream. Read more: http://stackoverflow.com/questions/856013/mime-type-for-zip-file-in-google-chrome
       #@upload_message = "Failed. Please choose a zip file."
       #render :index
-      flash.now[:error] = "Failed. Please choose a zip file."
+      flash[:error] = "Failed. Please choose a zip file."
     else
       require 'rubygems'
       require 'zip'
@@ -37,7 +37,7 @@ class AdminController < ApplicationController
         number_of_uploaded_narrative = narratives_unzip_pathes.length
         narrative_number = narrative_number + number_of_uploaded_narrative
         set_counter_value(get_narrative_counter, narrative_number)
-        flash.now[:success] = "#{number_of_uploaded_narrative} narrative(s) has been Uploaded to server successfully."
+        flash[:success] = "#{number_of_uploaded_narrative} narrative(s) has been Uploaded to server successfully."
       end
     end
 
@@ -51,7 +51,7 @@ class AdminController < ApplicationController
 
     def get_narratives_path
       upload_path = params[:upload_path]
-      if(upload_path)
+      if(upload_path == "")
         upload_path = Rails.root.join('public', 'narratives').to_s
       end
       narratives_path = upload_path
