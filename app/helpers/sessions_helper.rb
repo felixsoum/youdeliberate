@@ -11,5 +11,5 @@ module SessionsHelper
   def sign_out
     cookies.delete(:user_id)
   end
-  
+
 end

@@ -74,21 +74,21 @@ class NarrativesController < ApplicationController
     FlagMailer.flag_reason_email(narrative_id, params[:flag]).deliver
     redirect_to(:action => "play", :id => narrative_id)
   end
-  
+
   # POST narratives/1/agree
   def agree
     narrative_id = params[:id]
     Narrative.increment_counter(:num_of_agree, narrative_id)
     redirect_to(:action => "play", :id => narrative_id)
   end
-  
+
   # POST narratives/1/disagree
   def disagree
     narrative_id = params[:id]
     Narrative.increment_counter(:num_of_disagree, narrative_id)
     redirect_to(:action => "play", :id => narrative_id)
   end
-  
+
   # POST /narratives
   # POST /narratives.json
   def create
@@ -164,7 +164,7 @@ class NarrativesController < ApplicationController
         redirect_to signin_path
       end
     end
-    
+
     def format_json?
       request.format.json?
     end
