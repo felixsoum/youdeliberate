@@ -7,6 +7,13 @@
   var playlistDetails = <%= @audio_json %>;
   var myPlaylist;
 	$(document).ready(function(){
+	  //disable flag if it is already flagged
+	  $("a[data-toggle='modal']").each(function() {
+	  	if($(this).attr('id')=="true"){
+	  		 $(this).removeAttr("data-toggle");
+	  	}
+	  });
+	  
 	  var currentTrack = $("#jp-current-track");
 	  myPlaylist = new jPlayerPlaylist({
 	    jPlayer: "#jquery_jplayer_1",
@@ -108,7 +115,7 @@
  				<span class="glyphicon glyphicon-thumbs-down"></span>
  				<span id="num-disagree-votes"><%= @narrative.num_of_disagree %></span>
  			</button>
-			<a class="btn btn-default" data-toggle="modal" href="#flag-modal" rel="tooltip" data-placement="top" data-original-title="Signaler un recit innaproprier / Flag an inappropriate narrative" >
+			<a id ="<%= is_flagged?(@narrative.id) %>" class="btn btn-default" data-toggle="modal" href="#flag-modal" rel="tooltip" data-placement="top" data-original-title="Signaler un recit innaproprier / Flag an inappropriate narrative" >
 				<span class="glyphicon glyphicon-flag"></span>
 				<span id="num-flags"><%= @narrative.num_of_flagged %></span>
 			</a>

@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.turbolinks
+//= require jquery-tablesorter
 //= require turbolinks
 //= require js-routes
 //= require bootstrap

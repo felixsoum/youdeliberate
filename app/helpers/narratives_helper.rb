@@ -53,4 +53,22 @@ module NarrativesHelper
     Category.find(category_id).category_name
   end
 
+  def get_flagged_narratives
+    flagged_narratives_array = Array.new
+    if (cookies[:flagged])
+      flagged_narratives_string = cookies[:flagged]
+      flagged_narratives_array = flagged_narratives_string.split(",")
+    end
+    return flagged_narratives_array
+  end
+  
+  def save_flagged_narratives flagged_narratives
+    cookies[:flagged] = flagged_narratives.join(",")
+  end
+  
+  def is_flagged? narrative_id
+    flagged_narratives = get_flagged_narratives
+    flagged_narratives.include? narrative_id.to_s
+  end
+
 end
