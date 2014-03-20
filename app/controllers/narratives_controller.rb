@@ -55,6 +55,7 @@ class NarrativesController < ApplicationController
     @comments = get_comments_for_narrative(selected_narrative_id)
     @audio_count = audio_array.size
     @share_link = share_narrative_url params[:id].strip
+    Narrative.increment_counter(:num_of_view, selected_narrative_id)
   end
 
   # POST narratives/1/comment
