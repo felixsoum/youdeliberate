@@ -10,7 +10,8 @@ var bubble; //lord help us global variables
 
 //Define sort criteria
 var sortCriteria = {
-	SORTBYAGREES : {value: 0, name: "Sort by agrees", code: "A"}, 
+	SORTBYAGREES : {value: 0, name: "Sort by agrees", code: "A"},
+	SORTBYDISAGREES : {value: 4, name: "Sort by disagrees", code: "D" },
 	SORTBYVIEWS: {value: 1, name: "Sort by views", code: "V"}, 
 	SORTBYCOMMENTS : {value: 2, name: "Sort by comments", code: "C"},
 	SORTBYTIME : {value: 3, name: "Sort by time uploaded", code: "T"}
@@ -165,7 +166,7 @@ function populateDateHash(c){
 	}
 	dates.sort(function(a,b){return a-b});
 	for(i=0; i<dates.length; i++){
-		dateHash[dates[i]]=i;
+		dateHash[dates[i]]=i+1; //We want our smallest narrative, when sorted by time uploaded, to have size 1, not 0
 	}
 }
 
@@ -182,10 +183,13 @@ function getValueBySortCriteria(n){
 		break;
 		case sortCriteria.SORTBYTIME:
 		var date = new Date(n.uploadTime);
-		return date.getTime() == 0 ? minimumCircleSize : dateHash[date.getTime()] //wtf am I writing;
+		return date.getTime() == 0 ? minimumCircleSize : dateHash[date.getTime()] //UTC time values are really big, so we just sort them and give them size values 1, 2, 3, etc
 		break;
 		case sortCriteria.SORTBYAGREES:
 		return n.numberAgree == 0 ? minimumCircleSize : n.numberAgree;
+		break;
+		case sortCriteria.SORTBYDISAGREES:
+		return n.numberDisagree == 0 ? minimumCircleSize : n.numberDisagree;
 		break;
 		default:
 		return n.numberViews == 0 ? minimumCircleSize : n.numberViews;
