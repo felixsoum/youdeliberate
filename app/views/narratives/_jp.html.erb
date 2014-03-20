@@ -33,6 +33,7 @@
 					<div class="jp-volume-bar" align="left">
 						<div class="jp-volume-bar-value"></div>
 					</div>
+					<div class="jplayer-total-length">Durée/Duration: <%= (@narrative.total_audio_length / 60).to_s.rjust(2,'0') %>:<%= (@narrative.total_audio_length % 60).to_s.rjust(2,'0') %> </div>
 				</div>
 				<div class="jp-title">
 					<ul>

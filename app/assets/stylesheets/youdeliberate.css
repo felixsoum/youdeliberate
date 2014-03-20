@@ -64,3 +64,9 @@ background-color: #428BCA;
 .label-ambivalent {
 background-color: #A0A0A0;
 }
+
+.jplayer-total-length {
+	padding: 12px 18px 0 0;
+	font-size: .64em;
+	font-style: oblique
+}
