@@ -82,3 +82,6 @@ gem 'fancybox2-rails', '~> 0.2.8'
 
 # Use bootstrap-sass for front-end development
 gem 'bootstrap-sass', '~> 3.1.1'
+
+# Use ruby-mp3info to get track lengths without loading in jPlayer
+gem 'ruby-mp3info'

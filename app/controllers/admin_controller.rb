@@ -1,4 +1,6 @@
 class AdminController < ApplicationController
+  @@accepted_audio_formats = [".mp3", ".wav"]
+  @@accepted_image_formats = [".jpg", ".png"]
 
   # POST admin/upload
   def upload
@@ -17,6 +19,7 @@ class AdminController < ApplicationController
     else
       require 'rubygems'
       require 'zip'
+      require "mp3info"
       upload_narratives(narratives_zip)
     end
     redirect_to narratives_path
@@ -79,7 +82,7 @@ class AdminController < ApplicationController
       counter.save
     end
 
-    def extract_files zip_file, narratives_path, narratives_unzip_pathes
+    def extract_files zip_file, narratives_path, narratives_unzip_pathes      
       zip_file.each do |file|
         file_with_folder_name = file.name
         if (position_of_last_slash = file_with_folder_name.rindex('/'))
@@ -94,7 +97,7 @@ class AdminController < ApplicationController
         end
         file_path = File.join(folder_path, file_name)
         FileUtils.mkdir_p(File.dirname(file_path))
-        zip_file.extract(file, file_path) unless File.exist?(file_path)
+        zip_file.extract(file, file_path) unless File.exist?(file_path)        
       end
     end
 
@@ -103,6 +106,7 @@ class AdminController < ApplicationController
         narrative_path = "#{narratives_path}/#{value}"
         parse_xml_to_database(narrative_path)
         insert_image_audio_to_database(narrative_path)
+        insert_audio_length_for_narrative(narrative_path)
       end
     end
 
@@ -130,16 +134,29 @@ class AdminController < ApplicationController
       end
     end
 
-    def insert_image_audio_to_database narrative_path
-      accepted_audio_formats = [".mp3", ".wav",".3gp"]
-      accepted_image_formats = [".jpg", ".png"]
+    def insert_audio_length_for_narrative narrative_path
+        total_length = 0;
+        
+        # Cycle through each audio file in that narrative's folder to compute the total audio length. 
+        Dir.foreach(narrative_path) do |file|
+          if @@accepted_audio_formats.include? File.extname(file)
+            Mp3Info.open(narrative_path + "/" + file) do |mp3info|
+              total_length += mp3info.length
+            end
+          end
+          
+          Narrative.update(@narrative.id, :total_audio_length => total_length)
+       end
+    end
+
+    def insert_image_audio_to_database narrative_path      
       Dir.foreach(narrative_path) do |file|
         next if file == '.' or file == '..'
         relative_narrative_path = narrative_path.from(
           narrative_path.index('narratives/'))
-        insert_to_table(file, accepted_audio_formats,
+        insert_to_table(file, @@accepted_audio_formats,
           relative_narrative_path, Audio)
-        insert_to_table(file, accepted_image_formats,
+        insert_to_table(file, @@accepted_image_formats,
           relative_narrative_path, Image)
       end
     end
