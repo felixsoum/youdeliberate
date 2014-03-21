@@ -47,14 +47,14 @@
 	  	
 	  	// If the opposite vote was already cast (ie agree is the opposite of disagree and vice-versa)
 	  	if (oppositeAction.data('vote-submitted')) {
-	  		youDeliberate.updateVoteCountBy($('#' + oppositeAction.data('display-id')), -1);
+	  		youDeliberate.updateVoteCountBy(oppositeAction, -1);
 			youDeliberate.swapAndSubmit(oppositeAction);
 	  	}
 	  	
 	  	if (that.data('vote-submitted')) {
 	  		voteIncr = -1;
 	  	}
-	  	youDeliberate.updateVoteCountBy($('#' + that.data('display-id')), voteIncr); 
+	  	youDeliberate.updateVoteCountBy(that, voteIncr); 
 	  	youDeliberate.swapAndSubmit(that);
 	  	
 	  }) 
@@ -79,8 +79,12 @@
 	  	},
 	  	
 	  	// Locally update visual display (instead of updating it from db values)
-	  	updateVoteCountBy: function(that, x) {	  		
-	  		that.html(parseInt(that.html()) + x); 
+	  	updateVoteCountBy: function(that, x) {
+	  		if (x > 0) { that.addClass("active");
+	  		} else { that.removeClass("active"); }
+	  		
+	  		dataField = $('#' + that.data('display-id'));
+			dataField.html(parseInt(dataField.html()) + x); 		
 	  	}
 	  	
 	  }
