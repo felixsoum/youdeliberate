@@ -24,8 +24,8 @@ jQuery ->
       2: (node) ->
         $(node).find("option:selected").text()
     headers:
-      8:
-        sorter: false
       9:
+        sorter: false
+      10:
         sorter: false
   return

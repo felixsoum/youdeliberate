@@ -51,11 +51,12 @@
 				      <th class="header">Name</th>
 				      <th class="header">Language</th>
 				      <th class="header">Category</th>
-				      <th class="header">View #</th>
-				      <th class="header">Agree #</th>
-				      <th class="header">Disagree #</th>
-				      <th class="header">Flagged #</th>
+				      <th class="header">View&nbsp;&nbsp;&nbsp;</th>
+				      <th class="header">Agree&nbsp;&nbsp;&nbsp;</th>
+				      <th class="header">Disagree&nbsp;&nbsp;&nbsp;</th>
+				      <th class="header">Flagged&nbsp;&nbsp;&nbsp;</th>
 				      <th class="header">Create Time</th>
+				      <th class="header">Upload Time</th>
 				      <th>Published</th>
 				      <th colspan="3"></th>
 				    </tr>
@@ -73,6 +74,7 @@
 				        <td><%= narrative.num_of_disagree %></td>
 				        <td><%= narrative.num_of_flagged %></td>
 				        <td><%= narrative.create_time.to_formatted_s(:db) %></td>
+				        <td><%= narrative.updated_at.to_formatted_s(:db) %></td>
 				        <td><%= f.check_box :is_published %></td>
 				       	<td><a href="#" class="play-button" data-narrative-id="<%= narrative.id %>">Play</a></td>
 				       	<td><%= f.submit "Save", :class => 'save-button'%></td>
