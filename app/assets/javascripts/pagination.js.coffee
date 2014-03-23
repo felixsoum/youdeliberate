@@ -9,31 +9,14 @@ leftmostTrack = 1
 maxPagination = 10
 
 # Hack solution: http://stackoverflow.com/a/12319131
-paginationContainer =
-"
-░░░░░▄▄▄▄▀▀▀▀▀▀▀▀▄▄▄▄▄▄░░░░░░░░
-░░░░░█░░░░▒▒▒▒▒▒▒▒▒▒▒▒░░▀▀▄░░░░
-░░░░█░░░▒▒▒▒▒▒░░░░░░░░▒▒▒░░█░░░
-░░░█░░░░░░▄██▀▄▄░░░░░▄▄▄░░░░█░░
-░▄▀▒▄▄▄▒░█▀▀▀▀▄▄█░░░██▄▄█░░░░█░
-█░▒█▒▄░▀▄▄▄▀░░░░░░░░█░░░▒▒▒▒▒░█
-█░▒█░█▀▄▄░░░░░█▀░░░░▀▄░░▄▀▀▀▄▒█
-░█░▀▄░█▄░█▀▄▄░▀░▀▀░▄▄▀░░░░█░░█░
-░░█░░░▀▄▀█▄▄░█▀▀▀▄▄▄▄▀▀█▀██░█░░
-░░░█░░░░██░░▀█▄▄▄█▄▄█▄████░█░░░
-░░░░█░░░░▀▀▄░█░░░█░█▀██████░█░░
-░░░░░▀▄░░░░░▀▀▄▄▄█▄█▄█▄█▄▀░░█░░
-░░░░░░░▀▄▄░▒▒▒▒░░░░░░░░░░▒░░░█░
-░░░░░░░░░░▀▀▄▄░▒▒▒▒▒▒▒▒▒▒░░░░█░
-░░░░░░░░░░░░░░▀▄▄▄▄▄░░░░░░░░█░░
-"
+paginationContainer ="bouboule"
 
 window.paginate = (n) ->
   switch n
-    when '«'
+    when '<<'
       if leftmostTrack > 1
         leftmostTrack--
-    when '»'
+    when '>>'
       if leftmostTrack < audioCount - maxPagination + 1
         leftmostTrack++
     else
@@ -48,7 +31,7 @@ window.paginate = (n) ->
   paginationText = ""
 
   # Left button
-  paginationText += "<li><a href=\"#\">«</a></li>" unless leftmostTrack is 1
+  paginationText += "<li><a href=\"#\"><<</a></li>" unless leftmostTrack is 1
 
   # Page buttons
   for index in [leftmostTrack..(leftmostTrack + maxPagination - 1)]
@@ -57,7 +40,7 @@ window.paginate = (n) ->
     paginationText += "<li#{pageAttr}><a href=\"#\">#{index}</a></li>"
 
   # Right button
-  paginationText += "<li><a href=\"#\">»</a></li>" unless leftmostTrack + maxPagination > audioCount
+  paginationText += "<li><a href=\"#\">>></a></li>" unless leftmostTrack + maxPagination > audioCount
   
   paginationContainer.html(paginationText)
 

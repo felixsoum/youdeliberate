@@ -1,13 +1,14 @@
 class NarrativesController < ApplicationController
   include NarrativesHelper
   before_action :set_narrative, only: [:show, :edit, :update, :destroy]
-  before_filter :require_login, :except => [:play, :comment, :flag, :agree, :disagree], :unless => :format_json?
+  before_filter :require_login, :except => [:play, :comment, :flag, :agree, :disagree, :undo_agree, :undo_disagree], :unless => :format_json?
   
   # GET /narratives
   # GET /narratives.json
   def index
     @narratives = Narrative.all
-    render_to_home(narratives_json(@narratives))
+    published_narratives = Narrative.where(is_published: true)
+    render_to_home(narratives_json(published_narratives))
   end
 
   # GET /narratives/1
@@ -26,7 +27,8 @@ class NarrativesController < ApplicationController
   # GET /sunburst.json
   def sunburst
     @narratives = Narrative.all
-    render_to_home(sunburst_json(@narratives))
+    published_narratives = Narrative.where(is_published: true)
+    render_to_home(sunburst_json(published_narratives))
   end
 
   # GET /narratives/new
@@ -53,6 +55,7 @@ class NarrativesController < ApplicationController
     @comments = get_comments_for_narrative(selected_narrative_id)
     @audio_count = audio_array.size
     @share_link = share_narrative_url params[:id].strip
+    Narrative.increment_counter(:num_of_view, selected_narrative_id)
   end
 
   # POST narratives/1/comment
@@ -67,26 +70,43 @@ class NarrativesController < ApplicationController
 
   # POST narratives/1/flag
   def flag
-    narrative_id = params[:id]
-    @narrative = Narrative.find(narrative_id)
-    flag = @narrative.num_of_flagged + 1
-    @narrative.update(num_of_flagged: flag)
-    FlagMailer.flag_reason_email(narrative_id, params[:flag]).deliver
-    redirect_to(:action => "play", :id => narrative_id)
+      flagged_narratives = get_flagged_narratives
+      narrative_id = params[:id]
+    if (!flagged_narratives.include? narrative_id.to_s)
+      @narrative = Narrative.find(narrative_id)
+      flag = @narrative.num_of_flagged + 1
+      @narrative.update(num_of_flagged: flag)
+      FlagMailer.flag_reason_email(narrative_id, params[:flag]).deliver
+      flagged_narratives.push(narrative_id.to_s)
+      save_flagged_narratives(flagged_narratives)
+      redirect_to(:action => "play", :id => narrative_id)
+    else
+      redirect_to(:action => "play", :id => narrative_id)
+    end
   end
   
   # POST narratives/1/agree
   def agree
-    narrative_id = params[:id]
-    Narrative.increment_counter(:num_of_agree, narrative_id)
-    redirect_to(:action => "play", :id => narrative_id)
+    is_ok = Narrative.increment_counter(:num_of_agree, params[:id])
+    return_status_code is_ok
   end
   
   # POST narratives/1/disagree
   def disagree
-    narrative_id = params[:id]
-    Narrative.increment_counter(:num_of_disagree, narrative_id)
-    redirect_to(:action => "play", :id => narrative_id)
+    is_ok = Narrative.increment_counter(:num_of_disagree, params[:id])
+    return_status_code is_ok
+  end
+  
+  # POST narratives/1/undo_agree
+  def undo_agree
+    is_ok = Narrative.decrement_counter(:num_of_agree, params[:id])
+    return_status_code is_ok
+  end
+  
+  # POST narratives/1/undo_disagree
+  def undo_disagree
+    is_ok = Narrative.decrement_counter(:num_of_disagree, params[:id])
+    return_status_code is_ok    
   end
   
   # POST /narratives
@@ -129,9 +149,20 @@ class NarrativesController < ApplicationController
       format.html { redirect_to narratives_url }
       format.json { head :no_content }
     end
+    flash[:success] = "The narrative has been delete."
   end
 
   private
+    def return_status_code is_ok
+      respond_to do |format|
+        if is_ok == 1
+          format.json { head :ok }
+        else
+          format.json { head :error }
+        end 
+      end
+    end
+    
     # Use callbacks to share common setup or constraints between actions.
     def set_narrative
       @narrative = Narrative.find(params[:id])
@@ -143,7 +174,7 @@ class NarrativesController < ApplicationController
                                         :category_id, :first_image,
                                         :num_of_view, :num_of_agree,
                                         :num_of_disagree, :num_of_flagged,
-                                        :create_time)
+                                        :create_time, :is_published)
     end
 
     def render_after_fail format, act

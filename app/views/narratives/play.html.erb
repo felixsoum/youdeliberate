@@ -31,8 +31,57 @@
 	    currentTrack.text(trackId);
 	    window.paginate(trackId)
 	  }
+	  
+	  jQuery('.btn').tooltip();
+	  $('#agree-button, #disagree-button').on("click", function() {
+	  	var that = $(this),
+	  	voteIncr = 1,
+	  	oppositeAction = $('#' + that.data('opposite-id'));
+	  	
+	  	// If the opposite vote was already cast (ie agree is the opposite of disagree and vice-versa)
+	  	if (oppositeAction.data('vote-submitted')) {
+	  		youDeliberate.updateVoteCountBy(oppositeAction, -1);
+			youDeliberate.swapAndSubmit(oppositeAction);
+	  	}
+	  	
+	  	if (that.data('vote-submitted')) {
+	  		voteIncr = -1;
+	  	}
+	  	youDeliberate.updateVoteCountBy(that, voteIncr); 
+	  	youDeliberate.swapAndSubmit(that);
+	  	
+	  }) 
+	  
+	  var youDeliberate = {
+	  	// Submit request to update the vote count and swap the primary and secondary actions (ie, agree and undo_agree)
+	  	swapAndSubmit: function(that) {
+	  		var url = that.attr('data-ajax-primary-action');
 
-	  jQuery('.btn').tooltip(); 
+			// Invert the vote-submitted field
+			that.data('vote-submitted', !that.data('vote-submitted'));
+
+	  		// Swap the actions to allow the user to undo what they've just done.
+		  	that.attr('data-ajax-primary-action', that.attr('data-ajax-secondary-action'));
+		  	that.attr('data-ajax-secondary-action', url);
+
+		  	// Send out request
+		  	$.ajax({
+				url: url,
+				type: 'POST'
+			})
+	  	},
+	  	
+	  	// Locally update visual display (instead of updating it from db values)
+	  	updateVoteCountBy: function(that, x) {
+	  		if (x > 0) { that.addClass("active");
+	  		} else { that.removeClass("active"); }
+	  		
+	  		dataField = $('#' + that.data('display-id'));
+			dataField.html(parseInt(dataField.html()) + x); 		
+	  	}
+	  	
+	  }
+	  
 	});
 	//]]>
 	function playTrack(n) {
@@ -43,26 +92,37 @@
 
 <div>
 	<div id="narrative" align="center">
-		<div class="page-header"><h1><small>Narrative name: <%= @narrative.nar_name %></small></h1></div>
+		<div class="input-group">
+			<span class="input-group-addon"><span class="glyphicon glyphicon-link"></span></span>				
+			<input type="text" onClick="this.select();" readonly="readonly" value="<%= @share_link %>" class="form-control" placeholder="">
+		</div>
+		<h1><small>Narrative name: <%= @narrative.nar_name %></small></h1>
 		<div data-id="media_element">
       <%= render "jp" %>
 		</div>
 		</br>
 
-		<div class="input-group">
-				<span class="input-group-addon"><span class="glyphicon glyphicon-link"></span></span>				
-				<input type="text" onClick="this.select();" readonly="readonly" value="<%= @share_link %>" class="form-control" placeholder="">
-		</div>		
-
 		</br>
 		<div class="btn-group" id="single-view-tooltip">
-			<%= button_to agree_with_narrative_path(@narrative.id), {:class=>"btn btn-default", :title=> "Nombre votes en accord / Number of Agrees", :data => { :toggle=>"tooltip", :placement => "top"}} do %>
-				<span class='glyphicon glyphicon-thumbs-up'>&nbsp;<%= @narrative.num_of_agree %></span>
-			<%end%>
-			<%= button_to disagree_with_narrative_path(@narrative.id), {:class=>"btn btn-default", :title=> "Nombre de votes en désaccord / Number of Disagrees", :data => { :toggle=>"tooltip", :placement => "top"}} do %>
-				<span class="glyphicon glyphicon-thumbs-down">&nbsp;<%= @narrative.num_of_disagree %></span>
-			<%end%>
-			<a class="btn btn-default" data-toggle="modal" href="#flag-modal" rel="tooltip" data-placement="top" data-original-title="Signaler un recit innaproprier / Flag an inappropriate narrative" ><span class="glyphicon glyphicon-flag">&nbsp;<%= @narrative.num_of_flagged %></span></a>
+			<button id="agree-button" data-opposite-id="disagree-button" type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Nombre votes en accord / Number of Agrees" data-display-id="num-agree-votes" data-vote-submitted="false" data-ajax-primary-action="<%= agree_with_narrative_path(@narrative.id) %>", data-ajax-secondary-action="<%= undo_agree_with_narrative_path(@narrative.id) %>">
+				<span class="glyphicon glyphicon-thumbs-up"></span>
+				<span id="num-agree-votes"><%= @narrative.num_of_agree %></span>
+			</button>
+ 			<button id="disagree-button" data-opposite-id="agree-button" type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Nombre de votes en désaccord / Number of Disagrees" data-display-id="num-disagree-votes" data-vote-submitted="false" data-ajax-primary-action="<%= disagree_with_narrative_path(@narrative.id) %>", data-ajax-secondary-action="<%= undo_disagree_with_narrative_path(@narrative.id) %>">
+ 				<span class="glyphicon glyphicon-thumbs-down"></span>
+ 				<span id="num-disagree-votes"><%= @narrative.num_of_disagree %></span>
+ 			</button>
+			<!-- disable flag if it is already flagged -->
+			<a id ="<%= is_flagged?(@narrative.id) %>" class="btn btn-default"
+				<% if is_flagged?(@narrative.id) %>
+					disabled="disabled" 
+				<% else %>
+					data-toggle="modal"
+				<% end %>
+				  href="#flag-modal" rel="tooltip" data-placement="top" data-original-title="Signaler un recit innaproprier / Flag an inappropriate narrative" >
+				<span class="glyphicon glyphicon-flag"></span>
+				<span id="num-flags"><%= @narrative.num_of_flagged %></span>
+			</a>
 			<button type="button" class="btn btn-default" disabled="disabled"><span class="glyphicon glyphicon-eye-open">&nbsp;<%= @narrative.num_of_view %></span></button>
 		</div>
 	</div>

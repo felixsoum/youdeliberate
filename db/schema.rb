@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140312225445) do
+ActiveRecord::Schema.define(version: 20140319235330) do
 
   create_table "admins", force: true do |t|
     t.string   "user_name"
@@ -74,6 +74,8 @@ ActiveRecord::Schema.define(version: 20140312225445) do
     t.datetime "create_time"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_published",       default: false
+    t.integer  "total_audio_length"
   end
 
 end

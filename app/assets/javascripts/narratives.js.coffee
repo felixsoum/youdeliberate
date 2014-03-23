@@ -12,3 +12,20 @@ $ ->
  
     narrativeId = $(this).data("narrative-id")
     window.playNarrative(narrativeId)
+
+jQuery ->
+  $("table").tablesorter
+    theme: "blue"
+    textExtraction:
+      0: (node) ->
+        $(node).find("input").val()
+      1: (node) ->
+        $(node).find("option:selected").text()
+      2: (node) ->
+        $(node).find("option:selected").text()
+    headers:
+      9:
+        sorter: false
+      10:
+        sorter: false
+  return

@@ -21,6 +21,9 @@ gem 'coffee-rails', '~> 4.0.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
+# Use jquery sort table by its column
+gem 'jquery-tablesorter'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
@@ -82,3 +85,6 @@ gem 'fancybox2-rails', '~> 0.2.8'
 
 # Use bootstrap-sass for front-end development
 gem 'bootstrap-sass', '~> 3.1.1'
+
+# Use ruby-mp3info to get track lengths without loading in jPlayer
+gem 'ruby-mp3info'
