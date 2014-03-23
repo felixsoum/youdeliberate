@@ -32,7 +32,7 @@
 	    window.paginate(trackId)
 	  }
 	  
-	  jQuery('.btn').tooltip({html:true}); 
+	  jQuery('.btn').tooltip({html:true});
 	  $('#agree-button, #disagree-button').on("click", function() {
 	  	var that = $(this),
 	  	voteIncr = 1,
@@ -50,7 +50,7 @@
 	  	youDeliberate.updateVoteCountBy(that, voteIncr); 
 	  	youDeliberate.swapAndSubmit(that);
 	  	
-	  }) 
+	  })
 	  
 	  var youDeliberate = {
 	  	// Submit request to update the vote count and swap the primary and secondary actions (ie, agree and undo_agree)

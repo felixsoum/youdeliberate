@@ -18,7 +18,6 @@ App60::Application.routes.draw do
   post 'narratives/:id/disagree', to: 'narratives#disagree', as: 'disagree_with_narrative'
   post 'narratives/:id/undo_disagree', to: 'narratives#undo_disagree', as: 'undo_disagree_with_narrative'
   resources :narratives
-  
   # Admin
   get 'admin', to: 'narratives#index', as: 'admin_list'
   get 'admin/login',  to: 'sessions#new', as: 'signin'

@@ -5,7 +5,7 @@
   App60
 </title>
 
-<!-- Google Analytics -->  
+<!-- Google Analytics -->
 <%= analytics_init :local => Rails.env.development? %>
 
 <!-- Stylesheets -->
@@ -22,7 +22,7 @@
 
 </head>
 <body>
-<%= render partial: "shared/flash_messages", flash: flash %> 
+<%= render partial: "shared/flash_messages", flash: flash %>
 <%= yield %>
 </body>
 </html>

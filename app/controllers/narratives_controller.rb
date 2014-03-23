@@ -2,7 +2,7 @@ class NarrativesController < ApplicationController
   include NarrativesHelper
   before_action :set_narrative, only: [:show, :edit, :update, :destroy]
   before_filter :require_login, :except => [:play, :comment, :flag, :agree, :disagree, :undo_agree, :undo_disagree], :unless => :format_json?
-  
+
   # GET /narratives
   # GET /narratives.json
   def index
