@@ -18,7 +18,7 @@ class AdminController < ApplicationController
       require "mp3info"
       upload_narratives(narratives_zip)
     end
-    redirect_to narratives_path
+    redirect_to admin_list_path
   end
 
   private
@@ -30,11 +30,11 @@ class AdminController < ApplicationController
         invalid_narratives = Array.new
         narratives_unzip_pathes = get_narratives_unzip_pathes(zip_file, narrative_number, invalid_narratives)
         if (!narratives_unzip_pathes.empty?)
-#          extract_files(zip_file, narratives_path, narratives_unzip_pathes)
-#          update_database(narratives_unzip_pathes, narratives_path)
+          extract_files(zip_file, narratives_path, narratives_unzip_pathes)
+          update_database(narratives_unzip_pathes, narratives_path)
           number_of_uploaded_narrative = narratives_unzip_pathes.length
-#          narrative_number = narrative_number + number_of_uploaded_narrative
-#          set_counter_value(get_narrative_counter, narrative_number)
+          narrative_number = narrative_number + number_of_uploaded_narrative
+          set_counter_value(get_narrative_counter, narrative_number)
           flash[:success] = get_message(number_of_uploaded_narrative, invalid_narratives)
         else
           flash[:error] = "There are invalid files in narratives.(For file format just mp3, wav, jpg and png are supported)"

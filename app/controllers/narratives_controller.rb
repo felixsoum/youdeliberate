@@ -130,7 +130,7 @@ class NarrativesController < ApplicationController
   def update
     respond_to do |format|
       if @narrative.update(narrative_params)
-        format.html { redirect_to narratives_url }
+        format.html { redirect_to admin_list_path }
         format.json { head :no_content }
         flash[:success] = "The narrative has been updated."
       else
@@ -146,7 +146,7 @@ class NarrativesController < ApplicationController
     FileUtils.rm_rf(@narrative.nar_path)
     @narrative.destroy
     respond_to do |format|
-      format.html { redirect_to narratives_url }
+      format.html { redirect_to admin_list_path }
       format.json { head :no_content }
     end
     flash[:success] = "The narrative has been delete."
