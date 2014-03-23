@@ -7,3 +7,4 @@
 [![Build Status](https://travis-ci.org/felixsoum/youdeliberate.png?branch=master)](https://travis-ci.org/felixsoum/youdeliberate)
 [![Code Climate](https://codeclimate.com/github/felixsoum/youdeliberate.png)](https://codeclimate.com/github/felixsoum/youdeliberate)
 [![Coverage Status](https://coveralls.io/repos/felixsoum/youdeliberate/badge.png?branch=master)](https://coveralls.io/r/felixsoum/youdeliberate?branch=master)
+[![Dependency Status](https://gemnasium.com/felixsoum/youdeliberate.svg)](https://gemnasium.com/felixsoum/youdeliberate)
