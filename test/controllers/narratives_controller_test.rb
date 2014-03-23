@@ -59,7 +59,7 @@ class NarrativesControllerTest < ActionController::TestCase
 
   test "Should be able to update a narrative" do
     patch :update, id: @narrative, narrative: { category_id: @narrative.category_id, create_time: @narrative.create_time, first_image: @narrative.first_image, language_id: @narrative.language_id, nar_name: @narrative.nar_name, nar_path: @narrative.nar_path, num_of_agree: @narrative.num_of_agree, num_of_disagree: @narrative.num_of_disagree, num_of_flagged: @narrative.num_of_flagged, num_of_view: @narrative.num_of_view }
-    assert_redirected_to narratives_path
+    assert_redirected_to admin_list_path
   end
 
   test "Should be able to destroy narrative" do
@@ -67,7 +67,7 @@ class NarrativesControllerTest < ActionController::TestCase
       delete :destroy, id: @narrative
     end
 
-    assert_redirected_to narratives_path
+    assert_redirected_to admin_list_path
   end
   
   test "Should not be able to use the create narrative action" do

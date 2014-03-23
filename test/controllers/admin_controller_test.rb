@@ -5,14 +5,14 @@ class AdminControllerTest < ActionController::TestCase
   test "Should not be able to upload without including a file" do
     post :upload
     assert_response :redirect
-    assert_redirected_to narratives_path
+    assert_redirected_to admin_list_path
   end
 
   test "Should not be able to upload a non-zip file" do
     file = fixture_file_upload('files/how-to.pdf', 'application/pdf')
     post :upload, :narrative => file 
     assert_response :redirect
-    assert_redirected_to narratives_path
+    assert_redirected_to admin_list_path
   end
   
   test "Should be able to upload a zip file containing a single narrative" do
@@ -20,7 +20,7 @@ class AdminControllerTest < ActionController::TestCase
     file = fixture_file_upload('files/single_narrative.zip', 'application/zip')
     post :upload, :narrative => file, :upload_path => test_narrative_path
     assert_response :redirect
-    assert_redirected_to narratives_path
+    assert_redirected_to admin_list_path
     # Remove the directory of the uploaded narrative
     FileUtils.rm_rf(test_narrative_path)
     assert !Dir.exist?(test_narrative_path)
@@ -31,7 +31,7 @@ class AdminControllerTest < ActionController::TestCase
     file = fixture_file_upload('files/multiple_narratives.zip', 'application/octet-stream')
     post :upload, :narrative => file, :upload_path => test_narrative_path
     assert_response :redirect
-    assert_redirected_to narratives_path
+    assert_redirected_to admin_list_path
     # Remove the directory of the uploaded narrative
     FileUtils.rm_rf("#{test_narrative_path}")  
     assert !Dir.exist?(test_narrative_path)
