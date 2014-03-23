@@ -52,6 +52,7 @@ function getData() {
         .attr("d", arc)
         .attr("categoryID",function(d){ return d.category_id; })
         .attr("class","sunburst-path")
+        .attr("id",function(d){return "category"+d.category_id})
         .style("opacity",function(d){ return getSunburstSegmentOpacity(d); })
         .style("stroke", function(d) { return getArcMouseOutColor(d.category_id); })
         .style("stroke-width","2px")

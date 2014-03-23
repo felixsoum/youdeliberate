@@ -14,6 +14,9 @@ function sortClassToggle(b){
     case "sort-by-agrees":
     currentSortCriteria = sortCriteria.SORTBYAGREES;
     break;
+    case "sort-by-disagrees":
+    currentSortCriteria = sortCriteria.SORTBYDISAGREES;
+    break;
     case "sort-by-comments":
     currentSortCriteria = sortCriteria.SORTBYCOMMENTS;
     break;

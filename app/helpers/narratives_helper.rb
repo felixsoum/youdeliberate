@@ -10,7 +10,7 @@ module NarrativesHelper
   end
 
   def narrative_json(narrative)
-        { :id => " #{narrative.id}",
+        { :id => "#{narrative.id}",
           :name => narrative.nar_name,
           :language => narrative.language_id,
           :numberAgree => narrative.num_of_agree,
