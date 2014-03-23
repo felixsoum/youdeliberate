@@ -143,7 +143,7 @@ class NarrativesController < ApplicationController
   # DELETE /narratives/1
   # DELETE /narratives/1.json
   def destroy
-    FileUtils.rm_rf(@narrative.nar_path)
+    FileUtils.rm_rf(Rails.public_path + @narrative.nar_path)
     @narrative.destroy
     respond_to do |format|
       format.html { redirect_to admin_list_path }

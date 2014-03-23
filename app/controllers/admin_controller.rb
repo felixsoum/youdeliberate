@@ -37,7 +37,7 @@ class AdminController < ApplicationController
           set_counter_value(get_narrative_counter, narrative_number)
           flash[:success] = get_message(number_of_uploaded_narrative, invalid_narratives)
         else
-          flash[:error] = "There are invalid files in narratives.(For file format just mp3, wav, jpg and png are supported)"
+          flash[:error] = "There are invalid files in narratives.(For file format just mp3, wav, mp4, jpg and png are supported)"
         end
       end
     end
