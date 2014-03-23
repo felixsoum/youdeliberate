@@ -1,5 +1,5 @@
 class AdminController < ApplicationController
-  @@accepted_audio_formats = [".mp3", ".wav"]
+  @@accepted_audio_formats = [".mp3", ".wav", ".mp4"]
   @@accepted_image_formats = [".jpg", ".png"]
 
   # POST admin/upload
