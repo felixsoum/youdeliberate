@@ -11,6 +11,7 @@ one:
   num_of_disagree: 1
   num_of_flagged: 1
   create_time: 2014-01-21 12:42:10
+  total_audio_length: 120
 
 two:
   nar_name: second narrative
@@ -23,3 +24,4 @@ two:
   num_of_disagree: 0
   num_of_flagged: 0
   create_time: 2014-01-29 12:42:10
+  total_audio_length: 101
