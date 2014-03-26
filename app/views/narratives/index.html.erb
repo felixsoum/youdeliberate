@@ -77,7 +77,10 @@
 				        <td><%= narrative.num_of_flagged %></td>
 				        <td><%= narrative.create_time.to_formatted_s(:db) %></td>
 				        <td><%= narrative.updated_at.to_formatted_s(:db) %></td>
-				        <td><%= check_box(narrative.id, :is_published, {}, true, false) %></td>
+                <td>
+                  <input name="<%= narrative.id %>[is_published]" type="hidden" value="0" />
+                  <input <%= 'checked="checked"' if narrative.is_published %> id="<%= narrative.id %>_is_published" name="<%= narrative.id %>[is_published]" type="checkbox" value="1" />
+                </td>
 				       	<td><a href="#" class="play-button" data-narrative-id="<%= narrative.id %>">Play</a></td>
 
 				        <td><%= link_to 'Delete', narrative, method: :delete, data: { confirm: 'Are you sure?' }, :class => "delete-button" %></td>

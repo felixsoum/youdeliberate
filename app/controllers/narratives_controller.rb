@@ -141,14 +141,8 @@ class NarrativesController < ApplicationController
   end
 
   def save
-    params_copy = params.deep_dup
-    #Narrative.ids.each do |id|
-      #params_copy[id][:is_published]
-    #end
-    puts "START SAVE~~~~~~~~~~~~~~~~~~~~"
     Narrative.transaction do
       Narrative.all.each do |narrative|
-        puts params[narrative.id.to_s][:is_published]
         narrative.update(params.require(narrative.id.to_s).permit(:nar_name, :language_id, :category_id, :is_published))
       end
     end
