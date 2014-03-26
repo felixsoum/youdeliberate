@@ -19,20 +19,20 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
-  portal_topic: "Bill 60"
-  about_description: "Bill 60 is a bill created by the Government of Quebec that is proposing a modification to the agreed resonable accommodiation in Quebec"
+fr:
+  portal_topic: "Project de loi 60"
+  about_description: "Le projet de loi 60 est un projet de loi créée par le gouvernement du Québec qui propose une modification de la accommodiation resonable convenu au Québec"
   about_list_html: |
-    <p><b> Accomodation can be: </b></p>
+    <p><b> Hébergement peut être: </b></p>
     <ul>
-      <li>Religious</li>
-      <li>Academic</li>
-      <li>Employement Related</li>
+      <li>Religieuse</li>
+      <li>Scolaire</li>
+      <li>Emploi connexes</li>
     </ul>
   about_link_html: |
-    <h4>Bill 60 links</h4>
+    <h4>Projet de loi 60 liens</h4>
     <ol class="list-unstyled">
-      <li><a href="http://www.nosvaleurs.gouv.qc.ca/medias/pdf/Charter.pdf">Government of Quebec Bill 60</a></li>
-      <li><a href="#">Useful Link 2</a></li>
-      <li><a href="#">Questionable Editorials</a></li>
+      <li><a href="http://www.lapresse.ca/fichiers/4708179/charte.pdf">Gouvernement du Québec le Projet de loi 60</a></li>
+      <li><a href="#">Lien Utile 2</a></li>
+      <li><a href="#">Discutable Editoriaux</a></li>
     </ol>
