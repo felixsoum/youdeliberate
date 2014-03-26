@@ -63,24 +63,30 @@
 				  </thead>
 
 				  <tbody>
-				    <% @narratives.each do |narrative| %>
-				      <%= form_for(narrative) do |f| %>
+				  	<%= form_tag("/narratives/save", method: "post") do %>
+				  	  <% language_all = Language.all.collect {|p| [ p.language_name, p.id ] } %>
+				  	  <% category_all = Category.all.collect {|p| [ p.category_name, p.id ] } %>
+				      <% @narratives.each do |narrative| %>
 				      <tr>
-				        <td><%= f.text_field :nar_name %></td>
-				        <td><%= f.select :language_id, Language.all.collect {|p| [ p.language_name, p.id ] } %></td>
-				        <td><%= f.select :category_id, Category.all.collect {|p| [ p.category_name, p.id ] } %></td>
+				        <td><%= text_field(narrative.id, :nar_name, value: narrative.nar_name) %></td>
+				        <td><%= select(narrative.id, :language_id, options_for_select(language_all, narrative.language_id) ) %></td>
+				        <td><%= select(narrative.id, :category_id, options_for_select(category_all, narrative.category_id) ) %></td>
 				        <td><%= narrative.num_of_view %></td>
 				        <td><%= narrative.num_of_agree %></td>
 				        <td><%= narrative.num_of_disagree %></td>
 				        <td><%= narrative.num_of_flagged %></td>
 				        <td><%= narrative.create_time.to_formatted_s(:db) %></td>
 				        <td><%= narrative.updated_at.to_formatted_s(:db) %></td>
-				        <td><%= f.check_box :is_published %></td>
+                <td>
+                  <input name="<%= narrative.id %>[is_published]" type="hidden" value="0" />
+                  <input <%= 'checked="checked"' if narrative.is_published %> id="<%= narrative.id %>_is_published" name="<%= narrative.id %>[is_published]" type="checkbox" value="1" />
+                </td>
 				       	<td><a href="#" class="play-button" data-narrative-id="<%= narrative.id %>">Play</a></td>
-				       	<td><%= f.submit "Save", :class => 'save-button'%></td>
+
 				        <td><%= link_to 'Delete', narrative, method: :delete, data: { confirm: 'Are you sure?' }, :class => "delete-button" %></td>
 				      </tr>
 				      <% end %>
+				      <%= submit_tag("Save")%>
 				    <% end %>
 				  </tbody>
 				</table>

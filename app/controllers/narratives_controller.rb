@@ -140,6 +140,15 @@ class NarrativesController < ApplicationController
     end
   end
 
+  def save
+    Narrative.transaction do
+      Narrative.all.each do |narrative|
+        narrative.update(params.require(narrative.id.to_s).permit(:nar_name, :language_id, :category_id, :is_published))
+      end
+    end
+    redirect_to admin_list_path
+  end
+
   # DELETE /narratives/1
   # DELETE /narratives/1.json
   def destroy
