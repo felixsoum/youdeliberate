@@ -46,52 +46,52 @@
           <div class="panel-heading"><h4>Liste des récits&nbsp;&nbsp;<span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;Listing Narratives</h4></div>
 			<div class="table-responsive with-padding">
         <%= form_tag("/narratives/save", method: "post") do %>
-				<table class="tablesorter">
-				  <thead>
-				    <tr>
-				      <th class="header">Name</th>
-				      <th class="header">Language</th>
-				      <th class="header">Category</th>
+        <table class="tablesorter">
+          <thead>
+            <tr>
+              <th class="header">Name</th>
+              <th class="header">Language</th>
+              <th class="header">Category</th>
               <th>Published</th>
-				      <th class="header">View&nbsp;&nbsp;&nbsp;</th>
-				      <th class="header">Agree&nbsp;&nbsp;&nbsp;</th>
-				      <th class="header">Disagree&nbsp;&nbsp;&nbsp;</th>
-				      <th class="header">Flagged&nbsp;&nbsp;&nbsp;</th>
-				      <th class="header">Create Time</th>
-				      <th class="header">Upload Time</th>
-				      <th colspan="2"></th>
-				    </tr>
-				  </thead>
+              <th class="header">View&nbsp;&nbsp;&nbsp;</th>
+              <th class="header">Agree&nbsp;&nbsp;&nbsp;</th>
+              <th class="header">Disagree&nbsp;&nbsp;&nbsp;</th>
+              <th class="header">Flagged&nbsp;&nbsp;&nbsp;</th>
+              <th class="header">Create Time</th>
+              <th class="header">Upload Time</th>
+              <th colspan="2"></th>
+            </tr>
+          </thead>
           
-				  <tbody>
-				  	
-				  	  <% language_all = Language.all.collect {|p| [ p.language_name, p.id ] } %>
-				  	  <% category_all = Category.all.collect {|p| [ p.category_name, p.id ] } %>
-				      <% @narratives.each do |narrative| %>
-				      <tr>
-				        <td><%= text_field(narrative.id, :nar_name, value: narrative.nar_name) %></td>
-				        <td><%= select(narrative.id, :language_id, options_for_select(language_all, narrative.language_id) ) %></td>
-				        <td><%= select(narrative.id, :category_id, options_for_select(category_all, narrative.category_id) ) %></td>
-                <td>
-                  <input name="<%= narrative.id %>[is_published]" type="hidden" value="0" />
-                  <input <%= 'checked="checked"' if narrative.is_published %> id="<%= narrative.id %>_is_published" name="<%= narrative.id %>[is_published]" type="checkbox" value="1" />
-                </td>
-				        <td><%= narrative.num_of_view %></td>
-				        <td><%= narrative.num_of_agree %></td>
-				        <td><%= narrative.num_of_disagree %></td>
-				        <td><%= narrative.num_of_flagged %></td>
-				        <td><%= narrative.create_time.to_formatted_s(:db) %></td>
-				        <td><%= narrative.updated_at.to_formatted_s(:db) %></td>
-				       	<td><a href="#" class="btn btn-default btn-xs" data-narrative-id="<%= narrative.id %>">Play</a></td>
-				        <td><%= link_to 'Delete', narrative, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-default btn-xs" %></td>
-				      </tr>
-				      <% end %>
-				      
-				  </tbody>
+          <tbody>
+           
+           <% language_all = Language.all.collect {|p| [ p.language_name, p.id ] } %>
+           <% category_all = Category.all.collect {|p| [ p.category_name, p.id ] } %>
+           <% @narratives.each do |narrative| %>
+           <tr>
+            <td><%= text_field(narrative.id, :nar_name, value: narrative.nar_name) %></td>
+            <td><%= select(narrative.id, :language_id, options_for_select(language_all, narrative.language_id) ) %></td>
+            <td><%= select(narrative.id, :category_id, options_for_select(category_all, narrative.category_id) ) %></td>
+            <td>
+              <input name="<%= narrative.id %>[is_published]" type="hidden" value="0" />
+              <input <%= 'checked="checked"' if narrative.is_published %> id="<%= narrative.id %>_is_published" name="<%= narrative.id %>[is_published]" type="checkbox" value="1" />
+            </td>
+            <td><%= narrative.num_of_view %></td>
+            <td><%= narrative.num_of_agree %></td>
+            <td><%= narrative.num_of_disagree %></td>
+            <td><%= narrative.num_of_flagged %></td>
+            <td><%= narrative.create_time.to_formatted_s(:db) %></td>
+            <td><%= narrative.updated_at.to_formatted_s(:db) %></td>
+            <td><a href="#" class="btn btn-default btn-xs" data-narrative-id="<%= narrative.id %>">Play</a></td>
+            <td><%= link_to 'Delete', narrative, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-default btn-xs" %></td>
+          </tr>
+          <% end %>
           
-				</table>
-        <%= button_tag "Save", class: "btn btn-primary btn-lg" %>
-            <% end %>
+        </tbody>
+        
+      </table>
+      <%= button_tag "Save", class: "btn btn-primary btn-lg" %>
+      <% end %>
 			</div>
           </div>
         </div>
