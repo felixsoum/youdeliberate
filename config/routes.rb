@@ -24,6 +24,8 @@ App60::Application.routes.draw do
   get 'admin/login',  to: 'sessions#new', as: 'signin'
   delete 'admin/logout', to: 'sessions#destroy', as: 'signout'
   post 'admin/upload', as: 'upload_narrative'
+  get 'admin/forget', to: 'sessions#forget_password', as: 'forget_password'
+  post 'admin/send', to: 'sessions#send_password', as: 'send_password'
   get 'admin/*any' => redirect('/admin')
   resources :sessions, only: [:new, :create, :destroy]
 	
