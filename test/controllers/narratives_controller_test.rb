@@ -102,4 +102,11 @@ class NarrativesControllerTest < ActionController::TestCase
     assert_not_nil assigns(:narratives)
   end
 
+  test "UT-NC-22: Narrative should save narratives changes" do
+    changed_narratives = {"298486374"=>{"nar_name"=>"100", "language_id"=>"1", "category_id"=>"1", "is_published"=>"1"}, "980190962"=>{"nar_name"=>"200", "language_id"=>"1", "category_id"=>"2", "is_published"=>"1"}} 
+    post :save, :narrative_attributes => changed_narratives
+    assert_response :redirect
+    assert_redirected_to admin_list_path
+  end
+
 end
