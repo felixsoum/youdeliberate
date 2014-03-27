@@ -68,13 +68,14 @@
            <% language_all = Language.all.collect {|p| [ p.language_name, p.id ] } %>
            <% category_all = Category.all.collect {|p| [ p.category_name, p.id ] } %>
            <% @narratives.each do |narrative| %>
+           <% form_hash = "narrative_attributes[#{narrative.id}]" %>
            <tr>
-            <td><%= text_field(narrative.id, :nar_name, value: narrative.nar_name) %></td>
-            <td><%= select(narrative.id, :language_id, options_for_select(language_all, narrative.language_id) ) %></td>
-            <td><%= select(narrative.id, :category_id, options_for_select(category_all, narrative.category_id) ) %></td>
+            <td><%= text_field(form_hash, :nar_name, value: narrative.nar_name) %></td>
+            <td><%= select(form_hash, :language_id, options_for_select(language_all, narrative.language_id) ) %></td>
+            <td><%= select(form_hash, :category_id, options_for_select(category_all, narrative.category_id) ) %></td>
             <td>
-              <input name="<%= narrative.id %>[is_published]" type="hidden" value="0" />
-              <input <%= 'checked="checked"' if narrative.is_published %> id="<%= narrative.id %>_is_published" name="<%= narrative.id %>[is_published]" type="checkbox" value="1" />
+              <input name="<%= form_hash %>[is_published]" type="hidden" value="0" />
+              <input <%= 'checked="checked"' if narrative.is_published %> id="<%= form_hash %>_is_published" name="<%= form_hash %>[is_published]" type="checkbox" value="1" />
             </td>
             <td><%= narrative.num_of_view %></td>
             <td><%= narrative.num_of_agree %></td>

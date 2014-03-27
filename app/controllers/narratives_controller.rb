@@ -140,11 +140,26 @@ class NarrativesController < ApplicationController
     end
   end
 
+  # POST /narratives/save
   def save
+    # Convert hash keys from String to Int
+    converted_params = Hash[params[:narrative_attributes].map {|k, v| [k.to_i, v] }]
+    # Whitelist params
+    safe_params = ActionController::Parameters.new(converted_params)
+    # Track success of save
+    is_saved = true
+    # Commit all updates in a single transaction
     Narrative.transaction do
+      # ActiveRecord guarantees that only changed objects will be saved in the transaction
       Narrative.all.each do |narrative|
-        narrative.update(params.require(narrative.id.to_s).permit(:nar_name, :language_id, :category_id, :is_published))
+        is_saved = is_saved and narrative.update(safe_params.require(narrative.id).permit(:nar_name, :language_id, :category_id, :is_published))
       end
+    end
+    # Flash save status
+    if is_saved
+      flash[:success] = "The narratives have been saved."
+    else
+      flash[:error] = "There was a problem saving the narratives..."
     end
     redirect_to admin_list_path
   end
