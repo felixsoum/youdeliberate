@@ -45,7 +45,20 @@
 		  
 		  <div>
             <p class="with-left-margin title">Add new administrator:</p>
-			
+			<%= form_tag(add_admin_path, method: "post") do %>
+				<p class="with-left-margin"><strong>User name (email): </strong>
+			    <%= email_field_tag(:email, nil, placeholder: 'Email') %>
+			    </p>
+				<p class="with-left-margin"><strong>Password: </strong>
+			    <%= password_field_tag(:password, nil, placeholder: 'Password') %>
+			    </p>
+			    <p class="with-left-margin"><strong>Confirm Password: </strong>
+			    <%= password_field_tag(:password_confirmation, nil, placeholder: 'Password again') %>
+			    </p>
+			    <div class="with-left-margin with-bottom-margin">
+			            <%= submit_tag("Add", class: "btn btn-large btn-primary") %>
+			    </div>
+			<% end %>
 		  </div>
 		  
 		  

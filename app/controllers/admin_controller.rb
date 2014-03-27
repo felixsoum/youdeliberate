@@ -31,6 +31,16 @@ class AdminController < ApplicationController
     redirect_to admin_setting_path
   end
 
+  def add_admin
+    admin = Admin.new(user_name: params[:email], password: params[:password], password_confirmation: params[:password_confirmation])
+    if(admin.save)
+      flash[:success] = "The new administrator has been added successfully."
+    else
+      flash[:error] = "The administrator is not added."
+    end
+    redirect_to admin_setting_path
+  end
+
   private
     def upload_narratives narratives_zip
       Zip::File.open(narratives_zip.path) do |zip_file|
