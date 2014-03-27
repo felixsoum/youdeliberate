@@ -21,6 +21,8 @@ App60::Application.routes.draw do
   resources :narratives
   # Admin
   get 'admin', to: 'narratives#index', as: 'admin_list'
+  get 'admin/setting', to: 'narratives#setting', as: 'admin_setting'
+  post 'admin/change', to: 'admin#change_password', as: 'change_password'
   get 'admin/login',  to: 'sessions#new', as: 'signin'
   delete 'admin/logout', to: 'sessions#destroy', as: 'signout'
   post 'admin/upload', as: 'upload_narrative'

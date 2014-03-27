@@ -21,6 +21,16 @@ class AdminController < ApplicationController
     redirect_to admin_list_path
   end
 
+  def change_password
+    admin = Admin.find(cookies[:user_id])
+    if(admin.update(password: params[:password], password_confirmation: params[:password_confirmation]))
+      flash[:success] = "Your password has been changed."
+    else
+      flash[:error] = "Please make sure the passwords you typed are the same."
+    end
+    redirect_to admin_setting_path
+  end
+
   private
     def upload_narratives narratives_zip
       Zip::File.open(narratives_zip.path) do |zip_file|
