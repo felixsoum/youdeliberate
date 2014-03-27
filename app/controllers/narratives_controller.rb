@@ -11,6 +11,9 @@ class NarrativesController < ApplicationController
     render_to_home(narratives_json(published_narratives))
   end
 
+  def setting
+  end
+
   # GET /narratives/1
   # GET /narratives/1.json
   def show

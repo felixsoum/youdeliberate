@@ -1,0 +1,71 @@
+
+    <!-- <div class="navbar navbar-inverse navbar-fixed-top" role="navigation"> -->
+    <div class="navbar navbar-default navbar-static-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand">VousDélibérez! <span class="glyphicon glyphicon-flash"></span> YouDeliberate!</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="list-spacer">&nbsp;</li>
+            <li><a class="fancybox" href="<%= admin_list_path %>">Récits <span class="glyphicon glyphicon-flash"></span> Narratives</a></li>
+            <li><a class="fancybox" href="<%= admin_setting_path %>">Réglage <span class="glyphicon glyphicon-flash"></span> Setting</a></li>
+            <li class="list-spacer">&nbsp;</li>
+            <li class="list-spacer" align="right"><%= link_to "Déconnexion/Logout", signout_path, method: "delete" %></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+    
+
+	<!-- content container -->
+    <div class="container">
+
+      <!-- page headline -->
+      <div class="header-section"><br/></div>
+
+      <!-- Upload narrative section -->
+      <div class="col-lg-12">
+      	<div class="panel panel-primary">
+          <div class="panel-heading"><h4>Réglage&nbsp;&nbsp;<span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;Setting</h4></div>
+          <div>
+            <p class="with-left-margin title">Change my password:</p>
+			<%= form_tag(change_password_path, method: "post") do %>
+				<p class="with-left-margin"><strong>New Password: </strong>
+			    <%= password_field_tag(:password, nil, placeholder: 'New password') %>
+			    </p>
+			    <p class="with-left-margin"><strong>Confirm Password: </strong>
+			    <%= password_field_tag(:password_confirmation, nil, placeholder: 'New password again') %>
+			    </p>
+			    <div class="with-left-margin with-bottom-margin">
+			            <%= submit_tag("Change", class: "btn btn-large btn-primary") %>
+			    </div>
+			<% end %>
+		  </div>
+		  
+		  <div>
+            <p class="with-left-margin title">Add new administrator:</p>
+			<%= form_tag(add_admin_path, method: "post") do %>
+				<p class="with-left-margin"><strong>User name (email): </strong>
+			    <%= email_field_tag(:email, nil, placeholder: 'Email') %>
+			    </p>
+				<p class="with-left-margin"><strong>Password: </strong>
+			    <%= password_field_tag(:password, nil, placeholder: 'Password') %>
+			    </p>
+			    <p class="with-left-margin"><strong>Confirm Password: </strong>
+			    <%= password_field_tag(:password_confirmation, nil, placeholder: 'Password again') %>
+			    </p>
+			    <div class="with-left-margin with-bottom-margin">
+			            <%= submit_tag("Add", class: "btn btn-large btn-primary") %>
+			    </div>
+			<% end %>
+		  </div>
+		  
+		  
+		  <div>
+            <p class="with-left-margin title">Google Analytics</p>
+            <a class="with-left-margin" href="http://www.google.ca/analytics/" target="_blank">Metrics</a>
+		  </div>
+      	</div>
+      </div><!-- End upload narrative section -->
+    </div>
