@@ -9,7 +9,7 @@
           <ul class="nav navbar-nav">
             <li class="list-spacer">&nbsp;</li>
             <li><a class="fancybox" href="<%= admin_list_path %>">Récits <span class="glyphicon glyphicon-flash"></span> Narratives</a></li>
-            <li><a class="fancybox" href="<%= admin_setting_path %>">Réglage <span class="glyphicon glyphicon-flash"></span> Setting</a></li>
+            <li><a class="fancybox" href="<%= admin_setting_path %>">paramètres <span class="glyphicon glyphicon-flash"></span> Settings</a></li>
             <li class="list-spacer">&nbsp;</li>
             <li class="list-spacer" align="right"><%= link_to "Déconnexion/Logout", signout_path, method: "delete" %></li>
           </ul>
@@ -28,9 +28,9 @@
       	<div class="panel panel-primary">
           <div class="panel-heading"><h4>Télécharger des récits&nbsp;&nbsp;<span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;Upload Narratives</h4></div>
           <div>
-            <h2><p class="with-left-margin title">Please choose a zip file:</p></h2>
+            <h2><p class="title">Please choose a zip file:</p></h2>
 			<%= form_tag(upload_narrative_path, multipart: true) do %>
-			  <div><%= file_field_tag 'narrative', accept: 'application/zip' %></div>
+			  <div class="with-small-left-margin"><%= file_field_tag 'narrative', accept: 'application/zip'%></div>
 			  <div><%= hidden_field_tag 'upload_path' %></div>
 			  <div class="with-left-margin with-bottom-margin"><%= submit_tag("Upload") %></div>
 			<% end %>
