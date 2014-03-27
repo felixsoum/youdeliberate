@@ -1,5 +1,5 @@
 class FlagMailer < ActionMailer::Base
-  default from: 'flag_reason@youdeliberate.com'
+  default from: 'soen390@youdeliberate.com'
 
   def flag_reason_email narrative_id, reason
     mail(to: Admin.first.user_name, subject: "The reason to flag narrative #{narrative_id}",
