@@ -37,29 +37,39 @@ function onLoadAnim() {
     
     path
         .data(partition.value(value).nodes)
-      .transition()
+        .transition()
         .duration(2700)
         .attrTween("d", arcTween);
+initializeTooltips(); 
+  
 }
-
+function initializeTooltips(){
+  jQuery('#toolTip1').tooltip({html:true,placement:'right',trigger:'manual',html:true}); 
+  jQuery('#toolTip2').tooltip({html:true,placement:'right',trigger:'manual',html:true});
+  jQuery('#toolTip3').tooltip({html:true,placement:'right',trigger:'manual',html:true}); 
+}
 //get data
 function getData() {
+
+  createTooltipDivs(); 
   d3.json("/sunburst.json", function(error, root) {
     path = svg.datum(root).selectAll("path")
         .data(partition.nodes)
-      .enter().append("path")
+        .enter().append("path")
         .attr("display", function(d) { return d.depth ? null : "none"; }) // hide inner ring
         .attr("d", arc)
         .attr("categoryID",function(d){ return d.category_id; })
         .attr("class","sunburst-path")
         .attr("id",function(d){return "category"+d.category_id})
+        .attr("data-toggle","tooltip")
+        .attr("title",function(d){return getCategoryTooltip(d.category_id);}) 
         .style("opacity",function(d){ return getSunburstSegmentOpacity(d); })
         .style("stroke", function(d) { return getArcMouseOutColor(d.category_id); })
         .style("stroke-width","2px")
         .style("fill", function(d) { return getCategoryColor(d.category_id); })
         .style("fill-rule", "evenodd")
-        .on("mouseover",function(d){d3.select(this).style("stroke",function(d) { d3.select(this).style("opacity",0.5); highlightMatchingCircles(d); return getArcMouseOverColor(d.category_id);  })})
-        .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { d3.select(this).style("opacity",function(d){ return getSunburstSegmentOpacity(d); }); deHighlightCircles(); return getArcMouseOutColor(d.category_id);  })})
+        .on("mouseover",function(d){d3.select(this).style("stroke",function(d) { d3.select(this).style("opacity",0.5); highlightMatchingCircles(d); showTooltip(d); return getArcMouseOverColor(d.category_id);  })})
+        .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { d3.select(this).style("opacity",function(d){ return getSunburstSegmentOpacity(d); }); deHighlightCircles(); hideTooltip(d); return getArcMouseOutColor(d.category_id);  })})
         .on("click",function(d,i){filterCategoryToggle(d.category_id)})
         .each(stash);
         
@@ -68,7 +78,50 @@ function getData() {
         onLoadAnim();
   });
 }
+function createTooltipDivs(){
+  var foo = document.getElementById('sunburst');
+  //create tooltip div for For category 
+  var forDiv = document.createElement('div'); 
+  forDiv.id = "toolTip1"; 
+  forDiv.style.width = "25px"; 
+  forDiv.style.height = "25px"; 
+  forDiv.innerHTML = ""; 
+  forDiv.title = "POUR / FOR</br> "+"percent"+"%"; 
+  foo.appendChild(forDiv); 
+  jQuery("#toolTip1").offset({top:460,left:370});
+  jQuery('#toolTip1').attr("data-toggle","tooltip"); 
 
+  //create tooltip div for For category 
+  var againstDiv = document.createElement('div'); 
+  againstDiv.id = "toolTip2"; 
+  againstDiv.style.width = "25px"; 
+  againstDiv.style.height = "25px"; 
+  againstDiv.innerHTML = ""; 
+  againstDiv.title = "CONTRE /</br> AGAINST</br> "+"percent"+"%"; 
+  foo.appendChild(againstDiv); 
+  jQuery("#toolTip2").offset({top:460,left:370});
+  jQuery('#toolTip2').attr("data-toggle","tooltip"); 
+
+  //create tooltip div for For category 
+  var ambivalentDiv = document.createElement('div'); 
+  ambivalentDiv.id = "toolTip3"; 
+  ambivalentDiv.style.width = "25px"; 
+  ambivalentDiv.style.height = "25px"; 
+  ambivalentDiv.innerHTML = ""; 
+  ambivalentDiv.title = "AMBIVALENT(E) /</br> AMBIVALENT</br> "+"percent"+"%"; 
+  foo.appendChild(ambivalentDiv); 
+  jQuery("#toolTip3").offset({top:460,left:360});
+  jQuery('#toolTip3').attr("data-toggle","tooltip"); 
+
+}
+function showTooltip(d){  
+  var id = "#toolTip"+d.category_id; 
+  jQuery(id).tooltip('show'); 
+}
+function hideTooltip(d){
+  var id = "#toolTip"+d.category_id; 
+  jQuery(id).tooltip('hide');
+}
 // Stash the old values for transition.
 function stash(d) {
   d.x0 = d.x;

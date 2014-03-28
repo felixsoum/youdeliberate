@@ -104,11 +104,11 @@
 
 		</br>
 		<div class="btn-group" id="single-view-tooltip">
-			<button id="agree-button" data-opposite-id="disagree-button" type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Nombre votes en accord / Number of Agrees" data-display-id="num-agree-votes" data-vote-submitted="false" data-ajax-primary-action="<%= agree_with_narrative_path(@narrative.id) %>", data-ajax-secondary-action="<%= undo_agree_with_narrative_path(@narrative.id) %>">
+			<button id="agree-button" data-opposite-id="disagree-button" type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="D'accord / Agree" data-display-id="num-agree-votes" data-vote-submitted="false" data-ajax-primary-action="<%= agree_with_narrative_path(@narrative.id) %>", data-ajax-secondary-action="<%= undo_agree_with_narrative_path(@narrative.id) %>">
 				<span class="glyphicon glyphicon-thumbs-up"></span>
 				<span id="num-agree-votes"><%= @narrative.num_of_agree %></span>
 			</button>
- 			<button id="disagree-button" data-opposite-id="agree-button" type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Nombre de votes en désaccord / Number of Disagrees" data-display-id="num-disagree-votes" data-vote-submitted="false" data-ajax-primary-action="<%= disagree_with_narrative_path(@narrative.id) %>", data-ajax-secondary-action="<%= undo_disagree_with_narrative_path(@narrative.id) %>">
+ 			<button id="disagree-button" data-opposite-id="agree-button" type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Pas d'accord / Disagree" data-display-id="num-disagree-votes" data-vote-submitted="false" data-ajax-primary-action="<%= disagree_with_narrative_path(@narrative.id) %>", data-ajax-secondary-action="<%= undo_disagree_with_narrative_path(@narrative.id) %>">
  				<span class="glyphicon glyphicon-thumbs-down"></span>
  				<span id="num-disagree-votes"><%= @narrative.num_of_disagree %></span>
  			</button>
