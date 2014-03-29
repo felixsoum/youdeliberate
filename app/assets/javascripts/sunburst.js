@@ -44,9 +44,9 @@ initializeTooltips();
   
 }
 function initializeTooltips(){
-  jQuery('#toolTip1').tooltip({html:true,placement:'right',trigger:'manual',html:true}); 
-  jQuery('#toolTip2').tooltip({html:true,placement:'right',trigger:'manual',html:true});
-  jQuery('#toolTip3').tooltip({html:true,placement:'right',trigger:'manual',html:true}); 
+  jQuery('#toolTip1').tooltip({html:true,placement:'bottom',trigger:'manual',html:true}); 
+  jQuery('#toolTip2').tooltip({html:true,placement:'bottom',trigger:'manual',html:true});
+  jQuery('#toolTip3').tooltip({html:true,placement:'bottom',trigger:'manual',html:true}); 
 }
 //get data
 function getData() {
@@ -80,37 +80,43 @@ function getData() {
 }
 function createTooltipDivs(){
   var foo = document.getElementById('sunburst');
+  var top = jQuery("#sunburst-svg").offset().top; 
+  var left = jQuery("#sunburst-svg").offset().left; 
+  var height = document.getElementById('sunburst-svg').offsetHeight;
+  var height = document.getElementById('sunburst-svg').offsetWidth;
+  var newTop = top +height/2.5; 
+  var newLeft = left + width/2; 
   //create tooltip div for For category 
   var forDiv = document.createElement('div'); 
   forDiv.id = "toolTip1"; 
-  forDiv.style.width = "25px"; 
-  forDiv.style.height = "25px"; 
+  forDiv.style.width = "5px"; 
+  forDiv.style.height = "5px"; 
   forDiv.innerHTML = ""; 
-  forDiv.title = "POUR / FOR</br> "+"percent"+"%"; 
+  forDiv.title = "POUR <span class='glyphicon glyphicon-flash'></span> FOR</br> "+"percent"+"%"; 
   foo.appendChild(forDiv); 
-  jQuery("#toolTip1").offset({top:460,left:370});
+  jQuery("#toolTip1").offset({top:newTop,left:newLeft});
   jQuery('#toolTip1').attr("data-toggle","tooltip"); 
 
   //create tooltip div for For category 
   var againstDiv = document.createElement('div'); 
   againstDiv.id = "toolTip2"; 
-  againstDiv.style.width = "25px"; 
-  againstDiv.style.height = "25px"; 
+  againstDiv.style.width = "1px"; 
+  againstDiv.style.height = "1px"; 
   againstDiv.innerHTML = ""; 
-  againstDiv.title = "CONTRE /</br> AGAINST</br> "+"percent"+"%"; 
+  againstDiv.title = "CONTRE <span class='glyphicon glyphicon-flash'></span></br> AGAINST</br> "+"percent"+"%"; 
   foo.appendChild(againstDiv); 
-  jQuery("#toolTip2").offset({top:460,left:370});
+  jQuery("#toolTip2").offset({top:newTop,left:newLeft});
   jQuery('#toolTip2').attr("data-toggle","tooltip"); 
 
   //create tooltip div for For category 
   var ambivalentDiv = document.createElement('div'); 
   ambivalentDiv.id = "toolTip3"; 
-  ambivalentDiv.style.width = "25px"; 
-  ambivalentDiv.style.height = "25px"; 
+  ambivalentDiv.style.width = "1px"; 
+  ambivalentDiv.style.height = "1px"; 
   ambivalentDiv.innerHTML = ""; 
-  ambivalentDiv.title = "AMBIVALENT(E) /</br> AMBIVALENT</br> "+"percent"+"%"; 
+  ambivalentDiv.title = "AMBIVALENT(E) <span class='glyphicon glyphicon-flash'></span></br> AMBIVALENT</br> "+"percent"+"%"; 
   foo.appendChild(ambivalentDiv); 
-  jQuery("#toolTip3").offset({top:460,left:360});
+  jQuery("#toolTip3").offset({top:newTop,left:newLeft});
   jQuery('#toolTip3').attr("data-toggle","tooltip"); 
 
 }
