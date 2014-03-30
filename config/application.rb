@@ -21,7 +21,7 @@ module App60
     # config.i18n.default_locale = :de
 
     # Ignore test warning. Read more: http://stackoverflow.com/questions/20361428/rails-i18n-validation-deprecation-warning
-    config.i18n.enforce_available_locales = false
+    config.i18n.enforce_available_locales = true
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
   end
 end
