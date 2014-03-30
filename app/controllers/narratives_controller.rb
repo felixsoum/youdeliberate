@@ -11,6 +11,9 @@ class NarrativesController < ApplicationController
     render_to_home(narratives_json(published_narratives))
   end
 
+  def setting
+  end
+
   # GET /narratives/1
   # GET /narratives/1.json
   def show
@@ -138,6 +141,30 @@ class NarrativesController < ApplicationController
         flash[:error] = "Fail.The narrative cannot be updated."
       end
     end
+  end
+
+  # POST /narratives/save
+  def save
+    # Convert hash keys from String to Int
+    converted_params = Hash[params[:narrative_attributes].map {|k, v| [k.to_i, v] }]
+    # Whitelist params
+    safe_params = ActionController::Parameters.new(converted_params)
+    # Track success of save
+    is_saved = true
+    # Commit all updates in a single transaction
+    Narrative.transaction do
+      # ActiveRecord guarantees that only changed objects will be saved in the transaction
+      Narrative.all.each do |narrative|
+        is_saved = is_saved and narrative.update(safe_params.require(narrative.id).permit(:nar_name, :language_id, :category_id, :is_published))
+      end
+    end
+    # Flash save status
+    if is_saved
+      flash[:success] = "The narratives have been saved."
+    else
+      flash[:error] = "There was a problem saving the narratives..."
+    end
+    redirect_to admin_list_path
   end
 
   # DELETE /narratives/1

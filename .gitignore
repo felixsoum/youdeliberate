@@ -23,3 +23,6 @@ Gemfile.lock
 
 # Ignore the uploaded narratives.
 /public/narratives
+
+# Ignore precompiled assets
+/public/assets

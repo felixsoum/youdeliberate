@@ -11,7 +11,7 @@ class ImageTest < ActiveSupport::TestCase
     @img = nil
   end
   
-  test "Should not save image without image_path or correct narrative id" do
+  test "UT-I-2: Should not save image without image_path or correct narrative id" do
     img_no_parent = Image.new(image_path: "path")
     assert !img_no_parent.save
     
@@ -22,7 +22,7 @@ class ImageTest < ActiveSupport::TestCase
     assert !img_wrong_parent.save 
   end
   
-  test "Should have has_many relationship between narratives and images" do
+  test "UT-I-1: Should have has_many relationship between narratives and images" do
     assert_equal(980190962, @img.narrative_id)
     assert_equal(980190962, @img.narrative.id)
   end

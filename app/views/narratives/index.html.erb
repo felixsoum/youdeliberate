@@ -8,8 +8,8 @@
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="list-spacer">&nbsp;</li>
-            <li><a class="fancybox" href="">Récits <span class="glyphicon glyphicon-flash"></span> Narratives</a></li>
-            <li><a class="fancybox" href="">Tableau de bord <span class="glyphicon glyphicon-flash"></span> Dashboard</a></li>
+            <li><a class="fancybox" href="<%= admin_list_path %>">Récits <span class="glyphicon glyphicon-flash"></span> Narratives</a></li>
+            <li><a class="fancybox" href="<%= admin_setting_path %>">paramètres <span class="glyphicon glyphicon-flash"></span> Settings</a></li>
             <li class="list-spacer">&nbsp;</li>
             <li class="list-spacer" align="right"><%= link_to "Déconnexion/Logout", signout_path, method: "delete" %></li>
           </ul>
@@ -28,9 +28,9 @@
       	<div class="panel panel-primary">
           <div class="panel-heading"><h4>Télécharger des récits&nbsp;&nbsp;<span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;Upload Narratives</h4></div>
           <div>
-            <p class="with-left-margin title">Please choose a zip file:</p>
+            <h2><p class="title">Please choose a zip file:</p></h2>
 			<%= form_tag(upload_narrative_path, multipart: true) do %>
-			  <div><%= file_field_tag 'narrative', accept: 'application/zip' %></div>
+			  <div class="with-small-left-margin"><%= file_field_tag 'narrative', accept: 'application/zip'%></div>
 			  <div><%= hidden_field_tag 'upload_path' %></div>
 			  <div class="with-left-margin with-bottom-margin"><%= submit_tag("Upload") %></div>
 			<% end %>
@@ -45,45 +45,54 @@
       	<div class="panel panel-primary">
           <div class="panel-heading"><h4>Liste des récits&nbsp;&nbsp;<span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;Listing Narratives</h4></div>
 			<div class="table-responsive with-padding">
-				<table class="tablesorter">
-				  <thead>
-				    <tr>
-				      <th class="header">Name</th>
-				      <th class="header">Language</th>
-				      <th class="header">Category</th>
-				      <th class="header">View&nbsp;&nbsp;&nbsp;</th>
-				      <th class="header">Agree&nbsp;&nbsp;&nbsp;</th>
-				      <th class="header">Disagree&nbsp;&nbsp;&nbsp;</th>
-				      <th class="header">Flagged&nbsp;&nbsp;&nbsp;</th>
-				      <th class="header">Create Time</th>
-				      <th class="header">Upload Time</th>
-				      <th>Published</th>
-				      <th colspan="3"></th>
-				    </tr>
-				  </thead>
-
-				  <tbody>
-				    <% @narratives.each do |narrative| %>
-				      <%= form_for(narrative) do |f| %>
-				      <tr>
-				        <td><%= f.text_field :nar_name %></td>
-				        <td><%= f.select :language_id, Language.all.collect {|p| [ p.language_name, p.id ] } %></td>
-				        <td><%= f.select :category_id, Category.all.collect {|p| [ p.category_name, p.id ] } %></td>
-				        <td><%= narrative.num_of_view %></td>
-				        <td><%= narrative.num_of_agree %></td>
-				        <td><%= narrative.num_of_disagree %></td>
-				        <td><%= narrative.num_of_flagged %></td>
-				        <td><%= narrative.create_time.to_formatted_s(:db) %></td>
-				        <td><%= narrative.updated_at.to_formatted_s(:db) %></td>
-				        <td><%= f.check_box :is_published %></td>
-				       	<td><a href="#" class="play-button" data-narrative-id="<%= narrative.id %>">Play</a></td>
-				       	<td><%= f.submit "Save", :class => 'save-button'%></td>
-				        <td><%= link_to 'Delete', narrative, method: :delete, data: { confirm: 'Are you sure?' }, :class => "delete-button" %></td>
-				      </tr>
-				      <% end %>
-				    <% end %>
-				  </tbody>
-				</table>
+        <%= form_tag("/narratives/save", method: "post") do %>
+        <table class="tablesorter">
+          <thead>
+            <tr>
+              <th class="header">Name</th>
+              <th class="header">Language</th>
+              <th class="header">Category</th>
+              <th>Published</th>
+              <th class="header">View&nbsp;&nbsp;&nbsp;</th>
+              <th class="header">Agree&nbsp;&nbsp;&nbsp;</th>
+              <th class="header">Disagree&nbsp;&nbsp;&nbsp;</th>
+              <th class="header">Flagged&nbsp;&nbsp;&nbsp;</th>
+              <th class="header">Create Time</th>
+              <th class="header">Upload Time</th>
+              <th colspan="2"></th>
+            </tr>
+          </thead>
+          
+          <tbody>
+           
+           <% language_all = Language.all.collect {|p| [ p.language_name, p.id ] } %>
+           <% category_all = Category.all.collect {|p| [ p.category_name, p.id ] } %>
+           <% @narratives.each do |narrative| %>
+           <% form_hash = "narrative_attributes[#{narrative.id}]" %>
+           <tr>
+            <td><%= text_field(form_hash, :nar_name, value: narrative.nar_name) %></td>
+            <td><%= select(form_hash, :language_id, options_for_select(language_all, narrative.language_id) ) %></td>
+            <td><%= select(form_hash, :category_id, options_for_select(category_all, narrative.category_id) ) %></td>
+            <td>
+              <input name="<%= form_hash %>[is_published]" type="hidden" value="0" />
+              <input <%= 'checked="checked"' if narrative.is_published %> id="<%= form_hash %>_is_published" name="<%= form_hash %>[is_published]" type="checkbox" value="1" />
+            </td>
+            <td><%= narrative.num_of_view %></td>
+            <td><%= narrative.num_of_agree %></td>
+            <td><%= narrative.num_of_disagree %></td>
+            <td><%= narrative.num_of_flagged %></td>
+            <td><%= narrative.create_time.to_formatted_s(:db) %></td>
+            <td><%= narrative.updated_at.to_formatted_s(:db) %></td>
+            <td><a href="#" class="btn btn-default btn-xs" data-narrative-id="<%= narrative.id %>">Play</a></td>
+            <td><%= link_to 'Delete', narrative, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-default btn-xs" %></td>
+          </tr>
+          <% end %>
+          
+        </tbody>
+        
+      </table>
+      <%= button_tag "Save", class: "btn btn-primary btn-lg" %>
+      <% end %>
 			</div>
           </div>
         </div>

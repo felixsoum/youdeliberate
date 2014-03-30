@@ -17,12 +17,18 @@ App60::Application.routes.draw do
   post 'narratives/:id/undo_agree', to: 'narratives#undo_agree', as: 'undo_agree_with_narrative'
   post 'narratives/:id/disagree', to: 'narratives#disagree', as: 'disagree_with_narrative'
   post 'narratives/:id/undo_disagree', to: 'narratives#undo_disagree', as: 'undo_disagree_with_narrative'
+  post 'narratives/save'
   resources :narratives
   # Admin
   get 'admin', to: 'narratives#index', as: 'admin_list'
+  get 'admin/setting', to: 'narratives#setting', as: 'admin_setting'
+  post 'admin/change', to: 'admin#change_password', as: 'change_password'
+  post 'admin/add', to: 'admin#add_admin', as: 'add_admin'
   get 'admin/login',  to: 'sessions#new', as: 'signin'
   delete 'admin/logout', to: 'sessions#destroy', as: 'signout'
   post 'admin/upload', as: 'upload_narrative'
+  get 'admin/forget', to: 'sessions#forget_password', as: 'forget_password'
+  post 'admin/send', to: 'sessions#send_password', as: 'send_password'
   get 'admin/*any' => redirect('/admin')
   resources :sessions, only: [:new, :create, :destroy]
 	
