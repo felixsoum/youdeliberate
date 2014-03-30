@@ -103,10 +103,25 @@ class NarrativesControllerTest < ActionController::TestCase
   end
 
   test "UT-NC-22: Narrative should save narratives changes" do
-    changed_narratives = {"298486374"=>{"nar_name"=>"100", "language_id"=>"1", "category_id"=>"1", "is_published"=>"1"}, "980190962"=>{"nar_name"=>"200", "language_id"=>"1", "category_id"=>"2", "is_published"=>"1"}} 
+    changed_narratives = {"298486374"=>{"nar_name"=>"100", "language_id"=>"1", "category_id"=>"1", "is_published"=>"1"}, 
+                          "980190962"=>{"nar_name"=>"200", "language_id"=>"1", "category_id"=>"2", "is_published"=>"1"}} 
     post :save, :narrative_attributes => changed_narratives
     assert_response :redirect
     assert_redirected_to admin_list_path
+  end
+
+  test "UT-NC-23: First flag a narrative should increment num_of_flagged by 1 and sending a email" do
+    assert_difference(['Narrative.find(@narrative.id).num_of_flagged', 'ActionMailer::Base.deliveries.size']) do
+      post :flag, id: @narrative.id, :format => :json
+    end
+
+    assert_no_difference(['Narrative.find(@narrative.id).num_of_flagged', 'ActionMailer::Base.deliveries.size']) do
+      post :flag, id: @narrative.id, :format => :json
+    end
+
+    reason_email = ActionMailer::Base.deliveries.last
+    assert_equal Admin.first.user_name, reason_email.to[0]
+    assert_equal "The reason to flag narrative #{@narrative.id}", reason_email.subject
   end
 
 end

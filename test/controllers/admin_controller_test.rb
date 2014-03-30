@@ -36,5 +36,35 @@ class AdminControllerTest < ActionController::TestCase
     FileUtils.rm_rf("#{test_narrative_path}")  
     assert !Dir.exist?(test_narrative_path)
   end
-  
+
+  test "UT-AC-7: Should be able to change password" do
+    cookies[:user_id] = Admin.first!.id
+    post :change_password, :password => "change", :password_confirmation => "change"
+    assert_equal 'Your password has been changed.', flash[:success]
+    assert_response :redirect
+    assert_redirected_to admin_setting_path
+  end
+
+  test "UT-AC-8: Should not be able to change password when password and password confimation are different" do
+    cookies[:user_id] = Admin.first!.id
+    post :change_password, :password => "change", :password_confirmation => "notchange"
+    assert_equal 'Please make sure the passwords you typed are the same.', flash[:error]
+    assert_response :redirect
+    assert_redirected_to admin_setting_path
+  end
+
+  test "UT-AC-9: Should be able to add another admin account with valid information" do
+    post :add_admin, :email => "add@new.com", :password => "addnew", :password_confirmation => "addnew"
+    assert_equal 'The new administrator has been added successfully.', flash[:success]
+    assert_response :redirect
+    assert_redirected_to admin_setting_path
+  end
+
+  test "UT-AC-10: Should not be able to add another admin account with invalid information" do
+    post :add_admin, :email => "add@new.com", :password => "addnew", :password_confirmation => "addothernew"
+    assert_equal 'The administrator is not added.', flash[:error]
+    assert_response :redirect
+    assert_redirected_to admin_setting_path
+  end
+
 end

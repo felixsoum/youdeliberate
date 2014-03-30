@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  user_name: MyString
-  password_digest: MyString
+  user_name: try@try.com
+  password_digest: $2a$10$krDNd0zSdfCpE5jb0OWKku7.Nww/1jqk6uNqHZqD.yaAwWjr3TZ5m
 
 two:
-  user_name: MyString
-  password_digest: MyString
+  user_name: test@test.com
+  password_digest: test
