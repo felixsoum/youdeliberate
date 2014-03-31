@@ -8,14 +8,15 @@
 					<div data-id="comments">
 						<% if @comments.each do |comment| %>
 							<p style="margin:0;">
-							<%= comment.content%></p>
+								<%= comment.content%>
+								<%= render 'flag_button', :comment_id => comment.id %>
+							</p>
 							<p style="padding-left:1em;margin:0;">
-							<font size="1">at <%= comment.created_at%></font>
+								<font size="1">at <%= comment.created_at%></font>
 							</p>
 						<% end.empty? %>
   							Aucun commentaire / No comments
-						<% end %>		
-						
+						<% end %>
 					</div>								
 				</td>				
 			  </tr>

@@ -1,0 +1,10 @@
+<a id ="<%= is_flagged?(@narrative.id) %>" class="btn btn-default flag-content-button"
+	<% if is_flagged?(@narrative.id) %>
+		disabled="disabled" 
+	<% else %>
+		data-toggle="modal"
+	<% end %>
+	  href="#flag-modal" rel="tooltip" data-comment-id="<%= comment_id %>" data-placement="top" data-original-title="Signaler du contenu innaproprié / Flag inappropriate content">
+	<span class="glyphicon glyphicon-flag"></span>
+	<span id="num-flags"><%= @narrative.num_of_flagged %></span>
+</a>
