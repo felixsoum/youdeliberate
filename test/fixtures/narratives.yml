@@ -5,6 +5,7 @@ one:
   nar_path: first nar path
   language_id: 1
   category_id: 1
+  is_published: t
   first_image: image path
   num_of_view: 1
   num_of_agree: 1
@@ -18,6 +19,7 @@ two:
   nar_path: second nar path
   language_id: 1
   category_id: 1
+  is_published: f
   first_image: image path
   num_of_view: 0
   num_of_agree: 0
