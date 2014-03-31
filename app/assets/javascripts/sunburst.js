@@ -106,8 +106,8 @@ function createTooltipDivs(){
   var foo = document.getElementById('sunburst');
   var top = jQuery("#sunburst-svg").offset().top; 
   var left = jQuery("#sunburst-svg").offset().left; 
-  var height = document.getElementById('sunburst-svg').offsetHeight;
-  var height = document.getElementById('sunburst-svg').offsetWidth;
+  var height = $(document.getElementById('sunburst-svg')).height();
+  //var height = document.getElementById('sunburst-svg').offsetWidth;
   var newTop = top +height/2.5; 
   var newLeft = left + width/2; 
   //create tooltip div for For category 
