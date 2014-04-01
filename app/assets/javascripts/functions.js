@@ -186,7 +186,7 @@ function deHighlightCircles(){
   //with transition
   //d3.selectAll("circle").each( function(c){d3.select(this).transition().style("opacity",getCircleOpacity(c)).style("stroke",getCategoryColor(c.category));}  );
   //instantaneous
-  d3.selectAll("circle").each( function(c){d3.select(this).style("opacity",getCircleOpacity(c)).style("stroke",getCategoryColor(c.category));}  );
+  d3.selectAll("circle").each( function(c){d3.select(this).style("opacity",getCircleOpacity(c)).style("stroke",function(d){return getBubbleStrokeColor("false",c.category)});}  );
 }
 
 $(document).ready(function() {

@@ -83,20 +83,21 @@ function drawBubbles(){
 		  .attr("categoryID", function(d){return d.category; })
 		  .attr("transform", function(d){ return "translate(" + 200 + "," + 200 + ")"; })
 		  .attr("id",function(d){return "narrative"+d.n_id})
+		  .attr("viewed","false")
 		  //For fill-in selection color
 		  //.on("mouseover",function(d){d3.select(this).style("fill",function(d) { return getMouseOverColor(d.category); })})
 		  //.on("mouseout",function(d){d3.select(this).style("fill" function(d) { return getCategoryColor(d.category); })})
 		  //For outline selection color
 		  .on("mouseover",function(d){d3.select(this).style("stroke",function(d) { d3.select(this).style("opacity",0.5); highlightMatchingSunburstSegment(d3.select(this)); return getMouseOverColor(d.category);  })})
-		  .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { d3.select(this).style("opacity",1); deHighlightSunburstSegments(); return getCategoryColor(d.category);  })})
-		  .on("click",function(d){$.fancybox({type: 'iframe',href: Routes.play_narrative_path(d.n_id)});}) //Requests single-narrative view with appropriate ID
+		  .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { d3.select(this).style("opacity",1); deHighlightSunburstSegments(); return getBubbleStrokeColor(this.getAttribute("viewed"),d.category);  })})
+		  .on("click",function(d){$.fancybox({type: 'iframe',href: Routes.play_narrative_path(d.n_id)}); this.setAttribute("viewed","true"); d3.select(this).style("stroke",function(d){return getBubbleStrokeColor(this.getAttribute("viewed"),d.category);})}) //Requests single-narrative view with appropriate ID
 		  .transition()
 		  .attr("r", function(d) {
 		  	 return d.r; 
 		  	 })
 		  .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
 		  .style("fill", function(d) { return getCategoryColor(d.category); })
-		  .style({ 'stroke': function(d) { return getCategoryColor(d.category); }, 'stroke-width': '3px'})
+		  .style({ 'stroke': function(d) { return getBubbleStrokeColor(this.getAttribute("viewed"),d.category); }, 'stroke-width': '3px'})
 		  .style("opacity",function(d){return getCircleOpacity(d)})
 		  .duration(3000)
 		  .ease("bounce");
@@ -193,6 +194,15 @@ function getValueBySortCriteria(n){
 		break;
 		default:
 		return n.numberViews == 0 ? minimumCircleSize : n.numberViews;
+	}
+}
+
+function getBubbleStrokeColor(v,d){
+	if(v=="true"){
+		return "#663366";
+	}
+	else{
+		return getCategoryColor(d);
 	}
 }
 
