@@ -9,7 +9,7 @@
 						<% if @comments.each do |comment| %>
 							<p style="margin:0;">
 								<%= comment.content%>
-								<%= render 'flag_button', :comment_id => comment.id %>
+								<%= render 'flag_button', :this_type => "comment", :this_id => comment.id, :comment_id => comment.id, :num_flags => comment.num_flags %>
 							</p>
 							<p style="padding-left:1em;margin:0;">
 								<font size="1">at <%= comment.created_at%></font>

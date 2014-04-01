@@ -121,7 +121,7 @@ class NarrativesControllerTest < ActionController::TestCase
 
     reason_email = ActionMailer::Base.deliveries.last
     assert_equal Admin.first.user_name, reason_email.to[0]
-    assert_equal "The reason to flag narrative #{@narrative.id}", reason_email.subject
+    assert_equal "Content has been flagged in narrative #{@narrative.id}", reason_email.subject
   end
 
 end

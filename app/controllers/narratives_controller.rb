@@ -73,17 +73,15 @@ class NarrativesController < ApplicationController
 
   # POST narratives/1/flag
   def flag
-      flagged_narratives = get_flagged_narratives
-      narrative_id = params[:id]
-    if (params[:comment_id] != "")
+    narrative_id = params[:id]
+    if (params.has_key?(:comment_id) && params[:comment_id] != "" && !is_flagged?("comment", params[:comment_id]))
+      NComment.increment_counter(:num_flags, params[:comment_id])
       FlagMailer.flag_reason_email(narrative_id, params[:comment_id], params[:flag]).deliver
-    elsif (!flagged_narratives.include? narrative_id.to_s)
-      @narrative = Narrative.find(narrative_id)
-      flag = @narrative.num_of_flagged + 1
-      @narrative.update(num_of_flagged: flag)
+      save_flagged_content("comment", params[:comment_id])
+    elsif (!is_flagged? "narrative", narrative_id.to_s)
+      Narrative.increment_counter(:num_of_flagged, narrative_id)
       FlagMailer.flag_reason_email(narrative_id, nil, params[:flag]).deliver
-      flagged_narratives.push(narrative_id.to_s)
-      save_flagged_narratives(flagged_narratives)
+      save_flagged_content("narrative", narrative_id)
     end
     redirect_to(:action => "play", :id => narrative_id)
   end
