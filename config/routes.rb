@@ -12,6 +12,7 @@ App60::Application.routes.draw do
   get 'sunburst' => 'narratives#sunburst'
   get 'narratives/:id/play', to: 'narratives#play', as: 'play_narrative'
   post 'narratives/:id/comment/', to: 'narratives#comment', as: 'comment_add'
+  delete 'narratives/:id/comment/:comment_id/remove/', to: 'narratives#remove_comment', as: 'remove_comment'
   post 'narratives/:id/flag/', to: 'narratives#flag', as: 'increment_flag'
   post 'narratives/:id/agree', to: 'narratives#agree', as: 'agree_with_narrative'
   post 'narratives/:id/undo_agree', to: 'narratives#undo_agree', as: 'undo_agree_with_narrative'

@@ -1,3 +1,4 @@
+<% signed_in = signed_in? %>
 <div class="panel panel-default">
 	<div class="panel-heading"><font size="4">Comments</font></div>
 	<div class="panel-body">
@@ -10,6 +11,9 @@
 							<p style="margin:0;">
 								<%= comment.content%>
 								<%= render 'flag_button', :this_type => "comment", :this_id => comment.id, :comment_id => comment.id, :num_flags => comment.num_flags %>
+								<% if signed_in %>
+									<%= link_to 'Remove', remove_comment_path(:comment_id => comment.id), method: :delete, remote: true, data: { confirm: 'Are you sure?' }, :class => "btn btn-default" %>
+								<% end %>
 							</p>
 							<p style="padding-left:1em;margin:0;">
 								<font size="1">at <%= comment.created_at%></font>

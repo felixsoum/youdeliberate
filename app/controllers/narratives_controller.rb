@@ -70,6 +70,16 @@ class NarrativesController < ApplicationController
       format.js
     end
   end
+  
+  def remove_comment
+    narrative_id = params[:id]
+    comment = NComment.find(params[:comment_id])
+    comment.update(:content => 'Commentaire effacé / Comment removed')
+    @comments = get_comments_for_narrative(narrative_id)
+    respond_to do |format|
+      format.js { render 'comment.js.erb' }
+    end
+  end
 
   # POST narratives/1/flag
   def flag
