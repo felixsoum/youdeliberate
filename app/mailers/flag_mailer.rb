@@ -4,7 +4,7 @@ class FlagMailer < ActionMailer::Base
   def flag_reason_email narrative_id, comment_id, reason
     comment_str = ""
     if comment_id != nil
-      comment_str = "Comment: #{comment_id}\n"
+      comment_str = "Comment: #{comment_id}\nPlease log in as an administrator on the admin portal and visit " + root_url + share_narrative_path(narrative_id) + " to moderate the comment.\n"
     end
     mail(to: Admin.first.user_name, subject: "Content has been flagged in narrative #{narrative_id}",
             body: "Narrative: #{narrative_id}\n"+ comment_str +"Reason provided by user: #{reason}")
