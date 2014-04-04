@@ -1,13 +1,15 @@
 class FlagMailer < ActionMailer::Base
   default from: 'soen390@youdeliberate.com'
 
-  def flag_reason_email narrative_id, comment_id, reason
-    comment_str = ""
-    if comment_id != nil
-      comment_str = "Comment: #{comment_id}\nPlease log in as an administrator on the admin portal and visit " + root_url + share_narrative_path(narrative_id) + " to moderate the comment.\n"
-    end
+  def flag_narrative_email narrative_id, reason
     mail(to: Admin.first.user_name, subject: "Content has been flagged in narrative #{narrative_id}",
-            body: "Narrative: #{narrative_id}\n"+ comment_str +"Reason provided by user: #{reason}")
+            body: "Narrative: #{narrative_id}\nReason provided by user: #{reason}")
+  end
+  
+  def flag_comment_email narrative_id, comment_id, reason
+    mail(to: Admin.first.user_name, subject: "Content has been flagged in narrative #{narrative_id}",
+            body: "Narrative: #{narrative_id}\nComment: #{comment_id}\nReason provided by user: #{reason}\n" +
+            "Please log in as an administrator on the admin portal and visit " + root_url + share_narrative_path(narrative_id) + " to moderate the comment.")
   end
 
   def forget_password_email email

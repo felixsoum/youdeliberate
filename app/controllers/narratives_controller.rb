@@ -86,11 +86,11 @@ class NarrativesController < ApplicationController
     narrative_id = params[:id]
     if (params.has_key?(:comment_id) && params[:comment_id] != "" && !is_flagged?("comment", params[:comment_id]))
       NComment.increment_counter(:num_flags, params[:comment_id])
-      FlagMailer.flag_reason_email(narrative_id, params[:comment_id], params[:flag]).deliver
+      FlagMailer.flag_comment_email(narrative_id, params[:comment_id], params[:flag]).deliver
       save_flagged_content("comment", params[:comment_id])
     elsif (!is_flagged? "narrative", narrative_id.to_s)
       Narrative.increment_counter(:num_of_flagged, narrative_id)
-      FlagMailer.flag_reason_email(narrative_id, nil, params[:flag]).deliver
+      FlagMailer.flag_narrative_email(narrative_id, params[:flag]).deliver
       save_flagged_content("narrative", narrative_id)
     end
     redirect_to(:action => "play", :id => narrative_id)

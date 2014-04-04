@@ -84,7 +84,7 @@
             <td><%= narrative.create_time.to_formatted_s(:db) %></td>
             <td><%= narrative.updated_at.to_formatted_s(:db) %></td>
             <td><a href="#" class="btn btn-default btn-xs" data-narrative-id="<%= narrative.id %>">Play</a></td>
-            <td><%= link_to 'Delete', narrative, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-default btn-xs" %></td>
+            <td><%= link_to 'Delete', narrative, method: :delete, data: { confirm: 'Do you really want to delete this narrative?' }, :class => "btn btn-default btn-xs" %></td>
           </tr>
           <% end %>
           

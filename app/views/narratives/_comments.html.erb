@@ -12,7 +12,7 @@
 								<%= comment.content%>
 								<%= render 'flag_button', :this_type => "comment", :this_id => comment.id, :comment_id => comment.id, :num_flags => comment.num_flags %>
 								<% if signed_in %>
-									<%= link_to 'Remove', remove_comment_path(:comment_id => comment.id), method: :delete, remote: true, data: { confirm: 'Are you sure?' }, :class => "btn btn-default" %>
+									<%= link_to 'Remove', remove_comment_path(:comment_id => comment.id), method: :delete, remote: true, data: { confirm: 'Do you really want to delete this comment?' }, :class => "btn btn-default" %>
 								<% end %>
 							</p>
 							<p style="padding-left:1em;margin:0;">
