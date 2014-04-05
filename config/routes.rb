@@ -18,7 +18,7 @@ App60::Application.routes.draw do
   post 'narratives/:id/undo_agree', to: 'narratives#undo_agree', as: 'undo_agree_with_narrative'
   post 'narratives/:id/disagree', to: 'narratives#disagree', as: 'disagree_with_narrative'
   post 'narratives/:id/undo_disagree', to: 'narratives#undo_disagree', as: 'undo_disagree_with_narrative'
-  post 'narratives/save'
+  post 'narratives/save', as: 'save_narratives'
   resources :narratives
   # Admin
   get 'admin', to: 'narratives#index', as: 'admin_list'
