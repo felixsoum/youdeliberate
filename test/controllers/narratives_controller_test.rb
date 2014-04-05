@@ -3,6 +3,7 @@ require 'test_helper'
 class NarrativesControllerTest < ActionController::TestCase
   setup do
     @narrative = narratives(:one)
+    @comment = n_comments(:one)
     cookies[:user_id] = Admin.take.id
   end
 
@@ -110,7 +111,7 @@ class NarrativesControllerTest < ActionController::TestCase
     assert_redirected_to admin_list_path
   end
 
-  test "UT-NC-23: First flag a narrative should increment num_of_flagged by 1 and sending a email" do
+  test "UT-NC-23: Flagging a narrative should increment num_of_flagged by 1 and send an email" do
     assert_difference(['Narrative.find(@narrative.id).num_of_flagged', 'ActionMailer::Base.deliveries.size']) do
       post :flag, id: @narrative.id, :format => :json
     end
@@ -123,5 +124,9 @@ class NarrativesControllerTest < ActionController::TestCase
     assert_equal Admin.first.user_name, reason_email.to[0]
     assert_equal "Content has been flagged in narrative #{@narrative.id}", reason_email.subject
   end
-
+  
+  test "UT-NC-24: Removing a comment simply replaces its text" do
+    delete :remove_comment, :format => 'js', id: @narrative.id, comment_id:  @comment.id
+    assert_equal NComment.find(@comment.id).content, 'Commentaire supprimé / Comment removed'
+  end
 end
