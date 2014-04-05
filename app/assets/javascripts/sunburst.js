@@ -1,12 +1,18 @@
 //specify sunburst size
-var width = 300, //420
-    height = 300,//350
+var width = 300,
+    height = 300,
     radius = Math.min(width, height) / 2;
 
+//apologies to anyone reading this, global scope for these
 var svg;
 var partition;
 var arc;
-var path; //for visibility. Might not be necessary
+var path; 
+var categoryCount = {};
+var categoryPercentages = {};
+var forDiv;
+var againstDiv;
+var ambivalentDiv;
 
 function setArc() {
     //add element to document body
@@ -53,12 +59,13 @@ function getData() {
 
   createTooltipDivs(); 
   d3.json("/sunburst.json", function(error, root) {
+
     path = svg.datum(root).selectAll("path")
         .data(partition.nodes)
         .enter().append("path")
         .attr("display", function(d) { return d.depth ? null : "none"; }) // hide inner ring
         .attr("d", arc)
-        .attr("categoryID",function(d){ return d.category_id; })
+        .attr("categoryID",function(d){ populateCategoryCount(d.category_id, d.count); return d.category_id; }) //populate category percentages here for some reason
         .attr("class","sunburst-path")
         .attr("id",function(d){return "category"+d.category_id})
         .attr("data-toggle","tooltip")
@@ -73,48 +80,65 @@ function getData() {
         .on("click",function(d,i){filterCategoryToggle(d.category_id)})
         .each(stash);
         
+        populateCategoryPercentages();
 
         // Only animate after D3 is done to avoid a race condition
         onLoadAnim();
   });
 }
+
+
+//quick and dirty context specific version
+function populateCategoryCount(i,c){
+  categoryCount[i] = c;
+}
+//behold the magic numbers
+function populateCategoryPercentages(){
+  for(i=1;i<4;i++){
+    categoryPercentages[i] = (categoryCount[i] / (categoryCount[1]+categoryCount[2]+categoryCount[3]) * 100).toPrecision(2);
+  }
+  forDiv.title = "POUR <span class='glyphicon glyphicon-flash'></span> FOR</br> "+categoryPercentages[1]+"%";
+  againstDiv.title = "CONTRE <span class='glyphicon glyphicon-flash'></span></br> AGAINST</br> "+categoryPercentages[2]+"%";
+  ambivalentDiv.title = "AMBIVALENT(E) <span class='glyphicon glyphicon-flash'></span></br> AMBIVALENT</br> "+categoryPercentages[3]+"%";
+}
+
 function createTooltipDivs(){
   var foo = document.getElementById('sunburst');
   var top = jQuery("#sunburst-svg").offset().top; 
   var left = jQuery("#sunburst-svg").offset().left; 
-  var height = document.getElementById('sunburst-svg').offsetHeight;
-  var height = document.getElementById('sunburst-svg').offsetWidth;
+  var height = $(document.getElementById('sunburst-svg')).height();
+  //var height = document.getElementById('sunburst-svg').offsetWidth;
   var newTop = top +height/2.5; 
   var newLeft = left + width/2; 
   //create tooltip div for For category 
-  var forDiv = document.createElement('div'); 
+  forDiv = document.createElement('div'); 
   forDiv.id = "toolTip1"; 
   forDiv.style.width = "5px"; 
   forDiv.style.height = "5px"; 
   forDiv.innerHTML = ""; 
-  forDiv.title = "POUR <span class='glyphicon glyphicon-flash'></span> FOR</br> "+"percent"+"%"; 
+  forDiv.title = "POUR <span class='glyphicon glyphicon-flash'></span> FOR</br> "+categoryPercentages[1]+"%"; 
   foo.appendChild(forDiv); 
   jQuery("#toolTip1").offset({top:newTop,left:newLeft});
   jQuery('#toolTip1').attr("data-toggle","tooltip"); 
 
   //create tooltip div for For category 
-  var againstDiv = document.createElement('div'); 
+  againstDiv = document.createElement('div'); 
   againstDiv.id = "toolTip2"; 
   againstDiv.style.width = "1px"; 
   againstDiv.style.height = "1px"; 
   againstDiv.innerHTML = ""; 
-  againstDiv.title = "CONTRE <span class='glyphicon glyphicon-flash'></span></br> AGAINST</br> "+"percent"+"%"; 
+  againstDiv.title = "CONTRE <span class='glyphicon glyphicon-flash'></span></br> AGAINST</br> "+categoryPercentages[2]+"%"; 
   foo.appendChild(againstDiv); 
   jQuery("#toolTip2").offset({top:newTop,left:newLeft});
   jQuery('#toolTip2').attr("data-toggle","tooltip"); 
 
   //create tooltip div for For category 
-  var ambivalentDiv = document.createElement('div'); 
+  ambivalentDiv = document.createElement('div'); 
   ambivalentDiv.id = "toolTip3"; 
   ambivalentDiv.style.width = "1px"; 
   ambivalentDiv.style.height = "1px"; 
   ambivalentDiv.innerHTML = ""; 
-  ambivalentDiv.title = "AMBIVALENT(E) <span class='glyphicon glyphicon-flash'></span></br> AMBIVALENT</br> "+"percent"+"%"; 
+  ambivalentDiv.title = "AMBIVALENT(E) <span class='glyphicon glyphicon-flash'></span></br> AMBIVALENT</br> "+categoryPercentages[3]+"%"; 
   foo.appendChild(ambivalentDiv); 
   jQuery("#toolTip3").offset({top:newTop,left:newLeft});
   jQuery('#toolTip3').attr("data-toggle","tooltip"); 

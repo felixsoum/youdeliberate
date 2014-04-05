@@ -2,17 +2,16 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<%= form_tag(increment_flag_path(@narrative.id), method: "post") do %>
-			<%= hidden_field_tag 'comment_id'%>
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Send reason to administrator</h4>
+					<h4 id="modal-flag-title" class="modal-title">Send reason to administrator</h4>
 				</div>
-				<div class="modal-body">
-					<%= text_area_tag(:flag, nil, placeholder: "Please write your reason why you want to flag this.", class: "form-control", rows: 5) %>
+				<div id="modal-flag-body" class="modal-body">
+					<%= text_area_tag(:flag, nil, placeholder: "Please write your reason why you want to flag this narrative.", class: "form-control", rows: 5) %>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-					<%= submit_tag("Send", class: "btn btn-primary") %>
+					<button id="flag-cancel" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					<%= submit_tag("Send", class: "btn btn-primary", id: "flag-submit") %>
 				</div>
 			<% end %>
 		</div><!-- /.modal-content -->

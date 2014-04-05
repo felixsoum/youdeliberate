@@ -9,7 +9,7 @@
           <ul class="nav navbar-nav">
             <li class="list-spacer">&nbsp;</li>
             <li><a class="fancybox" href="<%= admin_list_path %>">Récits <span class="glyphicon glyphicon-flash"></span> Narratives</a></li>
-            <li><a class="fancybox" href="<%= admin_setting_path %>">paramètres <span class="glyphicon glyphicon-flash"></span> Settings</a></li>
+            <li><a class="fancybox" href="<%= admin_setting_path %>">Paramètres <span class="glyphicon glyphicon-flash"></span> Settings</a></li>
             <li class="list-spacer">&nbsp;</li>
             <li class="list-spacer" align="right"><%= link_to "Déconnexion/Logout", signout_path, method: "delete" %></li>
           </ul>
@@ -84,14 +84,14 @@
             <td><%= narrative.create_time.to_formatted_s(:db) %></td>
             <td><%= narrative.updated_at.to_formatted_s(:db) %></td>
             <td><a href="#" class="btn btn-default btn-xs" data-narrative-id="<%= narrative.id %>">Play</a></td>
-            <td><%= link_to 'Delete', narrative, method: :delete, data: { confirm: 'Do you really want to delete this narrative?' }, :class => "btn btn-default btn-xs" %></td>
+            <td><%= link_to 'Delete', narrative, method: :delete, data: { confirm: 'Do you really want to delete this narrative?' }, :class => "btn btn-default btn-xs", :id => "admin-delete-narrative" + narrative.id.to_s %></td>
           </tr>
           <% end %>
           
         </tbody>
         
       </table>
-      <%= button_tag "Save", class: "btn btn-primary btn-lg" %>
+      <%= button_tag "Save", class: "btn btn-primary btn-lg", id: "admin-save-all-narratives" %>
       <% end %>
 			</div>
           </div>
