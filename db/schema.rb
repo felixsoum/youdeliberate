@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140319235330) do
+ActiveRecord::Schema.define(version: 20140331161550) do
 
   create_table "admins", force: true do |t|
     t.string   "user_name"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20140319235330) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "num_flags",    default: 0
   end
 
   create_table "narrative_counts", force: true do |t|

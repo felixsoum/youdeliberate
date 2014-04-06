@@ -53,22 +53,31 @@ module NarrativesHelper
     Category.find(category_id).category_name
   end
 
-  def get_flagged_narratives
-    flagged_narratives_array = Array.new
+  def get_flagged_content    
+    flagged_content_array = Array.new
     if (cookies[:flagged])
-      flagged_narratives_string = cookies[:flagged]
-      flagged_narratives_array = flagged_narratives_string.split(",")
+      flagged_string = cookies[:flagged]
+      flagged_string.lines.each do |line|
+          flagged_content_array << line.split(',').map(&:chomp)
+      end
     end
-    return flagged_narratives_array
+    return flagged_content_array
   end
   
-  def save_flagged_narratives flagged_narratives
-    cookies[:flagged] = flagged_narratives.join(",")
+  def save_flagged_content type, id
+    flagged_str = ""
+    flagged_content = get_flagged_content
+    flagged_content.push([type, id.to_s])
+    
+    flagged_content.each do |line|
+      flagged_str  << line.join(",") + "\n"
+    end
+    cookies[:flagged] = flagged_str
   end
   
-  def is_flagged? narrative_id
-    flagged_narratives = get_flagged_narratives
-    flagged_narratives.include? narrative_id.to_s
+  def is_flagged? passed_type, passed_id
+    flagged_content = get_flagged_content
+    !flagged_content.select{ |type, id| type == passed_type.to_s && id == passed_id.to_s}.empty?
   end
 
 end

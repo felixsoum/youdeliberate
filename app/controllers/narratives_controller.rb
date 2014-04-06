@@ -1,3 +1,4 @@
+# encoding: utf-8
 class NarrativesController < ApplicationController
   include NarrativesHelper
   before_action :set_narrative, only: [:show, :edit, :update, :destroy]
@@ -70,22 +71,31 @@ class NarrativesController < ApplicationController
       format.js
     end
   end
+  
+  # DELETE narratives/1/comment/1/remove/
+  def remove_comment
+    narrative_id = params[:id]
+    comment = NComment.find(params[:comment_id])
+    comment.update(:content => 'Commentaire supprimé / Comment removed')
+    @comments = get_comments_for_narrative(narrative_id)
+    respond_to do |format|
+      format.js { render 'comment.js.erb' }
+    end
+  end
 
   # POST narratives/1/flag
   def flag
-      flagged_narratives = get_flagged_narratives
-      narrative_id = params[:id]
-    if (!flagged_narratives.include? narrative_id.to_s)
-      @narrative = Narrative.find(narrative_id)
-      flag = @narrative.num_of_flagged + 1
-      @narrative.update(num_of_flagged: flag)
-      FlagMailer.flag_reason_email(narrative_id, params[:flag]).deliver
-      flagged_narratives.push(narrative_id.to_s)
-      save_flagged_narratives(flagged_narratives)
-      redirect_to(:action => "play", :id => narrative_id)
-    else
-      redirect_to(:action => "play", :id => narrative_id)
+    narrative_id = params[:id]
+    if (params.has_key?(:comment_id) && params[:comment_id] != "" && !is_flagged?("comment", params[:comment_id]))
+      NComment.increment_counter(:num_flags, params[:comment_id])
+      FlagMailer.flag_comment_email(narrative_id, params[:comment_id], params[:flag]).deliver
+      save_flagged_content("comment", params[:comment_id])
+    elsif (!is_flagged? "narrative", narrative_id.to_s)
+      Narrative.increment_counter(:num_of_flagged, narrative_id)
+      FlagMailer.flag_narrative_email(narrative_id, params[:flag]).deliver
+      save_flagged_content("narrative", narrative_id)
     end
+    redirect_to(:action => "play", :id => narrative_id)
   end
   
   # POST narratives/1/agree

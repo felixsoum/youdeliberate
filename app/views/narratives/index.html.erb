@@ -1,4 +1,3 @@
-
     <!-- <div class="navbar navbar-inverse navbar-fixed-top" role="navigation"> -->
     <div class="navbar navbar-default navbar-static-top" role="navigation">
       <div class="container">
@@ -9,7 +8,7 @@
           <ul class="nav navbar-nav">
             <li class="list-spacer">&nbsp;</li>
             <li><a class="fancybox" href="<%= admin_list_path %>">Récits <span class="glyphicon glyphicon-flash"></span> Narratives</a></li>
-            <li><a class="fancybox" href="<%= admin_setting_path %>">paramètres <span class="glyphicon glyphicon-flash"></span> Settings</a></li>
+            <li><a class="fancybox" href="<%= admin_setting_path %>">Paramètres <span class="glyphicon glyphicon-flash"></span> Settings</a></li>
             <li class="list-spacer">&nbsp;</li>
             <li class="list-spacer" align="right"><%= link_to "Déconnexion/Logout", signout_path, method: "delete" %></li>
           </ul>
@@ -45,7 +44,7 @@
       	<div class="panel panel-primary">
           <div class="panel-heading"><h4>Liste des récits&nbsp;&nbsp;<span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;Listing Narratives</h4></div>
 			<div class="table-responsive with-padding">
-        <%= form_tag("/narratives/save", method: "post") do %>
+        <%= form_tag(save_narratives_path, method: "post") do %>
         <table class="tablesorter">
           <thead>
             <tr>
@@ -84,14 +83,15 @@
             <td><%= narrative.create_time.to_formatted_s(:db) %></td>
             <td><%= narrative.updated_at.to_formatted_s(:db) %></td>
             <td><a href="#" class="btn btn-default btn-xs" data-narrative-id="<%= narrative.id %>">Play</a></td>
-            <td><%= link_to 'Delete', narrative, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-default btn-xs" %></td>
+            <td><%= link_to 'Delete', narrative, method: :delete, data: { confirm: 'Do you really want to delete this narrative?' }, :class => "btn btn-default btn-xs", :id => "admin-delete-narrative" + narrative.id.to_s %></td>
           </tr>
           <% end %>
           
         </tbody>
         
       </table>
-      <%= button_tag "Save", class: "btn btn-primary btn-lg" %>
+      <%= button_tag "Save", class: "btn btn-primary btn-lg", id: "admin-save-all-narratives" %>
+      <%= link_to "Cancel", admin_list_path, class: "btn btn-primary btn-lg", id: "admin-cancel-changes" %>
       <% end %>
 			</div>
           </div>

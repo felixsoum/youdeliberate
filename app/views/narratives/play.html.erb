@@ -33,6 +33,12 @@
 	  }
 	  
 	  jQuery('.btn').tooltip({html:true});
+	  $('.flag-content-button').on("click", function() {
+	  		var commentId = $(this).data('comment-id');
+	 		$("#comment_id").val(commentId);
+	  });
+	  
+	  
 	  $('#agree-button, #disagree-button').on("click", function() {
 	  	var that = $(this),
 	  	voteIncr = 1,
@@ -94,7 +100,7 @@
 	<div id="narrative" align="center">
 		<div class="input-group">
 			<span class="input-group-addon"><span class="glyphicon glyphicon-link"></span></span>				
-			<input type="text" onClick="this.select();" readonly="readonly" value="<%= @share_link %>" class="form-control" placeholder="">
+			<input id="share_link" type="text" onClick="this.select();" readonly="readonly" value="<%= @share_link %>" class="form-control" placeholder="">
 		</div>
 		<h1><small>Narrative name: <%= @narrative.nar_name %></small></h1>
 		<div data-id="media_element">
@@ -112,17 +118,7 @@
  				<span class="glyphicon glyphicon-thumbs-down"></span>
  				<span id="num-disagree-votes"><%= @narrative.num_of_disagree %></span>
  			</button>
-			<!-- disable flag if it is already flagged -->
-			<a id ="<%= is_flagged?(@narrative.id) %>" class="btn btn-default"
-				<% if is_flagged?(@narrative.id) %>
-					disabled="disabled" 
-				<% else %>
-					data-toggle="modal"
-				<% end %>
-				  href="#flag-modal" rel="tooltip" data-placement="top" data-original-title="Signaler un recit innaproprier / Flag an inappropriate narrative" >
-				<span class="glyphicon glyphicon-flag"></span>
-				<span id="num-flags"><%= @narrative.num_of_flagged %></span>
-			</a>
+			<%= render 'flag_button', :this_type => "narrative", :this_id => @narrative.id, :comment_id => nil, :num_flags => @narrative.num_of_flagged %>
 			<button type="button" class="btn btn-default" disabled="disabled"><span class="glyphicon glyphicon-eye-open">&nbsp;<%= @narrative.num_of_view %></span></button>
 		</div>
 	</div>

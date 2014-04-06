@@ -1,8 +1,10 @@
+# encoding: utf-8
 require 'test_helper'
 
 class NarrativesControllerTest < ActionController::TestCase
   setup do
     @narrative = narratives(:one)
+    @comment = n_comments(:one)
     cookies[:user_id] = Admin.take.id
   end
 
@@ -103,10 +105,29 @@ class NarrativesControllerTest < ActionController::TestCase
   end
 
   test "UT-NC-22: Narrative should save narratives changes" do
-    changed_narratives = {"298486374"=>{"nar_name"=>"100", "language_id"=>"1", "category_id"=>"1", "is_published"=>"1"}, "980190962"=>{"nar_name"=>"200", "language_id"=>"1", "category_id"=>"2", "is_published"=>"1"}} 
+    changed_narratives = {"298486374"=>{"nar_name"=>"100", "language_id"=>"1", "category_id"=>"1", "is_published"=>"1"}, 
+                          "980190962"=>{"nar_name"=>"200", "language_id"=>"1", "category_id"=>"2", "is_published"=>"1"}} 
     post :save, :narrative_attributes => changed_narratives
     assert_response :redirect
     assert_redirected_to admin_list_path
   end
 
+  test "UT-NC-23: Flagging a narrative should increment num_of_flagged by 1 and send an email" do
+    assert_difference(['Narrative.find(@narrative.id).num_of_flagged', 'ActionMailer::Base.deliveries.size']) do
+      post :flag, id: @narrative.id, :format => :json
+    end
+
+    assert_no_difference(['Narrative.find(@narrative.id).num_of_flagged', 'ActionMailer::Base.deliveries.size']) do
+      post :flag, id: @narrative.id, :format => :json
+    end
+
+    reason_email = ActionMailer::Base.deliveries.last
+    assert_equal Admin.first.user_name, reason_email.to[0]
+    assert_equal "Content has been flagged in narrative #{@narrative.id}", reason_email.subject
+  end
+  
+  test "UT-NC-24: Removing a comment simply replaces its text" do
+    delete :remove_comment, :format => 'js', id: @narrative.id, comment_id:  @comment.id
+    assert_equal NComment.find(@comment.id).content, 'Commentaire supprimé / Comment removed'
+  end
 end

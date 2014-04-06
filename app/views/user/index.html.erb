@@ -27,9 +27,8 @@
         </li>
 
         <li>
-          <%= link_to tutorial_path, :class => 'fancybox',:id=>'tutorial', :'data-fancybox-type' => 'iframe',:'data-placement' => 'bottom', :rel=>'popover',
-          :'data-content'=> @popover_contents, :'data-original-title'=>'<h3>Regarder le tutorial <span class="glyphicon glyphicon-info-sign"></span> Watch Tutorial</h3>' do %>
-            <span class="glyphicon glyphicon-info-sign"></span>
+          <%= link_to tutorial_path, :class => 'fancybox',:id=>'tutorial', :'data-fancybox-type' => 'iframe' do %>
+            Regarder Tutoriel <span class="glyphicon glyphicon-info-sign"></span> Watch Tutorial 
           <% end %>
         </li>
 
@@ -142,8 +141,6 @@
 	jQuery(document).ready(function() {
 	   jQuery('#tooltip-sort .btn').tooltip({html :true,container:'body'});
 	   jQuery('#tooltip-filter .btn').tooltip({html:true,container:'body'});
-     jQuery('.fancybox').popover({ html : true ,trigger:'focus'});
-     document.getElementById('tutorial').focus();
 <% if params[:id] %>
 		window.playNarrative(<%= params[:id] %>);
 <% end %>
