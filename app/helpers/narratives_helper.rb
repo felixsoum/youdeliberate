@@ -80,4 +80,13 @@ module NarrativesHelper
     !flagged_content.select{ |type, id| type == passed_type.to_s && id == passed_id.to_s}.empty?
   end
 
+  def fill_audio_array audio_array, selected_narrative_id
+    images = Image.where(narrative_id: selected_narrative_id)
+    default_image_path = images.first.try(:image_path) || "default_narrative_image.jpg"
+    Audio.where(narrative_id: selected_narrative_id).each do |audio|
+      image_path = images.where("image_number <= ?", audio.audio_number).last.try(:image_path) || default_image_path
+      audio_array.push(mp3: root_url + audio.audio_path, poster: root_url + image_path)
+    end
+  end
+
 end
