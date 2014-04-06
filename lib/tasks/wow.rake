@@ -1,4 +1,4 @@
-#encoding: utf-8 
+#encoding: utf-8
 desc "This task prepares the system for production deployment"
 task :wow do
   puts "Precompiling assets..."
