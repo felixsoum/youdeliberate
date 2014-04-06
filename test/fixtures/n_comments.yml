@@ -3,7 +3,9 @@
 one:
   narrative: one
   content: MyText
+  num_flags: 0
 
 two:
   narrative: two
   content: MyText
+  num_flags: 0

@@ -1,76 +1,15 @@
 <div class="container">
-	
-  <div class="blog-header">
-    <h1 class="blog-title">VousD&eacute;lib&eacute;rez!</h1>
-    <p class="lead blog-description">Share narratives and engage in deliberative democracy!</p>
-  </div>
-
-  <div class="row">
-
-    <div class="col-sm-7 blog-main">
-
-      <div class="blog-post">
-        <h2 class="blog-post-title">Qu'est-ce que VousD&eacute;lib&eacute;rez?</h2>
-        <p>YouDeliberate is a web portal that allows users to engage in the process of deliberate democracy on the subject of Bill 60.
-          The web portal allows users to listen to other peoples views on this subject and post a comment on narratives to engage in a debate on the subject.</p>
-
-        </div><!-- /.blog-post -->
-
-        <div class="blog-post">
-          <h2 class="blog-post-title">Plus Informations</h2>
-
-          <p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
-        </div><!-- /.blog-post -->
-
-      </div><!-- /.blog-main -->
-
-      <div class="col-sm-4 col-sm-offset-1 blog-sidebar">
-        <div class="sidebar-module sidebar-module-inset">
-          <h4>Au Sujet de <%= t :portal_topic, locale: :fr %></h4>
-          <p><%= t :about_description, locale: :fr %></p>
-          <%= t :about_list_html, locale: :fr %>
-        </div>
-        <div class="sidebar-module">
-          <%= t :about_link_html, locale: :fr %>
-        </div>
-      </div><!-- /.blog-sidebar -->
-
-    </div><!-- /.row -->
-    <div class="blog-header">
-      <h1 class="blog-title">YouDeliberate</h1>
-      <p class="lead blog-description">Share narratives and engage in deliberative democracy!</p>
+    <h2>À Propos<span class="glyphicon glyphicon-flash"></span>About us</h2>
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#french-video" data-toggle="tab"><%= image_tag("FR-24.png", id:"gb-flag") %></a></li>
+    <li><a href="#english-video" data-toggle="tab"><%= image_tag("EN-24.png", id:"gb-flag") %></a></li>
+  </ul>
+  <div class="tab-content">   
+    <div class="tab-pane active" id="french-video">
+      <iframe width="420" height="315" src="//www.youtube.com/embed/EIyixC9NsLI" frameborder="0" allowfullscreen></iframe>
+    </div>  
+    <div class="tab-pane" id="english-video">
+      <iframe width="420" height="315" src="//www.youtube.com/embed/okqEVeNqBhc" frameborder="0" allowfullscreen></iframe>
     </div>
-
-    <div class="row">
-
-      <div class="col-sm-7 blog-main">
-
-        <div class="blog-post">
-          <h2 class="blog-post-title">What is YouDeliberate?</h2>
-          <p>YouDeliberate is a web portal that allows users to engage in the process of deliberate democracy on the subject of Bill 60.
-            The web portal allows users to listen to other peoples views on this subject and post a comment on narratives to engage in a debate on the subject.</p>
-
-          </div><!-- /.blog-post -->
-
-          <div class="blog-post">
-            <h2 class="blog-post-title">More Information</h2>
-
-            <p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
-          </div><!-- /.blog-post -->
-
-        </div><!-- /.blog-main -->
-
-        <div class="col-sm-4 col-sm-offset-1 blog-sidebar">
-          <div class="sidebar-module sidebar-module-inset">
-            <h4>About <%= I18n.t :portal_topic, locale: :en %></h4>
-            <p><%= t :about_description, locale: :en %></p>
-            <%= t :about_list_html, locale: :en %>
-          </div>
-          <div class="sidebar-module">
-            <%= t :about_link_html, locale: :en %>
-          </div>
-        </div><!-- /.blog-sidebar -->
-
-      </div><!-- /.row -->
-
-    </div><!-- /.container -->
+  </div>
+</div><!-- /.container -->
