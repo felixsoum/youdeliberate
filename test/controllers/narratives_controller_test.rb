@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'test_helper'
 
 class NarrativesControllerTest < ActionController::TestCase
@@ -127,6 +128,6 @@ class NarrativesControllerTest < ActionController::TestCase
   
   test "UT-NC-24: Removing a comment simply replaces its text" do
     delete :remove_comment, :format => 'js', id: @narrative.id, comment_id:  @comment.id
-    assert_equal NComment.find(@comment.id).content, 'Commentaire supprime / Comment removed'
+    assert_equal NComment.find(@comment.id).content, 'Commentaire supprimé / Comment removed'
   end
 end
