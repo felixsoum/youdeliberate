@@ -75,7 +75,7 @@ class NarrativesController < ApplicationController
   def remove_comment
     narrative_id = params[:id]
     comment = NComment.find(params[:comment_id])
-    comment.update(:content => 'Commentaire supprimé / Comment removed')
+    comment.update(:content => 'Commentaire supprime / Comment removed')
     @comments = get_comments_for_narrative(narrative_id)
     respond_to do |format|
       format.js { render 'comment.js.erb' }
