@@ -1,12 +1,10 @@
 <!--Bubble generation : http://bl.ocks.org/mbostock/4063269-->
 
-//var bubbleDataSource = "example3.json;" //data from stub with narratives grouped by category
-//var bubbleDataSource = "example4.json"; //data from stub with randomly placed narratives
 var bubbleDataSource = '/narratives.json'; //data from DB
 
 var diameter = 0; //initialize global var
 var dateHash = {}; //I have no idea what I'm doing
-var bubble; //lord help us global variables
+var bubble; //lord help us, more global variables
 
 //Define sort criteria
 var sortCriteria = {
@@ -69,10 +67,6 @@ function drawBubbles(){
 		  .enter().append("g")
 		  .attr("class", "node");  
 
-	//title appears on mouseover
-	//node.append("title")
-	//  .text(function(d) { return d.className + ": " + format(d.value); });
-
 	  node.append("circle")
 			.attr("r",function(d) {
 		  	 return d.r/2; 
@@ -84,10 +78,6 @@ function drawBubbles(){
 		  .attr("transform", function(d){ return "translate(" + 200 + "," + 200 + ")"; })
 		  .attr("id",function(d){return "narrative"+d.n_id})
 		  .attr("viewed","false")
-		  //For fill-in selection color
-		  //.on("mouseover",function(d){d3.select(this).style("fill",function(d) { return getMouseOverColor(d.category); })})
-		  //.on("mouseout",function(d){d3.select(this).style("fill" function(d) { return getCategoryColor(d.category); })})
-		  //For outline selection color
 		  .on("mouseover",function(d){d3.select(this).style("stroke",function(d) { d3.select(this).style("opacity",0.5); highlightMatchingSunburstSegment(d3.select(this)); return getMouseOverColor(d.category);  })})
 		  .on("mouseout",function(d){d3.select(this).style("stroke", function(d) { d3.select(this).style("opacity",1); deHighlightSunburstSegments(); return getBubbleStrokeColor(this.getAttribute("viewed"),d.category);  })})
 		  .on("click",function(d){$.fancybox({type: 'iframe',href: Routes.play_narrative_path(d.n_id)}); this.setAttribute("viewed","true"); d3.select(this).style("stroke",function(d){return getBubbleStrokeColor(this.getAttribute("viewed"),d.category);})}) //Requests single-narrative view with appropriate ID
@@ -211,8 +201,6 @@ function getMouseOverColor(n){
 	//return "#4CBB17" //Kelly Green
 	return "#FFF";     //White
 }
-
-//d3.select(self.frameElement).style("height", diameter + "px");  //I have no idea what this does
 
 // jQuery.ready() with turbolinks. Read more: http://stackoverflow.com/a/17600195
 var init = function() {

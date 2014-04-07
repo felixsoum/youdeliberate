@@ -3,7 +3,7 @@ var width = 300,
     height = 300,
     radius = Math.min(width, height) / 2;
 
-//apologies to anyone reading this, global scope for these
+//apologies to anyone reading this, here's a bunch of global vars
 var svg;
 var partition;
 var arc;
@@ -32,7 +32,6 @@ function setArc() {
     arc = d3.svg.arc()
     .startAngle(function(d) { return d.x; })
     .endAngle(function(d) { return d.x + d.dx; })
-    //.innerRadius(function(d) { return Math.sqrt(d.y); })
     .innerRadius(function(d) { return Math.sqrt(d.y / 1.5); })
     .outerRadius(function(d) { return Math.sqrt(d.y + d.dy); });
 }
@@ -69,7 +68,6 @@ function getData() {
         .attr("class","sunburst-path")
         .attr("id",function(d){return "category"+d.category_id})
         .attr("data-toggle","tooltip")
-        .attr("title",function(d){return getCategoryTooltip(d.category_id);}) 
         .style("opacity",function(d){ return getSunburstSegmentOpacity(d); })
         .style("stroke", function(d) { return getArcMouseOutColor(d.category_id); })
         .style("stroke-width","2px")
@@ -88,29 +86,44 @@ function getData() {
 }
 
 
-//quick and dirty context specific version
+
 function populateCategoryCount(i,c){
-  categoryCount[i] = c;
+  categoryCount[i] = c == NaN ? 0 : c;
 }
 //behold the magic numbers
 function populateCategoryPercentages(){
-  for(i=1;i<4;i++){
-    categoryPercentages[i] = (categoryCount[i] / (categoryCount[1]+categoryCount[2]+categoryCount[3]) * 100).toPrecision(2);
+  var categoryCountLength = 4;
+  var total = 0;
+  for(i=0;i<categoryCountLength;i++){
+    if(parseInt(categoryCount[i], 10) > 0){
+      total += categoryCount[i];
+    }
   }
+
+  for(i=0;i<categoryCountLength;i++){
+    if(parseInt(categoryCount[i], 10) > 0){    
+      categoryPercentages[i] = parseInt((categoryCount[i] / total * 100).toPrecision(3));
+    }
+    else{
+      categoryPercentages[i] = 0;
+    }
+  }
+  //Hardcoded tooltips. Should generate these more dynamically in "future releases"
   forDiv.title = "POUR <span class='glyphicon glyphicon-flash'></span> FOR</br> "+categoryPercentages[1]+"%";
   againstDiv.title = "CONTRE <span class='glyphicon glyphicon-flash'></span></br> AGAINST</br> "+categoryPercentages[2]+"%";
   ambivalentDiv.title = "AMBIVALENT(E) <span class='glyphicon glyphicon-flash'></span></br> AMBIVALENT</br> "+categoryPercentages[3]+"%";
 }
 
+//Hardcoded tooltips. Should generate these more dynamically in "future releases"
 function createTooltipDivs(){
   var foo = document.getElementById('sunburst');
   var top = jQuery("#sunburst-svg").offset().top; 
   var left = jQuery("#sunburst-svg").offset().left; 
   var height = $(document.getElementById('sunburst-svg')).height();
-  //var height = document.getElementById('sunburst-svg').offsetWidth;
   var newTop = top +height/2.5; 
   var newLeft = left + width/2; 
-  //create tooltip div for For category 
+  
+  //create tooltip div for "For" category 
   forDiv = document.createElement('div'); 
   forDiv.id = "toolTip1"; 
   forDiv.style.width = "5px"; 
@@ -121,7 +134,7 @@ function createTooltipDivs(){
   jQuery("#toolTip1").offset({top:newTop,left:newLeft});
   jQuery('#toolTip1').attr("data-toggle","tooltip"); 
 
-  //create tooltip div for For category 
+  //create tooltip div for "Against" category 
   againstDiv = document.createElement('div'); 
   againstDiv.id = "toolTip2"; 
   againstDiv.style.width = "1px"; 
@@ -132,7 +145,7 @@ function createTooltipDivs(){
   jQuery("#toolTip2").offset({top:newTop,left:newLeft});
   jQuery('#toolTip2').attr("data-toggle","tooltip"); 
 
-  //create tooltip div for For category 
+  //create tooltip div for "Ambivalent" category 
   ambivalentDiv = document.createElement('div'); 
   ambivalentDiv.id = "toolTip3"; 
   ambivalentDiv.style.width = "1px"; 

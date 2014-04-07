@@ -147,19 +147,6 @@ function getCategoryColor(n){
       return "#000";
   }
 }
-function getCategoryTooltip(id){
-  switch(id){
-    case 1: 
-      return "Pour&nbsp;<span class='glyphicon glyphicon-flash'></span>&nbsp;For";
-      break; 
-    case 2: 
-      return "Contre&nbsp;<span class='glyphicon glyphicon-flash'></span>&nbsp;Against"
-      break; 
-    case 3: 
-      return "Ambivalent&nbsp;<span class='glyphicon glyphicon-flash'></span>&nbsp;Ambilavent"; 
-      break; 
-  }
-}
 
 function highlightMatchingSunburstSegment(c){
   //with transition
