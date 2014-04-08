@@ -1,15 +1,8 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
-# Unobtrusive JavaScript: http://guides.rubyonrails.org/working_with_javascript_in_rails.html
-
 audioCount = 1
 currentTrack = 1
 leftmostTrack = 1
 maxPagination = 10
-
-# Hack solution: http://stackoverflow.com/a/12319131
-paginationContainer ="bouboule"
+paginationContainer = "wow"
 
 window.paginate = (n) ->
   switch n

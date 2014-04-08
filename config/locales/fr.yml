@@ -1,38 +1,7 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 fr:
   portal_topic: "Project de loi 60"
-  about_description: "Le projet de loi 60 est un projet de loi créée par le gouvernement du Québec qui propose une modification de la accommodiation resonable convenu au Québec"
-  about_list_html: |
-    <p><b> Hébergement peut être: </b></p>
-    <ul>
-      <li>Religieuse</li>
-      <li>Scolaire</li>
-      <li>Emploi connexes</li>
-    </ul>
-  about_link_html: |
-    <h4>Projet de loi 60 liens</h4>
-    <ol class="list-unstyled">
-      <li><a href="http://www.lapresse.ca/fichiers/4708179/charte.pdf">Gouvernement du Québec le Projet de loi 60</a></li>
-      <li><a href="#">Lien Utile 2</a></li>
-      <li><a href="#">Discutable Editoriaux</a></li>
-    </ol>
+  about_html: |
+    <div class="tab-pane active" id="french-video">
+      <iframe width="640" height="360" src="//www.youtube.com/embed/IIS_M2agXO4" frameborder="0" allowfullscreen></iframe></br></br>
+      <a href="http://www.nosvaleurs.gouv.qc.ca/medias/pdf/Projet_de_loi.pdf"><font size="4">http://www.nosvaleurs.gouv.qc.ca/medias/pdf/Projet_de_loi.pdf</font></a>
+    </div>  

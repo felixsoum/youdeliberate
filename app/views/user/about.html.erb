@@ -5,14 +5,7 @@
     <li><a href="#english-video" data-toggle="tab"><%= image_tag("EN-24.png", id:"gb-flag") %></a></li>
   </ul>
   <div class="tab-content">   
-    <div class="tab-pane active" id="french-video">
-      <iframe width="640" height="360" src="//www.youtube.com/embed/IIS_M2agXO4" frameborder="0" allowfullscreen></iframe></br></br>
-      <a href="http://www.nosvaleurs.gouv.qc.ca/medias/pdf/Projet_de_loi.pdf"><font size="4">http://www.nosvaleurs.gouv.qc.ca/medias/pdf/Projet_de_loi.pdf</font></a>
-    </div>  
-    <div class="tab-pane" id="english-video">
-      <iframe width="640" height="360" src="//www.youtube.com/embed/axzhcTngnZ4" frameborder="0" allowfullscreen></iframe></br></br>
-      <a href="http://www.nosvaleurs.gouv.qc.ca/medias/pdf/Charter.pdf"><font size="4">http://www.nosvaleurs.gouv.qc.ca/medias/pdf/Charter.pdf</font></a>
-    </div>
+    <%= t :about_html, locale: :fr %>
+    <%= t :about_html, locale: :en %>
   </div>
 </div><!-- /.container -->
-

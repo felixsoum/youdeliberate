@@ -1,11 +1,21 @@
 # YouDeliberate
-
-## App 60
 Share narratives and engage in deliberative democracy!
 
-## Production deployment
-* $ rake wow
-* $ rails s -e production
+## Team B
+* Paolo Ascurra
+* Genevieve Chafouleas
+* Jorge Cook
+* Dong Li
+* Louis Mc Lean
+* Jignesh Patel
+* Felix Soumpholphakdy
+* Daniel Tremblay
+* Emmanuel Tsapekis
+
+## SOEN 390
+Software Engineering Team Design Project, Winter 2014
+Instructor: Dr. Olga Ormandjieva 
+TAs: Ming Zhu & Alex Hudon
 
 ## Master Badges
 [![Build Status](https://travis-ci.org/felixsoum/youdeliberate.png?branch=master)](https://travis-ci.org/felixsoum/youdeliberate)

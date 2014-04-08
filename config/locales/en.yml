@@ -1,38 +1,7 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
   portal_topic: "Bill 60"
-  about_description: "Bill 60 is a bill created by the Government of Quebec that is proposing a modification to the agreed resonable accommodiation in Quebec"
-  about_list_html: |
-    <p><b> Accomodation can be: </b></p>
-    <ul>
-      <li>Religious</li>
-      <li>Academic</li>
-      <li>Employement Related</li>
-    </ul>
-  about_link_html: |
-    <h4>Bill 60 links</h4>
-    <ol class="list-unstyled">
-      <li><a href="http://www.nosvaleurs.gouv.qc.ca/medias/pdf/Charter.pdf">Government of Quebec Bill 60</a></li>
-      <li><a href="#">Useful Link 2</a></li>
-      <li><a href="#">Questionable Editorials</a></li>
-    </ol>
+  about_html: |
+    <div class="tab-pane" id="english-video">
+      <iframe width="640" height="360" src="//www.youtube.com/embed/axzhcTngnZ4" frameborder="0" allowfullscreen></iframe></br></br>
+      <a href="http://www.nosvaleurs.gouv.qc.ca/medias/pdf/Charter.pdf"><font size="4">http://www.nosvaleurs.gouv.qc.ca/medias/pdf/Charter.pdf</font></a>
+    </div>
